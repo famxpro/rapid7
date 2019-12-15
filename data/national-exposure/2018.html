@@ -1,0 +1,197 @@
+<html>
+	
+<!-- Mirrored from www.rapid7.com/data/national-exposure/2018.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:45:20 GMT -->
+<head>
+		<meta charset="utf-8">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" charset="utf-8"/>
+	    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+	    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	    <meta name="title" content="2017 National Exposure Index Map | Rapid7" />
+	    <meta name="description" content="In this interactive map we look at inferring internet security posture by country through port scanning. How does your country rank?"/>
+	    <meta property="og:title" content="National Exposure Index Map | Rapid7" />
+	    <meta property="og:image" content="../includes/img/nei-2018/nei-og.jpg" />
+	    <meta property="og:url" content="2017.html" />
+	    <meta property="og:site_name" content="Rapid7" />
+	    <meta property="og:description" content="In this interactive map we look at inferring internet security posture by country through port scanning. How does your country rank?"/>
+	    <meta name="robots" content="index, follow" /> 
+		<link rel="icon" type="image/x-icon" href="../../includes/img/favicon.ico">
+		<!-- Foundation CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY=" crossorigin="anonymous" />
+		<!--App CSS -->
+		<link rel="stylesheet" href="../includes/css/all.min.css">
+		<script src="../../includes/js/jquery.min.js"></script>
+		<!-- Foundation JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script>
+		<!-- D3 -->
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+		<script src="https://d3js.org/topojson.v2.min.js"></script>
+		<style>
+		.svg-container {
+		    display: inline-block;
+		    position: relative;
+		    width: 100%;
+		    padding-bottom: 100%; /* aspect ratio */
+		    vertical-align: top;
+		    overflow: hidden;
+		}
+		.svg-content-responsive {
+		    display: inline-block;
+		    position: absolute;
+		    top: 10px;
+		    left: 0;
+		}
+		</style>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+	    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-4622520-1"></script>
+	    <script>
+	      window.dataLayer = window.dataLayer || [];
+	      function gtag(){dataLayer.push(arguments);}
+	      gtag('js', new Date());
+	      gtag('config', 'UA-4622520-1', { 'anonymize_ip': true });
+	    </script>
+	    <!-- End Google tag -->
+
+	</head>
+	<body class="nei_main" id="nei-2018">
+		<!--[if lte IE 9]>
+	    <div id="ie-conditional"><spa>Your IE browser is out of date - Upgrade to the latest version of IE to explore the map.</span> <a href="https://support.microsoft.com/en-us/help/17621/internet-explorer-downloads" title="Upgrade IE Now" class="button smBtn darkClear" target="_blank">Upgrade IE Now</a>
+	    </div>
+	    <![endif]-->
+
+		<div id="map"></div>
+		<div class="scale-key">
+			<div class="item-90"></div>
+			<div class="item-80"></div>
+			<div class="item-70"></div>
+			<div class="item-60"></div>
+			<div class="item-50"></div>
+			<div class="item-40"></div>
+			<div class="item-30"></div>
+			<div class="item-20"></div>
+			<div class="item-10"></div>
+		</div>
+		<div class="scale-label">
+			<div class="flT">Most Exposed</div>
+			<div class="flB">Least Exposed</div>	
+		</div>
+
+		<div class="header">
+			<div class="row expanded">
+				<div class="medium-3 columns">
+					<img id="logo" src="../../includes/img/Rapid7_logo.svg">
+				</div>
+				<div class="medium-9 end columns hide-for-small-only">
+					Click a country on the map or from the drop-down below
+				</div>
+			</div>
+			<div class="row expanded">
+				<div class="medium-9 small-12 columns">
+					<h1>
+						National Exposure Index
+						<a href="../../info/national-exposure-index/index.html" target="_blank" class="button darkClear smBtn hide-for-small-only">Download Full Report</a>
+					</h1>
+				</div>
+				<div class="medium-3 end small-12 columns" id="countrySelector">
+					<div class="country-list-container">
+						<div class="dark dropdown selected-country">
+						    Select a country
+						</div>
+						<ul class="country-list" id="countryList2"></ul>
+					</div>	
+				</div>
+			</div>
+			<div class="row show-for-small-only" id="mobile-map"> 
+				<img src="../includes/img/nei-2018/nei-map_2018.jpg">
+				<a href="../../info/national-exposure-index/index.html" target="_blank" class="button blue mdBtn show-for-small-only">Download Full Report</a>
+			</div>
+				
+		</div>
+		<div class="info-box tiny">
+			<button class="close-button" type="button">
+                <span aria-hidden="true"><img src="../../includes/img/close_white.svg"></span>
+            </button>
+            <div id="infoIcon">
+				<img class="info" src="../../includes/img/info.png"><h3>About</h3>
+			</div>
+			<p>The National Exposure Index is an exploration of data derived from <a href="https://opendata.rapid7.com/" target="_blank">Project Sonar</a>, Rapid7’s security research project that gains insights into global exposure to common vulnerabilities through internet-wide surveys.</p>
+			<p class="rev-date"><b>Last Updated:</b> June 7th 2018</p>
+		</div>
+		<div class="row expanded footer">
+			&copy; 2018 Rapid7
+
+			<div class="footer-links">
+				<a href="../../legal/index.html" target="_blank">Legal Terms</a>
+				<a href="../../privacy-policy/index.html" target="_blank">Privacy Policy</a>
+				<a href="../../export-notice/index.html" target="_blank">Export Notice</a>
+				<a href="../../trust/index.html" target="_blank">Trust</a>
+			</div>
+		</div>
+
+		<div class="reveal panel hidden" id="panelModal" data-reveal>
+			<div class="panel-header">
+		  		<button class="close-button" data-close aria-label="Close modal" type="button">
+		    		<span aria-hidden="true"><img src="../../includes/img/close.svg"></span>
+		 		</button>
+			  	<h2></h2>
+		        <div class="country-list-container">
+					<div class="selected-flag">
+					    <div class="iti-flag"></div>
+					</div>
+					<ul class="country-list" id="countryList1"></ul>
+				</div>	
+			</div>
+			<div class="panel-section">
+				<h3>Services</h3>
+				<select class="light dropdown" id="servicesDropdown">
+					<option value="web">HTTP vs HTTPS</option>
+					<option value="shell">Telnet vs ssh</option>
+					<option value="smtp">SMTP vs SMTPS</option>
+					<option value="imap">IMAP vs IMAP over SSL</option>
+					<option value="pop">POP3 vs POP3 over TLS SSL</option>
+				</select>
+				<div class="row" id="servicesStats">
+					<div class="medium-6 small-12 columns">
+						<span id="unencryptedPercent"></span> Unencrypted
+					</div>
+					<div class="medium-6 small-12 columns">
+						<span id="totalNodes"></span> Total Nodes
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns" id="servicesGraph">
+						<p class="subtitle">Encrypted %</p>
+						<div>
+							<img src="../includes/img/nei-2018/web.png">
+							<div class="marker">
+								<div class="iti-flag"></div>
+							</div>
+						</div>
+						<p class="subtitle">Unencrypted %</p>
+					</div>
+				</div>
+			</div>
+			<div class="panel-section">
+				<h3>Ports</h3>
+				<p class="subtitle">Total Devices: <span id="totalDevices"></span></p>
+				<div id="portExplorer"></div>
+				<div id="portDetails"></div>
+			</div>
+			<div class="panel-section" data-equalizer="buttons">
+				<h3>Similarly Exposed Countries</h3>
+				<a id="prevRank"><button class="lightGrayBtn button" data-equalizer-watch="buttons"></button></a>
+				<a id="nextRank"><button class="lightGrayBtn button" data-equalizer-watch="buttons"></button></a>
+			</div>
+		</div>
+
+        <div id="tooltip"></div>
+
+		
+		
+		<!--App JS -->
+		<script src="../includes/js/all.min0f7d.js?cb1"></script>
+	</body>
+
+<!-- Mirrored from www.rapid7.com/data/national-exposure/2018.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:45:28 GMT -->
+</html>
+

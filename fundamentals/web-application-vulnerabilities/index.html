@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+
+<!-- Mirrored from www.rapid7.com/fundamentals/web-application-vulnerabilities/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:15:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Common Web Application Vulnerabilities Explained: SQLi, XSS, CSRF</title>
+
+
+            <meta property="og:url" content="index.html" />
+        <link rel="canonical" href="index.html"  />
+        <link rel="alternate" href="index.html" hreflang="en" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="title" content="Common Web Application Vulnerabilities Explained: SQLi, XSS, CSRF" />
+    <meta name="description" content="Description: Learn more about the most common techniques used when hacking web application vulnerabilities so can secure your apps.  Learn more about SQLi, XSS, and CSRF." />
+    <meta property="og:title" content="Common Web Application Vulnerabilities Explained: SQLi, XSS, CSRF" />
+        <meta property="og:image" content="../../globalassets/rapid7-og.jpg" />
+        <meta name="twitter:image" content="../../globalassets/rapid7-og.jpg" />
+    <meta name="twitter:title" content="Common Web Application Vulnerabilities Explained: SQLi, XSS, CSRF">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="Rapid7" />
+    <meta property="og:description" content="Description: Learn more about the most common techniques used when hacking web application vulnerabilities so can secure your apps.  Learn more about SQLi, XSS, and CSRF." />
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+'conversionType': 'secondary',            
+        });
+    </script>
+
+    
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WBTPTVC');</script>
+    
+
+    <link rel="icon" type="image/x-icon" href="../../includes/img/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:800,900|Roboto:300,400,700|Noto+Sans+JP">
+    <link rel="stylesheet" href="../../includes/css/all.mined79.css?cb=1576099002710">
+    <script src="../../includes/js/jquery.min.js"></script>
+    <script src="http://js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>
+    <script src="../../includes/js/populateCountryState.js"></script>
+    <script src="http://information.rapid7.com/js/forms2/js/forms2.min.js"></script>
+    
+    
+
+</head>
+<body id="knowledge_center_detail" class="pg-id-8960 ">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBTPTVC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+        <div id="gdprAlert" class="overlay" style="display:none;">
+            <div class="gdpr-modal">
+                <div>
+                    <h2>Quick Cookie Notification</h2>
+                    <p>This site uses cookies, including for analytics, personalization, and advertising purposes.  For more information or to change your cookie settings, <a href="../../privacy-policy/tracking-technologies/index.html" target="_blank">click here</a>.  <br /><br />If you continue to browse this site without changing your cookie settings, you agree to this use.</p>
+                    <button class="button mdBtn blue" id="gdprClose">I AGREE, LET&rsquo;S GO!</button>
+                    <hr>
+                    <p class="fineprint">View <a href="../../privacy-policy/tracking-technologies/index.html" target="_blank">Cookie Policy</a> for full details</p>
+                </div>
+
+            </div>
+        </div>
+
+    <div id="__"></div>
+    <!--[if lte IE 9]>
+    <div id="ie-conditional"><spa>Your IE browser is out of date - Upgrade to the latest version of IE or Chrome for an optimal website experience.</span> <a href="https://support.microsoft.com/en-us/help/17621/internet-explorer-downloads" title="Upgrade IE Now" class="button smBtn darkClear" target="_blank">Upgrade IE Now</a>
+    <button class="close-button" type="button" id="closeIEBar">
+        <img src="../includes/img/close_white.svg">
+    </button>
+    </div>
+    <![endif]-->
+
+    
+
+
+<div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <div class="off-canvas__overlay"></div>
+<div class="off-canvas position-left" id="offCanvas" data-off-canvas data-transition="overlap">
+    <!-- Menu -->
+    <div class="off-canvas__content">
+        <!-- Mobile Menu -->
+        <div class="off-canvas__menu">
+            <div class="off-canvas__top">
+                <div class="off-canvas-close" data-toggle="offCanvas" aria-expanded="false" aria-controls="offCanvas"></div>
+                <div class="menuLabel">Main Menu</div>
+                <div id="btnMobileSearch" class="off-canvas-search"></div>
+            </div>
+                <ul class="vertical menu" data-accordion-menu data-multi-open="false">
+
+                    <li>
+                        <a href="../../products/index.html">
+                            <div class="menu__title">Products<span></span></div>
+                        </a>
+                        <ul class="menu vertical nested">
+                                            <li>
+                    <a href="../../products/insightidr/index.html">
+                        <p class="navTitle">InsightIDR</p>
+                        User Behavior Analytics &amp; SIEM
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/insightvm/index.html">
+                        <p class="navTitle">InsightVM</p>
+                        Vulnerability Management
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/insightappsec/index.html">
+                        <p class="navTitle">InsightAppSec</p>
+                        Dynamic Application Security Testing
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/insightconnect/index.html">
+                        <p class="navTitle">InsightConnect</p>
+                        Orchestration &amp; Automation
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/insightops/index.html">
+                        <p class="navTitle">InsightOps</p>
+                        Log Management
+                    </a>
+                </li>
+
+                                            <li class="menu section-title"> </li>
+                <li>
+                    <a href="../../products/metasploit/index.html">
+                        <p class="navTitle">Metasploit</p>
+                        Penetration Testing
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/nexpose/index.html">
+                        <p class="navTitle">Nexpose</p>
+                        Vulnerability Management On-Premise
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/appspider/index.html">
+                        <p class="navTitle">AppSpider</p>
+                        Application Security On-Premise
+                    </a>
+                </li>
+                <li>
+                    <a href="https://earlyaccess.rapid7.com/tcell">
+                        <p class="navTitle">tCell by Rapid7</p>
+                        Application Monitoring &amp; Protection
+                    </a>
+                </li>
+
+                        </ul>
+                    </li>
+                                        <li>
+
+                            <a href="#">
+                                <div class="menu__title">Services<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../services/security-consulting/index.html">
+                                            <p class="navTitle">Security Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/product-consulting/index.html">
+                                            <p class="navTitle">Product Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/managed-services/index.html">
+                                            <p class="navTitle">Managed Services</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/training-certification/index.html">
+                                            <p class="navTitle">Training &amp; Certification</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/support-and-customer-success/index.html">
+                                            <p class="navTitle">Support &amp; CSM</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="#">
+                                <div class="menu__title">Partners<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../partners/sales-partners/index.html">
+                                            <p class="navTitle">Sales Partners</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../partners/technology-partners/index.html">
+                                            <p class="navTitle">Technology Partners</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../partners/index.html">
+                                            <p class="navTitle">Find a Partner</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="../../research/index.html">
+                                <div class="menu__title">Research</div>
+                            </a>
+
+
+                    </li>
+
+                </ul>
+
+                <ul class="vertical menu sideUtilityLinks">
+                        <li><a href="https://blog.rapid7.com/">Blog</a></li>
+                        <li><a href="../../for-customers/index.html">Support</a></li>
+                        <li><a href="../../contact/index.html">Contact</a></li>
+                </ul>
+
+            <div class="menu__cta">
+                <a href="../../try/insight/index.html" class="button smBtn blue">Free Trial</a>
+            </div>
+        </div>
+
+        <!-- Mobile Search -->
+        <div class="off-canvas__search">
+            <div id="btnCloseMobileSearch" class="off-canvas-close"></div>
+            <div class="searchContainer">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                    <span class="sb-icon-search"></span>
+                </form>
+                <div class="search-links">
+                    <header>Helpful Links</header>
+                            <a href="../../for-customers/index.html">Product Support</a>
+                            <a href="../../pricing/index.html">Product Pricing</a>
+                            <a href="../../resources/index.html">Resource Library</a>
+                            <a href="../../about/events-webcasts/index.html">Events &amp; Webcasts</a>
+                            <a href="../../services/training-certification/index.html">Training &amp; Certification</a>
+                            <a href="../../about/news/index.html">News &amp; Press Releases</a>
+                            <a href="../../about/index.html">About Rapid7</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- end .off-canvas -->
+
+
+        <div class="off-canvas-content" data-off-canvas-content>
+            <div id="menuOverlay" class="reveal-overlay"></div>
+
+                <section class="longHero" >
+
+                    
+
+    <!-- nav -->
+    <div class="utility row">
+
+        <!-- nav toggle (mobile only) -->
+        <button type="button" class="button hamburger hamClosed" data-toggle="offCanvas" aria-expanded="false" aria-controls="offCanvas">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- main nav links -->
+        <div class="nav__main">
+
+            <div class="nav__main-top">
+                <a href="../../index.html" class="nav__main-logo">
+                    <img src="../../includes/img/Rapid7_logo.svg" alt="Rapid7 logo">
+                </a>
+                    <div class="top-bar">
+                        <ul class="dropdown menu nav__main-links" data-dropdown-menu data-disable-hover="true" data-click-open="true">
+                                    <li class="megamenu">
+                                        <a data-toggle="megamenu-Products" href="#">Products</a>
+
+                                        <div class="dropdown-pane megamenu__wrapper" id="megamenu-Products" data-dropdown data-disable-hover="true" data-click-open="true" data-options="closeOnClick:true;">
+                                            <div class="row collapse megamenu__content">
+                                                <div class="megamenu__info">
+                                                    <div class="megamenu__header">The Rapid7 Insight Cloud</div>
+<p>Rapid7 Insight is your home for SecOps, equipping you with the visibility, analytics, and automation you need to unite your teams and amplify efficiency.</p>
+<p><a href="../../products/insight-platform/index.html">Insight Cloud Overview</a><br /><a href="../../pricing/index.html">Insight Cloud Pricing</a> <a class="button xsmBtn blue" href="../../try/insight/index.html">Try Now</a></p>
+                                                </div>
+                                                <div class="megamenu__items">
+                                                    <div class="megamenu__items-main">
+                                                        <div class="megamenu__items-left megamenu__items-cols-two">
+                                                                <div class="megamenu__subheader">Insight Products</div>
+                                                            <div class="megamenu__items-col">
+                                                                                <div class="megamenu__item">
+                    <a href="../../products/insightidr/index.html" target="">
+                        <div class="megamenu__item-title">InsightIDR</div>
+                        <p>User Behavior Analytics &amp; SIEM</p>
+                    </a>
+                    <a href="../../trial/insightidr/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/insightvm/index.html" target="">
+                        <div class="megamenu__item-title">InsightVM</div>
+                        <p>Vulnerability Management</p>
+                    </a>
+                    <a href="../../trial/insightvm/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/insightappsec/index.html" target="">
+                        <div class="megamenu__item-title">InsightAppSec</div>
+                        <p>Dynamic Application Security Testing</p>
+                    </a>
+                    <a href="../../trial/insightappsec/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/insightconnect/index.html" target="">
+                        <div class="megamenu__item-title">InsightConnect</div>
+                        <p>Orchestration &amp; Automation</p>
+                    </a>
+                    <a href="../../info/insightconnect-contact/index.html" target=" ">Request Demo</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/insightops/index.html" target="">
+                        <div class="megamenu__item-title">InsightOps</div>
+                        <p>Log Management</p>
+                    </a>
+                    <a href="../../trial/insightops/index.html" target=" ">Free Trial</a>
+                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="megamenu__items-right">
+                                                                            <div class="megamenu__subheader"> &nbsp;</div>
+                <div class="megamenu__item">
+                    <a href="../../products/metasploit/index.html" target="">
+                        <div class="megamenu__item-title">Metasploit</div>
+                        <p>Penetration Testing</p>
+                    </a>
+                    <a href="../../try/metasploit-pro/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/nexpose/index.html" target="">
+                        <div class="megamenu__item-title">Nexpose</div>
+                        <p>Vulnerability Management On-Premise</p>
+                    </a>
+                    <a href="../../products/nexpose/download/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/appspider/index.html" target="">
+                        <div class="megamenu__item-title">AppSpider</div>
+                        <p>Application Security On-Premise</p>
+                    </a>
+                    <a href="../../try/appspider/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="https://earlyaccess.rapid7.com/tcell" target="_blank">
+                        <div class="megamenu__item-title">tCell by Rapid7</div>
+                        <p>Application Monitoring &amp; Protection</p>
+                    </a>
+                    <a href="https://information.rapid7.com/WC-TEM-2018-12-20-Cloud-WAF-Beta-Program_Registration.html" target="_blank ">Request Demo</a>
+                </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="megamenu__items-links">
+                                                        <a href="../../products/index.html">View All Products</a> &nbsp;
+                                                            <span> &vert; &nbsp; <a href="../../solutions/index.html">Search by Solution</a></span>
+                                                    </div>
+                                                </div>
+                                                <div class=" megamenu__search searchContainer">
+                                                    <form action="https://www.rapid7.com/search/">
+                                                        <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                                                        <input class="sb-search-submit" type="submit" value="">
+                                                        <span class="sb-icon-search"></span>
+                                                    </form>
+                                                    <div class="search-links">
+                                                        <div class="megamenu__subheader">Helpful Links</div>
+                                                                <a href="../../for-customers/index.html">Product Support</a>
+                                                                <a href="../../pricing/index.html">Product Pricing</a>
+                                                                <a href="../../resources/index.html">Resource Library</a>
+                                                                <a href="../../about/events-webcasts/index.html">Events &amp; Webcasts</a>
+                                                                <a href="../../services/training-certification/index.html">Training &amp; Certification</a>
+                                                                <a href="../../about/news/index.html">News &amp; Press Releases</a>
+                                                                <a href="../../about/index.html">About Rapid7</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="#">Services</a>
+                                            <ul class="menu vertical">
+                                                    <li><a href="../../services/security-consulting/index.html">Security Consulting</a></li>
+                                                    <li><a href="../../services/product-consulting/index.html">Product Consulting</a></li>
+                                                    <li><a href="../../services/managed-services/index.html">Managed Services</a></li>
+                                                    <li><a href="../../services/training-certification/index.html">Training &amp; Certification</a></li>
+                                                    <li><a href="../../services/support-and-customer-success/index.html">Support &amp; CSM</a></li>
+                                            </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">Partners</a>
+                                            <ul class="menu vertical">
+                                                    <li><a href="../../partners/sales-partners/index.html">Sales Partners</a></li>
+                                                    <li><a href="../../partners/technology-partners/index.html">Technology Partners</a></li>
+                                                    <li><a href="../../partners/index.html">Find a Partner</a></li>
+                                            </ul>
+                                    </li>
+                                    <li>
+                                        <a href="../../research/index.html">Research</a>
+                                    </li>
+                        </ul>
+                    </div>
+
+            </div>
+
+            <!-- breadcrumbs -->
+    <div class="row expanded">
+        <div class="medium-12 columns">
+            <ul class="breadcrumbs">
+                <li><a href="../../index.html">Home</a></li>
+                            <li><a href="../index.html">Fundamentals</a></li>
+            <li>Web Application Vulnerabilities</li>
+
+            </ul>
+        </div>
+    </div>
+
+
+
+        </div>
+
+        <div class="nav__utility">
+            <!-- utility links -->
+            <div id="utilityLinks" class="nav__utility-links hide-for-small-only" data-auth="false">
+
+                <ul class="dropdown menu" data-dropdown-menu data-disable-hover="true" data-click-open="true">
+                    <li class="language-toggle has-menu">
+                        <a href="#" class="text-uppercase">en</a>
+                        <ul class="menu">
+                                <li class=selected>
+                                    <a href="#">English</a>
+                                </li>
+                                <li >
+                                    <a href="../../de/fundamentals/web-application-vulnerabilities/index.html">Deutsch</a>
+                                </li>
+                                <li >
+                                    <a href="../../ja/fundamentals/web-application-vulnerabilities/index.html">日本語</a>
+                                </li>
+                        </ul>
+                    </li>
+                            <li >
+                                <a href="https://blog.rapid7.com/">Blog</a>
+                            </li>
+                            <li >
+                                <a href="../../for-customers/index.html">Support</a>
+                            </li>
+                            <li >
+                                <a href="../../contact/index.html">Contact</a>
+                            </li>
+                                            <li>
+                            <a id="utilitySignin" href="https://insight.rapid7.com/saml/SSO?fromURI=https%3a%2f%2fwww.rapid7.com%2ffundamentals%2fweb-application-vulnerabilities%2f" class="notlogged">Sign In</a>
+                        </li>
+                </ul>
+            </div>
+            <!-- utility user -->
+            <div class="nav__utility-trial" data-auth="false">
+                    <a href="../../try/insight/index.html" target="_blank">
+                        <span id="trialCta" class="button blue mdBtn cta"><span>Free</span> Trial</span>
+                    </a>
+            </div>
+        </div>
+
+    </div><!-- utility -->
+
+
+                    <div class="overlayText">
+                        <div class="row">
+                            <div class="longHero__content medium-10 medium-offset-1 large-8 large-offset-2 columns">
+
+                                <h1>
+                                    Web Application Vulnerabilities
+                                </h1>
+                                    <h2 class="subtitle">
+                                        A look at how attackers target web apps
+                                    </h2>
+                                
+                                
+                            </div>
+                            
+
+                        </div>
+                    </div>
+
+                    
+                </section>
+            
+
+
+<div class="pageContent">
+    
+
+<div data-sticky-container>
+    <div class="sticky-nav" id="stickyNav" data-sticky data-options="marginTop:0;" style="width:100%" data-top-anchor="stickyTrigger:top" data-sticky-on="small">
+        <div class="sticky-nav__main">
+            <a href="../../index.html" class="sticky-nav__logo">
+                <img alt="Rapid7 logo" class="lazy" data-src="/includes/img/Rapid7_logo.svg" src="../../includes/img/placeholder.png" />
+            </a>
+            <div class="sticky-nav__title show-for-medium">
+                    <a href="#__" class="smooth">Web Application Vulnerabilities</a>
+            </div>
+                    <div class="sticky-nav__share hide-for-medium">
+                        <a href="#" class="sticky-nav__share-title">
+                            <img alt="Share" class="lazy" data-src="/includes/img/icon-share.svg" src="../../includes/img/placeholder.png" />
+                        </a>
+                    </div>
+                <div class="sticky-nav__share sticky-nav__share--options">
+                        <span class="sticky-nav__share-title">
+                            Share:
+                        </span>
+                    <ul>
+                            <li>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.rapid7.com%2ffundamentals%2fweb-application-vulnerabilities%2f&amp;title=Web+Application+Vulnerabilities" onclick="window.open(this.href, 'linkedin-share', 'width=520,height=570');return false;">
+                                    <img class="lazy" data-src="/includes/img/linkedin-white.svg" src="../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/intent/tweet?text=Web+Application+Vulnerabilities&amp;url=https%3a%2f%2fwww.rapid7.com%2ffundamentals%2fweb-application-vulnerabilities%2f" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                                    <img class="lazy" data-src="/includes/img/twitter-white.svg" src="../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.rapid7.com%2ffundamentals%2fweb-application-vulnerabilities%2f" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                                    <img class="lazy" data-src="/includes/img/facebook-white.svg" src="../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                                                
+                    </ul>
+                </div>
+ 
+            <div class="sticky-nav__cta">
+                <a href="../../try/insight/index.html">
+                    <button class="blue button">
+                        Try Now
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="stickyTrigger"></div>
+
+    <!-- Intro -->
+    <section class="pageBlock bgWhite">
+        <div class="row">
+            <div class="small-10 small-offset-1 columns wrapper">
+                <h2>
+                    What are Web Application Vulnerabilities?
+                </h2>
+                <p>Web application vulnerabilities involve a system flaw or weakness in a web-based application. They have been around for years, largely due to not validating or sanitizing form inputs, misconfigured web servers, and application design flaws, and they can be exploited to compromise the application&rsquo;s security. These vulnerabilities are not the same as other common types of vulnerabilities, such as network or asset. They arise because web applications need to interact with multiple&nbsp;users across multiple&nbsp;networks, and that level of accessibility is&nbsp;easily taken advantage of by hackers.</p>
+<p>There are <a href="../../products/insightappsec/index.html" target="_blank" rel="noopener">web application security solutions</a> designed specifically for applications, and as such it&rsquo;s important to look beyond traditional vulnerability scanners when it comes to identifying gaps in an organization&rsquo;s <a href="../web-application-security/index.html" target="_blank" rel="noopener">application security</a>. To really understand your risks, learn more about some <a href="../types-of-attacks/index.html" target="_blank" rel="noopener">types of web application and cybersecurity attacks</a>, and how web scanners can help increase the safety of your applications.</p>
+            </div>
+        </div>
+    </section>
+    <section class="pageBlock bgGrayLight mainContent-container">
+        <!--  data-equalizer data-equalize-on="large" -->
+        <div class="sidebar-container row show-for-large">
+            <!-- sidebar -->
+            <div class="large-3 large-offset-8 end columns" id="sidebar">
+                <!-- data-equalizer-watch -->
+                <div class="sidebarmenu">
+                        <div class="chapter">Chapter 3</div>
+                        <h2>Web Application Security</h2>
+                        <span>Select Section</span>
+                        <ul>
+                                <li>
+                                    <a href="../web-application-security/index.html" >
+                                        Web Application Security and Scanning: Explanation and Deep Dive
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../web-application-security-testing/index.html" >
+                                        Web Application Security Testing
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index.html" class=active>
+                                        Web Application Vulnerabilities
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../application-security-testing-programs/index.html" >
+                                        Application Security Testing Programs
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../devsecops/index.html" >
+                                        DevSecOps: Definition and Deep Dive
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../dast/index.html" >
+                                        Dynamic Application Security Testing (DAST)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../software-development-life-cycle-sdlc/index.html" >
+                                        Software Development Life Cycle (SDLC)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../web-application-firewalls/index.html" >
+                                        Web Application Firewalls (WAFs)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../runtime-application-self-protection/index.html" >
+                                        Runtime Application Self-Protection (RASP)&amp;nbsp;
+                                    </a>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- content -->
+            <div class="small-10 small-offset-1 large-6 large-offset-1 columns wrapper mainContent">
+                <!-- data-equalizer-watch -->
+                <p><iframe src="https://www.youtube.com/embed/-7B9Ej4BFgw" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<p><a href="../../resources/wbw-an-intro-to-the-owasp-top-10/index.html" target="_blank" rel="noopener"><em>Click here for the video transcript</em></a></p>
+<h2>SQL Injection Attacks</h2>
+<p><a href="https://blog.rapid7.com/2015/11/11/what-is-sql-injection/" target="_blank" rel="noopener">Structured Query Language (SQL)</a> is now so commonly used to manage and direct information on applications that hackers have come up with ways to slip their own SQL commands into the database. These commands may change, steal or delete data, and they may also allow the hacker access to the root system.&nbsp;SQL (officially pronounced <em>ess-cue-el</em>, but commonly pronounced &ldquo;sequel&rdquo;) stands for structured query language; it&rsquo;s a programming language used to communicate with databases. Many of the servers that store critical data for websites and services use SQL to manage the data in their databases.</p>
+<p>An SQL injection attack specifically targets this kind of server, using malicious code to get the server to divulge information it normally wouldn&rsquo;t. This is especially problematic if the server stores private customer information from the website or web application, such as credit card numbers, usernames and passwords (credentials), or other personally identifiable information, which are tempting and lucrative targets for an attacker.</p>
+<p>Successful SQL injection attacks typically occur because a vulnerable application doesn&rsquo;t properly sanitize inputs provided by the user, by not stripping out anything that appears to be SQL code. For example, if an application is vulnerable to an injection attack, it may be possible for an attacker to go to a website's search box and type in code that would instruct the site's SQL server to dump all of its stored usernames and passwords for the site.&nbsp;</p>
+<p><strong>Learn more about&nbsp;</strong><a href="../sql-injection-attacks/index.html" target="_blank" rel="noopener"><strong>SQL injection attacks</strong></a><strong>.</strong></p>
+<h2>Cross-Site Scripting (XSS)&nbsp;</h2>
+<p>In an SQL injection attack, an attacker goes after a vulnerable website to target its stored data, such as user credentials or sensitive financial data. But if the attacker would rather directly target a website's users, they may opt for a <a href="../cross-site-scripting/index.html" target="_blank" rel="noopener">cross-site scripting</a> attack. Similar to an SQL injection attack, this attack also involves injecting malicious code into a website or web-based app. However, in this case the malicious code the attacker has injected only runs in the user's browser when they visit the attacked website, and it goes after the visitor directly.</p>
+<p>One of the most common ways an attacker can deploy a cross-site scripting attack is by injecting malicious code into an input field that would be automatically run when other visitors view the infected page. For example, they could embed a link to a malicious JavaScript in a comment on a blog.&nbsp;</p>
+<p>Cross-site scripting attacks can significantly damage a web company&rsquo;s reputation by placing the users' information at risk without any indication that anything malicious even occurred. Any sensitive information a user sends to the site or the application&mdash;such as their credentials, credit card information, or other private data&mdash;can be hijacked via cross-site scripting without the owners realizing there was even a problem in the first place.&nbsp;</p>
+<p><strong>Learn more about&nbsp;</strong><a href="../cross-site-scripting/index.html" target="_blank" rel="noopener"><strong>cross-site scripting</strong><strong> attacks</strong></a><strong>.</strong></p>
+<h2>Cross-Site Request Forgery (CSRF)</h2>
+<p>A <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)" target="_blank" rel="noopener">Cross-Site Request Forgery</a> (CSRF) attack is when a victim is forced to perform an unintended action on a web application they are logged into. The web application will have already deemed the victim and their browser trustworthy, and so executes an action intended by the hacker when the victim is tricked into submitting a malicious request to the application. This has been used for everything from harmless pranks on users to illicit money transfers.&nbsp;</p>
+<p>One way website owners can help cut down on their chance of attack is to have advanced validation techniques in place for anyone who may visit pages on their site or app, especially when it comes to social media or community sites. This will enable them to identify the user&rsquo;s browser and session to verify their authenticity.</p>
+<p>While there are a variety of ways a hacker may infiltrate an application due to web application vulnerabilities, there are also a variety of ways to defend against it. There are <a href="../../products/insightappsec/index.html" target="_blank" rel="noopener">web application security testing tools</a>&nbsp;specially designed to monitor even the most public of applications. Using these scanners&nbsp;reduce your chances of being the victim of a hack by showing you exactly where to make the changes needed for more secure applications.&nbsp;</p>
+
+                <!-- next and previous arrows -->
+                <div id="next-previous">
+                    <div class="row">
+                        <!-- Prev -->
+                            <div class="large-6 columns">
+                                <a class="prev-link" href="../web-application-security-testing/index.html">
+                                    <div class="prev-img"></div>
+                                    <span>Web Application Security Testing</span>
+                                </a>
+                            </div>
+                                                    <!-- Next -->
+                            <div class="large-6 columns end">
+                                <a class="next-link" href="../application-security-testing-programs/index.html">
+                                    <span>Application Security Testing Programs</span>
+                                    <div class="next-img"></div>
+                                </a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div><!-- end page content -->
+<div><div><section class="pageBlock bgWhite fullwidthBlock crossSiteLinks">
+    <div class="row collapse wrapper">
+        <div class="medium-10 medium-offset-1 columns">
+            <div class="pageBlock__content">
+                <div class="crossSiteWrapper row">
+                    <div class="large-6 columns">
+                            <div class="crossSiteLink">
+                                <div class="crossSiteLink__title">Webcast: All-in on AppSec</div>
+                                <div class="crossSiteLink__description">When starting an application security program, where do you start? What approach should you take? Our experts cover the concepts, technologies, and approaches you need to know in this webcast.</div>
+                                <a href="https://content.rapid7.com/appsec-get-started/all-in-on-appsec-the" class="textCta xsmText">View Webcast</a>
+                            </div>
+                    </div>
+                    <div class="large-6 columns">
+                            <div class="crossSiteLink">
+                                <div class="crossSiteLink__title">Toolkit: Modern Application Security</div>
+                                <div class="crossSiteLink__description">With these resources, you’ll learn what to look for in your applications and how to evaluate whether or not your DAST solution has got you covered.</div>
+                                <a href="https://content.rapid7.com/insightappsec" class="textCta xsmText">View Resources</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div></div>
+
+
+<footer >
+    <section class="search-scroll">
+        <div class="row">
+            <div class="footer__search">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                </form>
+            </div>
+            <div class="footer__scroll">
+                <a href="#__" class="smooth">
+                    <span>BACK TO TOP</span>
+                    <img class="lazy" data-src="/includes/img/up-arrow-lightgray.png" src="../../includes/img/placeholder.png" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+        <section class="footer__links row">
+            <div class="footer__links-wrapper">
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__contact">
+                        <a href="../../index.html">
+                            <img alt="Rapid7 logo" class="logo lazy" data-src="/includes/img/Rapid7_logo.svg" src="../../includes/img/placeholder.png" />
+                        </a>
+                                        <div class="footer__links-title">CUSTOMER SUPPORT</div>
+                <a class="link" href="tel:1-866-390-8113">+1-866-390-8113 (Toll Free)</a>
+                <div class="footer__links-title">SALES SUPPORT</div>
+                <a class="link" href="tel:866-772-7437">+1-866-7RAPID7 (Toll Free)</a>
+
+                            <div class="footer__breach">
+                                <div class="footer__breach-title">Need immediate help with a breach?</div>
+                                <div class="footer__breach-contact">
+                                    <div class="footer__breach-icon"></div>
+                                    <div class="footer__breach-phone"><a href="tel:18447274347">+1-844-RAPID-IR</a></div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="footer__links-section footer__solutions">
+                                        <div class="footer__links-title">SOLUTIONS</div>
+                <a class="link" href="../../solutions/index.html">All Solutions</a>
+                <a class="link" href="../../solutions/industry/index.html">Industry Solutions</a>
+                <a class="link" href="../../solutions/compliance/index.html">Compliance Solutions</a>
+
+                    </div>
+                </div>
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__support">
+                                        <div class="footer__links-title">SUPPORT & RESOURCES</div>
+                <a class="link" href="../../for-customers/index.html">Product Support</a>
+                <a class="link" href="../../resources/index.html">Resource Library</a>
+                <a class="link" href="../../about/customers/index.html">Customer Stories</a>
+                <a class="link" href="../../about/events-webcasts/index.html">Events & Webcasts</a>
+                <a class="link" href="../../services/training-certification/index.html">Training & Certification</a>
+                <a class="link" href="../index.html">IT & Security Fundamentals</a>
+                <a class="link" href="../../db/index.html">Vulnerability & Exploit Database</a>
+
+                    </div>
+                    <div class="footer__links-section footer__about">
+                                        <div class="footer__links-title">ABOUT US</div>
+                <a class="link" href="../../about/company/index.html">Company</a>
+                <a class="link" href="../../about/leadership/index.html">Leadership</a>
+                <a class="link" href="../../about/news/index.html">News & Press Releases</a>
+                <a class="link" href="../../about/customers/index.html">Customers</a>
+                <a class="link" href="../../about/public-policy/index.html">Public Policy</a>
+                <a class="link" href="https://investors.rapid7.com/">Investors</a>
+
+                    </div>
+                </div>
+
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__connect">
+                                        <div class="footer__links-title">CONNECT WITH US</div>
+                <a class="link" href="../../contact/index.html">Contact</a>
+                <a class="link" href="https://blog.rapid7.com/">Blog</a>
+                <a class="link" href="https://rapid7support.force.com/customers/">Support Login</a>
+                <a class="link" href="../../careers/index.html">Careers</a>
+
+                        <div class="footer__links-social">
+                            <a class="linkedin" href="https://www.linkedin.com/company/39624" target="_blank"></a>
+                            <a class="twitter" href="https://twitter.com/Rapid7" target="_blank"></a>
+                            <a class="facebook" href="https://www.facebook.com/rapid7" target="_blank"></a>
+                            <a class="instagram" href="https://www.instagram.com/rapid7/" target="_blank"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <section class="footer__legal">
+        <div class="row">
+            <div class="footer__legal-copyright">&copy; Rapid7</div>
+
+                    <div class="footer__legal-link"><a href="../../legal/index.html">Legal Terms</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../privacy-policy/index.html">Privacy Policy</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../export-notice/index.html">Export Notice</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../trust/index.html">Trust</a></div>
+        </div>
+    </section>
+
+        <!-- *************************** sticky contact us modal *************************** -->
+        <section class="contact-sticky">
+            <div class="row expanded">
+                <div id="stickyButtons" class="driftInit">
+                    <div class="chatBtn show-if-chat-online" id="stickyChat">
+                        <a class="gray button">Chat</a>
+                    </div>
+                    <div class="contactBtn" data-open="stickyContact">
+                        <a id="sticky_contact_btn" class="gray button">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="reveal light hasSidebar" id="stickyContact" data-reveal>
+            <section class="contactForm">
+                <div class="row">
+                    <div class="large-9 columns">
+                        <form id="contactModal" class="formBlock freemail">
+                            <div id="intro" class="row">
+                                <div id="thankyouText" style="display:none;" class="messageBox green">
+                                    <div class="medium-12">
+                                        <h4><span class="success">Success!</span> Thank you for submission. We will be in touch shortly.</h4>
+                                    </div>
+                                </div>
+                                <div id="errorText" style="display:none;" class="messageBox red">
+                                    <div class="medium-12">
+                                        <h4><span class="error">Oops!</span> There was a problem in submission. Please <a href="../../contact/index.html" title="Visit our Contact Us Page">contact us</a>.</h4>
+                                    </div>
+                                </div>
+                                <div class="columns medium-12">
+                                    <h2>Contact Us</h2>
+                                    <p id="fieldInstruction" class="">We're happy to answer any questions you may have about Rapid7</p>
+                                </div>
+                            </div>
+                            <fieldset>
+                                <dl class="clearfix expand">
+                                    <dd>
+                                        <select name="contactType" id="contactType" tabindex="21" class="normalSelect dropdownSelect">
+                                            <option value="0">Reason for Contact</option>
+                                                <option value="3557252">General</option>
+                                                <option value="3557253">Demo Request</option>
+                                                <option value="3557256">Pricing</option>
+                                                <option value="3557257">Professional Services</option>
+                                                <option value="3557359">Request for Proposal</option>
+                                        </select>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix expand" id="productNameParent" style="display:none;">
+                                    <dd>
+                                        <select name="productName" id="productName" tabindex="22" class="normalSelect dropdownSelect">
+                                            <option value="0">Select Product</option>
+                                            <option value="3558027">Metasploit</option>
+                                            <option value="8209765">InsightIDR</option>
+                                            <option value="11407979">InsightVM</option>
+                                            <option value="10417511">InsightOps</option>
+                                            <option value="18912840">InsightAppSec</option>
+                                            <option value="6184447">AppSpider</option>
+                                            <option value="1550853">Nexpose</option>
+                                        </select>
+                                    </dd>
+                                </dl>
+                                <dl class="">
+                                    <dd>
+                                        <label for="firstName">First Name</label>
+                                        <input id="firstName" type="text" name="firstName" tabindex="23" />
+                                    </dd>
+                                </dl>
+                                <dl class="">
+                                    <dd>
+                                        <label for="lastName">Last Name</label>
+                                        <input id="lastName" type="text" name="lastName" tabindex="24" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="jobTitle">Job Title</label>
+                                        <input id="jobTitle" type="text" name="jobTitle" tabindex="25" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="companyName">Company</label>
+                                        <input id="companyName" type="text" name="companyName" tabindex="26" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="email">Email</label>
+                                        <input id="email" type="text" tabindex="27" name="email" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <div class="intl-phone">
+                                            <label for="phone">Phone</label>
+                                            <div class="flag-container">
+                                                <div class="selected-flag">
+                                                    <div class="iti-flag"></div>
+                                                </div>
+                                                <ul class="country-list"></ul>
+                                            </div>
+                                            <input id="phone" type="text" name="phone" tabindex="28" />
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="country">Country</label>
+                                        <select name="country" id="country" tabindex="29" class="form_SelectInstruction normalSelect country_select" onchange='updateCountryData("#contactModal")'></select>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="state">State</label>
+                                        <select name="state" id="state" tabindex="30" class="form_SelectInstruction normalSelect dropdownSelect"></select>
+                                    </dd>
+                                </dl>
+                                <dl class="expand checkboxContainer" id="optout" style="display:none;">
+                                    <dd>
+                                        <input id="explicitOptOutAlt" type="checkbox" class="r7-check">
+                                        <label for="explicitOptOut">I do not want to receive emails regarding Rapid7's products and services.</label>
+                                    </dd>
+                                    <p class="disc">
+                                        <p>Issues with this page? Please email <a href="mailto:info@rapid7.com">info@rapid7.com</a>. Please see updated <a href="../../privacy-policy/index.html">Privacy Policy</a></p>
+                                    </p>
+                                </dl>
+                                <dl class="expand" id="consultant" style="display: none;">
+                                    <input id="consultantFieldAlt" type="checkbox" class="r7-check">
+                                    <label for="consultantFieldAlt">I am a consultant, partner, or reseller.</label>
+                                </dl>
+                                <dl class="expand">
+                                    <button id="submit" class="submit button blue mdBtn" tabindex="31">Submit</button>
+                                </dl>
+                                <input type="hidden" id="formName" value="ContactModal" />
+                            </fieldset>
+
+                        </form>
+                    </div>
+                    <div class="large-3 columns sidebar">
+                        <img alt="Rapid7 logo" class="logo lazy" data-src="/includes/img/logo-black.png" src="../../includes/img/placeholder.png" />
+                        <h3>General:</h3>
+                        <p><a href="mailto:info@rapid7.com">info@rapid7.com</a></p>
+                        <h3>Sales: </h3>
+                        <p>
+                            <a href="tel:1-866-772-7497">+1&ndash;866&ndash;7&ndash;Rapid7</a><br />
+                            <a href="mailto:sales@rapid7.com">sales@rapid7.com</a>
+                        </p>
+                        <h3>Support:</h3>
+                        <p>
+                            <a href="tel:1-866-390-8113">+1&ndash;866&ndash;390&ndash;8113(toll free)</a><br />
+                            <a href="mailto:support@rapid7.com">support@rapid7.com</a>
+                        </p>
+                        <h3>Incident Response:</h3>
+                        <p><a href="tel:1-844-787-4947">1-844-RAPID-IR</a></p>
+                        <p><a href="../../contact/index.html" class="view_more">More Contact Info</a></p>
+                    </div>
+                </div>
+            </section>
+            <button class="close-button" data-close="" aria-label="Close reveal" type="button"></button>
+        </div>
+        <!-- *************************** end sticky contact us modal *************************** -->
+</footer>
+
+
+
+
+            <!-- *************************** navigation close module *************************** -->
+        </div><!-- off-canvas-content -->
+    </div><!-- off-canvas-wrapper-inner -->
+</div><!-- off-canvas-wrapper -->
+
+
+    <!-- scripts -->
+    <!--[if lte IE 11]>
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+    <![endif]-->
+    <script src="../../includes/js/all.mined79.js?cb=1576099002710"></script>
+    
+    
+
+    
+    <!-- end scripts -->
+
+</body>
+
+<!-- Mirrored from www.rapid7.com/fundamentals/web-application-vulnerabilities/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:15:49 GMT -->
+</html>

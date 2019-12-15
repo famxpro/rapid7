@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja" dir="ltr">
+
+<!-- Mirrored from www.rapid7.com/ja/products/insightconnect/demo/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:30:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>InsightConnect Demo: Security Orchestration and Automation (SOAR)</title>
+
+
+            <meta property="og:url" content="../../../../products/insightconnect/demo/index.html" />
+        <link rel="canonical" href="../../../../products/insightconnect/demo/index.html"  />
+        <link rel="alternate" href="../../../../products/insightconnect/demo/index.html" hreflang="en" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="title" content="InsightConnect Demo: Security Orchestration and Automation (SOAR)" />
+    <meta name="description" content="See our SOAR solution in action to learn how you can accelerate your teams and tools - no coding required. Watch our pre-recorded demo today." />
+    <meta property="og:title" content="InsightConnect Demo: Security Orchestration and Automation (SOAR)" />
+        <meta property="og:image" content="../../../../globalassets/rapid7-og.jpg" />
+        <meta name="twitter:image" content="../../../../globalassets/rapid7-og.jpg" />
+    <meta name="twitter:title" content="InsightConnect Demo: Security Orchestration and Automation (SOAR)">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="Rapid7" />
+    <meta property="og:description" content="See our SOAR solution in action to learn how you can accelerate your teams and tools - no coding required. Watch our pre-recorded demo today." />
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+'conversionType': 'primary',            
+        });
+    </script>
+
+    
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WBTPTVC');</script>
+    
+
+    <link rel="icon" type="image/x-icon" href="../../../../includes/img/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:800,900|Roboto:300,400,700|Noto+Sans+JP">
+    <link rel="stylesheet" href="../../../../includes/css/all.mined79.css?cb=1576099002710">
+    <script src="../../../../includes/js/jquery.min.js"></script>
+    <script src="http://js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>
+    <script src="../../../../includes/js/populateCountryState.js"></script>
+    <script src="http://information.rapid7.com/js/forms2/js/forms2.min.js"></script>
+    
+    
+
+</head>
+<body  class="pg-id-14573 landingFormPage">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBTPTVC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+        <div id="gdprAlert" class="overlay" style="display:none;">
+            <div class="gdpr-modal">
+                <div>
+                    <h2>Quick Cookie Notification</h2>
+                    <p>This site uses cookies, including for analytics, personalization, and advertising purposes.  For more information or to change your cookie settings, <a href="../../../../privacy-policy/tracking-technologies/index.html" target="_blank">click here</a>.  <br /><br />If you continue to browse this site without changing your cookie settings, you agree to this use.</p>
+                    <button class="button mdBtn blue" id="gdprClose">I AGREE, LET&rsquo;S GO!</button>
+                    <hr>
+                    <p class="fineprint">View <a href="../../../../privacy-policy/tracking-technologies/index.html" target="_blank">Cookie Policy</a> for full details</p>
+                </div>
+
+            </div>
+        </div>
+
+    <div id="__"></div>
+    <!--[if lte IE 9]>
+    <div id="ie-conditional"><spa>Your IE browser is out of date - Upgrade to the latest version of IE or Chrome for an optimal website experience.</span> <a href="https://support.microsoft.com/en-us/help/17621/internet-explorer-downloads" title="Upgrade IE Now" class="button smBtn darkClear" target="_blank">Upgrade IE Now</a>
+    <button class="close-button" type="button" id="closeIEBar">
+        <img src="../includes/img/close_white.svg">
+    </button>
+    </div>
+    <![endif]-->
+
+    
+
+
+<div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <div class="off-canvas__overlay"></div>
+<div class="off-canvas position-left" id="offCanvas" data-off-canvas data-transition="overlap">
+    <!-- Menu -->
+    <div class="off-canvas__content">
+        <!-- Mobile Menu -->
+        <div class="off-canvas__menu">
+            <div class="off-canvas__top">
+                <div class="off-canvas-close" data-toggle="offCanvas" aria-expanded="false" aria-controls="offCanvas"></div>
+                <div class="menuLabel">Main Menu</div>
+                <div id="btnMobileSearch" class="off-canvas-search"></div>
+            </div>
+                <ul class="vertical menu" data-accordion-menu data-multi-open="false">
+
+                    <li>
+                        <a href="../../index.html">
+                            <div class="menu__title">製品<span></span></div>
+                        </a>
+                        <ul class="menu vertical nested">
+                                            <li>
+                    <a href="../../insightidr/index.html">
+                        <p class="navTitle">InsightIDR</p>
+                        ユーザー行動分析とSIEM
+                    </a>
+                </li>
+                <li>
+                    <a href="../../insightvm/index.html">
+                        <p class="navTitle">InsightVM</p>
+                        脆弱性管理
+                    </a>
+                </li>
+                <li>
+                    <a href="../../insightappsec/index.html">
+                        <p class="navTitle">InsightAppSec</p>
+                        動的アプリケーションセキュリティ
+                    </a>
+                </li>
+                <li>
+                    <a href="../index.html">
+                        <p class="navTitle">InsightConnect</p>
+                        オーケストレーションと自動化
+                    </a>
+                </li>
+
+                                            <li>
+                    <a href="../../metasploit/index.html">
+                        <p class="navTitle">Metasploit</p>
+                        ペンテストツール
+                    </a>
+                </li>
+
+                        </ul>
+                    </li>
+                                        <li>
+
+                            <a href="#">
+                                <div class="menu__title">サービス<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../../services/security-consulting/index.html">
+                                            <p class="navTitle">Security Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/product-consulting/index.html">
+                                            <p class="navTitle">Product Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/managed-services/index.html">
+                                            <p class="navTitle">Managed Services</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/training-certification/index.html">
+                                            <p class="navTitle">Training &amp; Certification</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/support-and-customer-success/index.html">
+                                            <p class="navTitle">Support &amp; CSM</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="#">
+                                <div class="menu__title">パートナー<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../../partners/sales-partners/index.html">
+                                            <p class="navTitle">Sales Partners</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../partners/technology-partners/index.html">
+                                            <p class="navTitle">Technology Partners</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../partners/index.html">
+                                            <p class="navTitle">Find a Partner</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="../../../research/index.html">
+                                <div class="menu__title">リサーチ</div>
+                            </a>
+
+
+                    </li>
+
+                </ul>
+
+                <ul class="vertical menu sideUtilityLinks">
+                        <li><a href="https://blog.rapid7.com/">ブログ</a></li>
+                        <li><a href="../../../for-customers/index.html">サポート</a></li>
+                        <li><a href="../../../contact/index.html">お問い合わせ</a></li>
+                </ul>
+
+            <div class="menu__cta">
+                <a href="../../../../try/insight/index.html" class="button smBtn blue">Free Trial</a>
+            </div>
+        </div>
+
+        <!-- Mobile Search -->
+        <div class="off-canvas__search">
+            <div id="btnCloseMobileSearch" class="off-canvas-close"></div>
+            <div class="searchContainer">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                    <span class="sb-icon-search"></span>
+                </form>
+                <div class="search-links">
+                    <header>Helpful Links</header>
+                            <a href="../../../for-customers/index.html">Product Support</a>
+                            <a href="../../../pricing/index.html">Product Pricing</a>
+                            <a href="../../../resources/index.html">Resource Library</a>
+                            <a href="../../../about/events-webcasts/index.html">Events &amp; Webcasts</a>
+                            <a href="../../../services/training-certification/index.html">Training &amp; Certification</a>
+                            <a href="../../../about/news/index.html">News &amp; Press Releases</a>
+                            <a href="../../../about/index.html">About Rapid7</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- end .off-canvas -->
+
+
+        <div class="off-canvas-content" data-off-canvas-content>
+            <div id="menuOverlay" class="reveal-overlay"></div>
+
+                <section class="longhero">
+
+
+
+
+
+                </section>
+            
+
+
+<div class="bgBlueGreenGradientDesign">
+
+    <header>
+        <div class="row">
+            <div class="large-8 large-offset-2 columns">
+                <div class="header-links">
+                    <a href="../../../../index.html">
+                        <img alt="Rapid7 logo" class="logo lazy" data-src="/includes/img/Rapid7_logo.svg" src="../../../../includes/img/placeholder.png" width="150" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="pageContent">
+        <div class="row collapse">
+            <div class="large-8 large-offset-2 columns">
+                <div class="landingForm">
+                    
+                    <div class="landingForm__intro textWhite">
+                        <h1>See Rapid7's Security Orchestration and Automation (SOAR) Solution in Action</h1>
+                        <p>Dedicating time and resources to implement automation is often viewed as a huge level of effort, but adding automation to your most time-intensive security processes doesn&rsquo;t have to be an intimidating undertaking. Did you know that with a small investment, you can realize tremendous ROI and value from automation, faster than ever before?</p>
+<p>In this pre-recorded demo of InsightConnect, you will learn about:</p>
+<ul>
+<li>Overview of automation workflow building blocks</li>
+<li>Real use cases teams struggle with today, including phishing, SIEM investigation and response, patching, and more</li>
+<li>How you can integrate security automation and orchestration into your existing SecOps programs</li>
+<li>How automation will improve efficiency across the processes and tools you&rsquo;re executing manually today</li>
+</ul>
+                        
+                    </div>
+                    <div class="landingForm__form sidebar">
+                        <div class="clearfix one-col">
+                                <div class="clearfix">
+        <div id="intro">
+            <h2>Watch Our Pre-Recorded Demo</h2>
+            <p id="fieldInstruction" class="instructions"></p>
+        </div>
+
+
+        <form id="mktoForm_3435" class="mlp-form" ></form>
+
+
+        <script>
+
+                var mktoForm;
+                var isValidCompanyEmail = false;
+                MktoForms2.loadForm("//information.rapid7.com", "411-NAK-970",  3435);
+                MktoForms2.whenReady(function (form) {
+                    console.log('form ready');
+                    var formEl = form.getFormElem()[0];
+                    var thankYouWindow;
+                    var allowFreemail = false;
+                    var hasSubmitMessage = false;
+                    var opensNewWindow = true;
+                    mktoForm = form;
+
+                    mktoForm.onValidate(function (form) {
+                        // Validates company email if freemail class present
+                        if ((!isValidCompanyEmail) && (!allowFreemail)) {
+                            console.log('invalid? isValidCompanyEmail: ' + isValidCompanyEmail);
+                            mktoForm.submittable(false);
+                            var email = jQuery('#Email').val();
+                            var emailRequest =
+                            {
+                                email: email
+                            };
+                            $.ajax({
+                                url: '/api/netsuite/CallNetsuiteEmailValidation',
+                                data: JSON.stringify(emailRequest),
+                                type: 'POST',
+                                method: 'POST',
+                                contentType: 'application/json',
+                                dataType: 'json',
+                                crossDomain: true,
+                                success:function(data){
+                                    var ips_val = data.ips;
+                                    var eme_val = data.eme;
+                                    var emdf_val = data.emdf;
+
+                                    // If all three checks are true, email is valid and lets move to the next validation state
+                                    if (ips_val == 'true' && eme_val == 'true' && emdf_val == 'true') {
+                                        console.log('valid');
+                                        isValidCompanyEmail = true;
+                                        mktoForm.submit();
+                                        return true;
+
+                                    }
+                                    // If all three checks are NOT met, throw a validation error message for the user to try again...
+                                    else {
+                                        console.log('invalid');
+                                        // Show error message, pointed at VehicleSize element
+                                        var emailElem = mktoForm.getFormElem().find("#Email");
+                                        mktoForm.showErrorMessage("Must be valid company email.", emailElem);
+                                        return false;
+                                    }
+                                }
+                            });
+                        } else {
+                            console.log('valid? isValidCompanyEmail: ' + isValidCompanyEmail);
+                            mktoForm.submittable(true);
+                        }
+                    });
+                    mktoForm.onSubmit(function (form) {
+                        if (opensNewWindow) {
+                            thankYouWindow = window.open('');
+                        }
+                    });
+
+                    mktoForm.onSuccess(function (values, followUpUrl) {
+                        window.dataLayer.push({ 'event': 'form_submit_success' });
+                        if (opensNewWindow) {
+                            // Opens new window with thank you URL
+                            thankYouWindow.document.location = followUpUrl;
+                            document.getElementById("followupUrl").setAttribute('href', followUpUrl);
+                        }
+                        if (hasSubmitMessage || opensNewWindow) {
+                            //hides form after submit, replaces with thank you message
+                            form.getFormElem().hide();
+                            document.getElementById('thankyouText').style.display = 'block';
+                            return false;
+                        } else {
+                            // inherits marketo settings
+                            return true;
+                        }
+                    });
+                });
+        </script>
+            <div id="thankyouText" style="display:none;" class="messageBox green">
+
+                <h3></h3>
+                        <h3>Your requested resource has opened in a new window.</h3>
+                    <p>If a new window did not open, please <a href="#" target="_blank" id="followupUrl">click here</a></p>
+
+            </div>
+
+        <div class="columns medium-12">
+            <a href="#"></a>
+        </div>
+    </div>
+
+                            <div class="landingForm__disclaimer en-only">
+                                Issues with this page? Please email <a href="mailto:info@rapid7.com">info@rapid7.com</a>. Please see updated <a href="../../../../privacy-policy/index.html">Privacy Policy</a>
+                            </div>
+                            <div class="landingForm__disclaimer de-only">
+                                Sie haben Probleme mit dieser Seite? Bitte senden Sie eine E-Mail an <a href="mailto:info@rapid7.com">info@rapid7.com</a>. Bitte lesen Sie die aktualisierten <a href="../../../../privacy-policy/index.html">Datenschutzrichtlinien</a>
+                            </div>
+                            <div class="landingForm__disclaimer ja-only">
+                                このページに問題がある場合は、<a href="mailto:info@rapid7.com">info@rapid7.com</a> にEメールでお問い合わせください  <a href="../../../../privacy-policy/index.html" target="_blank">最新のプライバシー・ポリシー</a> をご確認ください
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="landingForm__bottom">
+            
+        </section>
+
+
+    </div>
+
+
+
+<footer class="landingFooter">
+    <section class="search-scroll">
+        <div class="row">
+            <div class="footer__search">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="検索" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                </form>
+            </div>
+            <div class="footer__scroll">
+                <a href="#__" class="smooth">
+                    <span>トップに戻る</span>
+                    <img class="lazy" data-src="/includes/img/up-arrow-lightgray.png" src="../../../../includes/img/placeholder.png" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="footer__legal">
+        <div class="row">
+            <div class="footer__legal-copyright">&copy; Rapid7</div>
+
+                    <div class="footer__legal-link"><a href="../../../legal/index.html">Legal Terms</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../../../privacy-policy/index.html">Privacy Policy</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../../export-notice/index.html">Export Notice</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../../trust/index.html">Trust</a></div>
+        </div>
+    </section>
+
+</footer>
+
+
+
+</div>
+
+
+
+
+            <!-- *************************** navigation close module *************************** -->
+        </div><!-- off-canvas-content -->
+    </div><!-- off-canvas-wrapper-inner -->
+</div><!-- off-canvas-wrapper -->
+
+
+    <!-- scripts -->
+    <!--[if lte IE 11]>
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+    <![endif]-->
+    <script src="../../../../includes/js/all.mined79.js?cb=1576099002710"></script>
+    
+    
+    
+
+
+    
+    <!-- end scripts -->
+
+</body>
+
+<!-- Mirrored from www.rapid7.com/ja/products/insightconnect/demo/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:30:23 GMT -->
+</html>

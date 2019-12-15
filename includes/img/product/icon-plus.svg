@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="icon-learn-more-plus" transform="translate(-1045 -474)">
+    <g id="Group_995" data-name="Group 995" transform="translate(1045 474)">
+      <g id="Ellipse_23" data-name="Ellipse 23" transform="translate(0)" fill="none" stroke="#82939c" stroke-miterlimit="10" stroke-width="1.5">
+        <ellipse cx="8" cy="8" rx="8" ry="8" stroke="none"/>
+        <ellipse cx="8" cy="8" rx="7.25" ry="7.25" fill="none"/>
+      </g>
+      <g id="Ellipse_24" data-name="Ellipse 24" transform="translate(0)" fill="none" stroke="#82939c" stroke-miterlimit="10" stroke-width="1.5">
+        <ellipse cx="8" cy="8" rx="8" ry="8" stroke="none"/>
+        <ellipse cx="8" cy="8" rx="7.25" ry="7.25" fill="none"/>
+      </g>
+      <line id="Line_16" data-name="Line 16" y2="8.516" transform="translate(8 3.756)" fill="none" stroke="#82939c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <line id="Line_17" data-name="Line 17" x1="8.516" transform="translate(3.742 8.017)" fill="none" stroke="#82939c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja" dir="ltr">
+
+<!-- Mirrored from www.rapid7.com/ja/solutions/attacker-behavior-analytics/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:30:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Attacker Behavior Analytics: Detections For Successful Attack Techniques</title>
+
+
+            <meta property="og:url" content="../../../solutions/attacker-behavior-analytics/index.html" />
+        <link rel="canonical" href="../../../solutions/attacker-behavior-analytics/index.html"  />
+        <link rel="alternate" href="../../../solutions/attacker-behavior-analytics/index.html" hreflang="en" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="title" content="Attacker Behavior Analytics: Detections For Successful Attack Techniques" />
+    <meta name="description" />
+    <meta property="og:title" content="Attacker Behavior Analytics: Detections For Successful Attack Techniques" />
+        <meta property="og:image" content="../../../globalassets/rapid7-og.jpg" />
+        <meta name="twitter:image" content="../../../globalassets/rapid7-og.jpg" />
+    <meta name="twitter:title" content="Attacker Behavior Analytics: Detections For Successful Attack Techniques">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="Rapid7" />
+    <meta property="og:description" />
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+'conversionType': 'secondary',            
+        });
+    </script>
+
+    
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WBTPTVC');</script>
+    
+
+    <link rel="icon" type="image/x-icon" href="../../../includes/img/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:800,900|Roboto:300,400,700|Noto+Sans+JP">
+    <link rel="stylesheet" href="../../../includes/css/all.mined79.css?cb=1576099002710">
+    <script src="../../../includes/js/jquery.min.js"></script>
+    <script src="http://js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>
+    <script src="../../../includes/js/populateCountryState.js"></script>
+    <script src="http://information.rapid7.com/js/forms2/js/forms2.min.js"></script>
+    
+    
+
+</head>
+<body id="internal" class="pg-id-11126 internal">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBTPTVC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+        <div id="gdprAlert" class="overlay" style="display:none;">
+            <div class="gdpr-modal">
+                <div>
+                    <h2>Quick Cookie Notification</h2>
+                    <p>This site uses cookies, including for analytics, personalization, and advertising purposes.  For more information or to change your cookie settings, <a href="../../../privacy-policy/tracking-technologies/index.html" target="_blank">click here</a>.  <br /><br />If you continue to browse this site without changing your cookie settings, you agree to this use.</p>
+                    <button class="button mdBtn blue" id="gdprClose">I AGREE, LET&rsquo;S GO!</button>
+                    <hr>
+                    <p class="fineprint">View <a href="../../../privacy-policy/tracking-technologies/index.html" target="_blank">Cookie Policy</a> for full details</p>
+                </div>
+
+            </div>
+        </div>
+
+    <div id="__"></div>
+    <!--[if lte IE 9]>
+    <div id="ie-conditional"><spa>Your IE browser is out of date - Upgrade to the latest version of IE or Chrome for an optimal website experience.</span> <a href="https://support.microsoft.com/en-us/help/17621/internet-explorer-downloads" title="Upgrade IE Now" class="button smBtn darkClear" target="_blank">Upgrade IE Now</a>
+    <button class="close-button" type="button" id="closeIEBar">
+        <img src="../includes/img/close_white.svg">
+    </button>
+    </div>
+    <![endif]-->
+
+    
+
+
+<div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <div class="off-canvas__overlay"></div>
+<div class="off-canvas position-left" id="offCanvas" data-off-canvas data-transition="overlap">
+    <!-- Menu -->
+    <div class="off-canvas__content">
+        <!-- Mobile Menu -->
+        <div class="off-canvas__menu">
+            <div class="off-canvas__top">
+                <div class="off-canvas-close" data-toggle="offCanvas" aria-expanded="false" aria-controls="offCanvas"></div>
+                <div class="menuLabel">Main Menu</div>
+                <div id="btnMobileSearch" class="off-canvas-search"></div>
+            </div>
+                <ul class="vertical menu" data-accordion-menu data-multi-open="false">
+
+                    <li>
+                        <a href="../../products/index.html">
+                            <div class="menu__title">製品<span></span></div>
+                        </a>
+                        <ul class="menu vertical nested">
+                                            <li>
+                    <a href="../../products/insightidr/index.html">
+                        <p class="navTitle">InsightIDR</p>
+                        ユーザー行動分析とSIEM
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/insightvm/index.html">
+                        <p class="navTitle">InsightVM</p>
+                        脆弱性管理
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/insightappsec/index.html">
+                        <p class="navTitle">InsightAppSec</p>
+                        動的アプリケーションセキュリティ
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/insightconnect/index.html">
+                        <p class="navTitle">InsightConnect</p>
+                        オーケストレーションと自動化
+                    </a>
+                </li>
+
+                                            <li>
+                    <a href="../../products/metasploit/index.html">
+                        <p class="navTitle">Metasploit</p>
+                        ペンテストツール
+                    </a>
+                </li>
+
+                        </ul>
+                    </li>
+                                        <li>
+
+                            <a href="#">
+                                <div class="menu__title">サービス<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../services/security-consulting/index.html">
+                                            <p class="navTitle">Security Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/product-consulting/index.html">
+                                            <p class="navTitle">Product Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/managed-services/index.html">
+                                            <p class="navTitle">Managed Services</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/training-certification/index.html">
+                                            <p class="navTitle">Training &amp; Certification</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/support-and-customer-success/index.html">
+                                            <p class="navTitle">Support &amp; CSM</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="#">
+                                <div class="menu__title">パートナー<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../partners/sales-partners/index.html">
+                                            <p class="navTitle">Sales Partners</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../partners/technology-partners/index.html">
+                                            <p class="navTitle">Technology Partners</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../partners/index.html">
+                                            <p class="navTitle">Find a Partner</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="../../research/index.html">
+                                <div class="menu__title">リサーチ</div>
+                            </a>
+
+
+                    </li>
+
+                </ul>
+
+                <ul class="vertical menu sideUtilityLinks">
+                        <li><a href="https://blog.rapid7.com/">ブログ</a></li>
+                        <li><a href="../../for-customers/index.html">サポート</a></li>
+                        <li><a href="../../contact/index.html">お問い合わせ</a></li>
+                </ul>
+
+            <div class="menu__cta">
+                <a href="../../../try/insight/index.html" class="button smBtn blue">Free Trial</a>
+            </div>
+        </div>
+
+        <!-- Mobile Search -->
+        <div class="off-canvas__search">
+            <div id="btnCloseMobileSearch" class="off-canvas-close"></div>
+            <div class="searchContainer">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                    <span class="sb-icon-search"></span>
+                </form>
+                <div class="search-links">
+                    <header>Helpful Links</header>
+                            <a href="../../for-customers/index.html">Product Support</a>
+                            <a href="../../pricing/index.html">Product Pricing</a>
+                            <a href="../../resources/index.html">Resource Library</a>
+                            <a href="../../about/events-webcasts/index.html">Events &amp; Webcasts</a>
+                            <a href="../../services/training-certification/index.html">Training &amp; Certification</a>
+                            <a href="../../about/news/index.html">News &amp; Press Releases</a>
+                            <a href="../../about/index.html">About Rapid7</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- end .off-canvas -->
+
+
+        <div class="off-canvas-content" data-off-canvas-content>
+            <div id="menuOverlay" class="reveal-overlay"></div>
+
+                <section class="longHero" >
+
+                    
+
+    <!-- nav -->
+    <div class="utility row">
+
+        <!-- nav toggle (mobile only) -->
+        <button type="button" class="button hamburger hamClosed" data-toggle="offCanvas" aria-expanded="false" aria-controls="offCanvas">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- main nav links -->
+        <div class="nav__main">
+
+            <div class="nav__main-top">
+                <a href="../../index.html" class="nav__main-logo">
+                    <img src="../../../includes/img/Rapid7_logo.svg" alt="Rapid7 logo">
+                </a>
+                    <div class="top-bar">
+                        <ul class="dropdown menu nav__main-links" data-dropdown-menu data-disable-hover="true" data-click-open="true">
+                                    <li class="megamenu">
+                                        <a data-toggle="megamenu-製品" href="#">製品</a>
+
+                                        <div class="dropdown-pane megamenu__wrapper" id="megamenu-製品" data-dropdown data-disable-hover="true" data-click-open="true" data-options="closeOnClick:true;">
+                                            <div class="row collapse megamenu__content">
+                                                <div class="megamenu__info">
+                                                    <div class="megamenu__header">Rapid7 Insight Cloud</div>
+<p><em>Visutalization - 可視化 Analytics - 分析 Automation - 自動化</em></p>
+<p>ラピッドセブンのテクノロジーを凝縮した Rapid7 Insight Cloudなら、IT環境全体のデータ収集、脆弱性の管理の自動化、ユーザーの行動の監視、ログの検索、アプリケーションの脆弱性テストなど、セキュリティ、IT、DevOpsの部門間をまたいだコラボレーションが可能になります。</p>
+                                                </div>
+                                                <div class="megamenu__items">
+                                                    <div class="megamenu__items-main">
+                                                        <div class="megamenu__items-left ">
+                                                                <div class="megamenu__subheader">Insight製品</div>
+                                                            <div class="">
+                                                                                <div class="megamenu__item">
+                    <a href="../../products/insightidr/index.html" target="">
+                        <div class="megamenu__item-title">InsightIDR</div>
+                        <p>ユーザー行動分析とSIEM</p>
+                    </a>
+                    <a href="../../trial/insightidr/index.html" target=" ">無償試用版</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/insightvm/index.html" target="">
+                        <div class="megamenu__item-title">InsightVM</div>
+                        <p>脆弱性管理</p>
+                    </a>
+                    <a href="../../trial/insightvm/index.html" target=" ">無償試用版</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/insightappsec/index.html" target="">
+                        <div class="megamenu__item-title">InsightAppSec</div>
+                        <p>動的アプリケーションセキュリティ</p>
+                    </a>
+                    <a href="../../trial/insightappsec/index.html" target=" ">無償試用版</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/insightconnect/index.html" target="">
+                        <div class="megamenu__item-title">InsightConnect</div>
+                        <p>オーケストレーションと自動化</p>
+                    </a>
+                    <a href="../../info/insightconnect-contact/index.html" target=" ">デモンストレーション</a>
+                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="megamenu__items-right">
+                                                                            <div class="megamenu__item">
+                    <a href="../../products/metasploit/index.html" target="">
+                        <div class="megamenu__item-title">Metasploit</div>
+                        <p>ペンテストツール</p>
+                    </a>
+                    <a href="../../try/metasploit-pro/index.html" target=" ">無償試用版</a>
+                </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="megamenu__items-links">
+                                                        <a href="../../products/index.html">View All 製品</a> &nbsp;
+                                                            <span> &vert; &nbsp; <a href="../index.html">ソリューション検索（英語）</a></span>
+                                                    </div>
+                                                </div>
+                                                <div class=" megamenu__search searchContainer">
+                                                    <form action="https://www.rapid7.com/search/">
+                                                        <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                                                        <input class="sb-search-submit" type="submit" value="">
+                                                        <span class="sb-icon-search"></span>
+                                                    </form>
+                                                    <div class="search-links">
+                                                        <div class="megamenu__subheader">Helpful Links</div>
+                                                                <a href="../../for-customers/index.html">Product Support</a>
+                                                                <a href="../../pricing/index.html">Product Pricing</a>
+                                                                <a href="../../resources/index.html">Resource Library</a>
+                                                                <a href="../../about/events-webcasts/index.html">Events &amp; Webcasts</a>
+                                                                <a href="../../services/training-certification/index.html">Training &amp; Certification</a>
+                                                                <a href="../../about/news/index.html">News &amp; Press Releases</a>
+                                                                <a href="../../about/index.html">About Rapid7</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="#">サービス</a>
+                                            <ul class="menu vertical">
+                                                    <li><a href="../../services/security-consulting/index.html">Security Consulting</a></li>
+                                                    <li><a href="../../services/product-consulting/index.html">Product Consulting</a></li>
+                                                    <li><a href="../../services/managed-services/index.html">Managed Services</a></li>
+                                                    <li><a href="../../services/training-certification/index.html">Training &amp; Certification</a></li>
+                                                    <li><a href="../../services/support-and-customer-success/index.html">Support &amp; CSM</a></li>
+                                            </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">パートナー</a>
+                                            <ul class="menu vertical">
+                                                    <li><a href="../../partners/sales-partners/index.html">Sales Partners</a></li>
+                                                    <li><a href="../../partners/technology-partners/index.html">Technology Partners</a></li>
+                                                    <li><a href="../../partners/index.html">Find a Partner</a></li>
+                                            </ul>
+                                    </li>
+                                    <li>
+                                        <a href="../../research/index.html">リサーチ</a>
+                                    </li>
+                        </ul>
+                    </div>
+
+            </div>
+
+            <!-- breadcrumbs -->
+    <div class="row expanded">
+        <div class="medium-12 columns">
+            <ul class="breadcrumbs">
+                <li><a href="../../index.html">Home</a></li>
+                            <li><a href="../index.html">Solutions</a></li>
+            <li>Attacker Behavior Analytics</li>
+
+            </ul>
+        </div>
+    </div>
+
+
+
+        </div>
+
+        <div class="nav__utility">
+            <!-- utility links -->
+            <div id="utilityLinks" class="nav__utility-links hide-for-small-only" data-auth="false">
+                    <div class="tooltip white">
+                        <span class="close"></span>
+                        お使いのブラウザの言語設定が日本語になっていることを検知しました。残念ながらこのページはEnglishでのみご覧いただいたけます。
+                    </div>
+
+                <ul class="dropdown menu" data-dropdown-menu data-disable-hover="true" data-click-open="true">
+                    <li class="language-toggle has-menu">
+                        <a href="#" class="text-uppercase">日本語</a>
+                        <ul class="menu">
+                                <li >
+                                    <a href="../../../solutions/attacker-behavior-analytics/index.html">English</a>
+                                </li>
+                                <li >
+                                    <a href="../../../de/solutions/attacker-behavior-analytics/index.html">Deutsch</a>
+                                </li>
+                                <li class=selected>
+                                    <a href="#">日本語</a>
+                                </li>
+                        </ul>
+                    </li>
+                            <li >
+                                <a href="https://blog.rapid7.com/">ブログ</a>
+                            </li>
+                            <li >
+                                <a href="../../for-customers/index.html">サポート</a>
+                            </li>
+                            <li >
+                                <a href="../../contact/index.html">お問い合わせ</a>
+                            </li>
+                                            <li>
+                            <a id="utilitySignin" href="https://insight.rapid7.com/saml/SSO?fromURI=https%3a%2f%2fwww.rapid7.com%2fja%2fsolutions%2fattacker-behavior-analytics%2f" class="notlogged">Sign In</a>
+                        </li>
+                </ul>
+            </div>
+            <!-- utility user -->
+            <div class="nav__utility-trial" data-auth="false">
+                    <a href="../../../link/69587fa6945744918c7ab6cd21db04e4.html" target="_blank">
+                        <span id="trialCta" class="button blue mdBtn cta">無償試用版はこちら</span>
+                    </a>
+            </div>
+        </div>
+
+    </div><!-- utility -->
+
+
+                    <div class="overlayText">
+                        <div class="row">
+                            <div class="longHero__content medium-10 medium-offset-1 large-8 large-offset-2 columns">
+
+                                <h1>
+                                    Attacker Behavior Analytics (ABA)
+                                </h1>
+                                    <h2 class="subtitle">
+                                        Insight into evolving attacker behavior, straight from Rapid7's global SOCs
+                                    </h2>
+                                
+                                
+                            </div>
+                            
+
+                        </div>
+                    </div>
+
+                    
+                </section>
+            
+
+
+<div class="pageContent">
+    
+
+<div data-sticky-container>
+    <div class="sticky-nav" id="stickyNav" data-sticky data-options="marginTop:0;" style="width:100%" data-top-anchor="stickyTrigger:top" data-sticky-on="small">
+        <div class="sticky-nav__main">
+            <a href="../../../index.html" class="sticky-nav__logo">
+                <img alt="Rapid7 logo" class="lazy" data-src="/includes/img/Rapid7_logo.svg" src="../../../includes/img/placeholder.png" />
+            </a>
+            <div class="sticky-nav__title show-for-medium">
+                    <a href="#__" class="smooth">Attacker Behavior Analytics (ABA)</a>
+            </div>
+                    <div class="sticky-nav__share hide-for-medium">
+                        <a href="#" class="sticky-nav__share-title">
+                            <img alt="Share" class="lazy" data-src="/includes/img/icon-share.svg" src="../../../includes/img/placeholder.png" />
+                        </a>
+                    </div>
+                <div class="sticky-nav__share sticky-nav__share--options">
+                        <span class="sticky-nav__share-title">
+                            Share:
+                        </span>
+                    <ul>
+                            <li>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.rapid7.com%2fja%2fsolutions%2fattacker-behavior-analytics%2f&amp;title=Attacker+Behavior+Analytics+(ABA)" onclick="window.open(this.href, 'linkedin-share', 'width=520,height=570');return false;">
+                                    <img class="lazy" data-src="/includes/img/linkedin-white.svg" src="../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/intent/tweet?text=Attacker+Behavior+Analytics+(ABA)&amp;url=https%3a%2f%2fwww.rapid7.com%2fja%2fsolutions%2fattacker-behavior-analytics%2f" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                                    <img class="lazy" data-src="/includes/img/twitter-white.svg" src="../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.rapid7.com%2fja%2fsolutions%2fattacker-behavior-analytics%2f" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                                    <img class="lazy" data-src="/includes/img/facebook-white.svg" src="../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                                                
+                    </ul>
+                </div>
+ 
+            <div class="sticky-nav__cta">
+                <a href="../../../try/insight/index.html">
+                    <button class="blue button">
+                        Try Now
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="stickyTrigger"></div>
+
+        <!-- Intro Block w/ Sidebar -->
+        <section class="pageBlock bgWhite">
+            <div class="row">
+                <div class="small-10 small-offset-1 medium-6 medium-offset-1 xlarge-5 xlarge-offset-2 columns wrapper">
+                    <p>It&rsquo;s time to take your threat intelligence to the skies. Today&rsquo;s attackers can easily contort malware and switch up their infrastructure, leaving security teams that chase attackers with static indicators and artifacts constantly feeling a step behind. While IP addresses, processes, and domains change, there is an underlying set of stealthy attacker techniques that foreshadow every successful breach.</p>
+<p>At Rapid7, we see a constant stream of threats, from the <a href="../../products/metasploit/index.html" target="_blank" rel="noopener">Metasploit</a> project, our <a href="../../services/managed-services/managed-detection-and-response-services/index.html" target="_blank" rel="noopener">Managed Detection and Response</a> customers, and <a href="../../services/security-consulting/incident-response-services/index.html">incident response</a> and <a href="../../services/security-consulting/penetration-testing-services/index.html">penetration testing engagements</a>. During threat investigations, our expert analysts zero in on these stealthy techniques, while researching the attacker&rsquo;s targets and goal. This intelligence is crafted into Attacker Behavior Analytics (ABA) detections, which can find malicious behaviors even if they have been altered to evade prevention defenses.</p>
+                </div>
+                <div class="small-10 small-offset-1 medium-4 medium-offset-0 large-3 large-offset-1 xlarge-offset-0 end columns wrapper">
+                    <!-- Side Dark CTA -->
+                    <div><div>
+    <div id="sideDarkCtaBlock" class="ctaBlock primary bgBlueGreenLinearGradient">
+        <div class="ctaBlock__title">
+            <h3>
+                [Webcast] Getting the Knack of ATT&CK
+            </h3>
+        </div>
+        <div class="ctaBlock__content">
+            <p>Learn how your organization can utilize MITRE ATT&CK framework in this on-demand webcast.</p>
+                <a class="blue button smBtn" href="https://information.rapid7.com/getting-knack-of-attack.html" id="darkSideCtaPrimaryBtn">
+                    Watch Now
+                </a>
+        </div>
+    </div>
+
+
+</div></div>
+                </div>
+            </div>
+        </section>
+            <!-- Content -->
+        <section class="pageBlock bgGrayLight" >
+            <div class="row">
+                <div class="small-10 small-offset-1 large-offset-2 columns wrapper large-6">
+                    <div class="pageBlock__content">
+                        <h3>Attacker Behavior Analytics Library</h3>
+<p>Below is a list of released ABA detections, all of which come with our threat detection solution, <a href="../../products/insightidr/index.html">InsightIDR</a>, and automatically match against your data in real time. This is threat intelligence that moves at the speed of the attacker&mdash;if a new exploit comes out, our team will craft a detection, test it against the <a href="../../products/insight-platform/index.html">Rapid7 Insight </a><a href="../../products/insight-platform/index.html" target="_blank" rel="noopener">cloud</a>, and deploy it in InsightIDR&mdash;all within hours. Still craving that aged, open-source threat feed now?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Accordion (Internal Accordion Page) -->
+            <section class="pageBlock bgGrayLight">
+                <div class="row">
+                    <div class="small-10 small-offset-1 large-offset-2 columns large-6">
+                        <div class="pageBlock__content">
+                            <section class="accordionBlock">
+                                <ul class="accordion" data-accordion data-allow-all-closed="true">
+                                    <li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        Office 365 Spearphishing Campaigns
+            <span>Verticals targeted: All</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2><strong>Office 365 Spearphishing Campaigns</strong></h2>
+<p><span style="font-weight: 400;"><strong><br />Verticals targeted:</strong> All</span></p>
+<p><span style="font-weight: 400;">Recent threat actors are targeting Microsoft 365 credentials with spearphishing campaigns. Attacker behavior analytics have been released that detect the dynamically generated phishing URLs used in these campaigns.</span></p>
+<p><span style="font-weight: 400;">For more information, reference our public blog post released by Rapid7's Managed Detection &amp; Response (MDR) team on Aug 20: </span><a href="https://blog.rapid7.com/2019/08/20/how-attackers-can-harvest-users-microsoft-365-credentials-with-new-phishing-campaign/"><span style="font-weight: 400;">https://blog.rapid7.com/2019/08/20/how-attackers-can-harvest-users-microsoft-365-credentials-with-new-phishing-campaign/</span></a></p>
+<p><strong>Detections added to InsightIDR:</strong><span style="font-weight: 400;"> Threat intelligence and detections for relevant spearphishing URLs.</span></p>
+        </p>
+    </div>
+</li>
+
+<li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        Mshta Used to Evade Prevention Defenses
+            <span>Verticals targeted: All</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2><strong>Mshta Used to Evade Prevention Defenses</strong></h2>
+<p><span style="font-weight: 400;"><strong><br />Verticals targeted:</strong> All<br /><br /></span><span style="font-weight: 400;">Macros are small Visual Basic for Applications (VBA) embedded inside of Microsoft Office documents, such as Powerpoint, Excel, Word, and Publisher. Macros are often used maliciously to run commands using a number of possible built-in Windows utilities, such as mshta.exe, to download malware and compromise the system. Malicious documents are often sent via phishing emails.<br /><br /></span><span style="font-weight: 400;">For more information on the technique, see T1170 of MITRE ATT&amp;CK: </span><a href="https://attack.mitre.org/techniques/T1170/"><span style="font-weight: 400;">https://attack.mitre.org/techniques/T1170/</span></a><span style="font-weight: 400;">.</span></p>
+<p><strong>Detections added to InsightIDR:</strong><span style="font-weight: 400;"> 4, to detect anomalous Mshta execution and activity</span></p>
+        </p>
+    </div>
+</li>
+
+<li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        Hidden Cobra
+            <span>Verticals targeted: All</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2>Hidden Cobra</h2>
+<p><strong>Verticals targeted: </strong>All</p>
+<p>DHS and the FBI track actors out of North Korea under the name Hidden Cobra, also known as the Lazarus Group. These actors have been responsible for a wide range of malicious activities, including WannaCry and the Sony hack. Their motivations are financial gain, espionage, and national interests. Rapid7 tracks several malware families related to Hidden Cobra, including:</p>
+<ul>
+<li>KEYMARBLE, a remote access trojan being used by North Korean entities that is capable of accessing device configuration data, downloading additional files, executing commands, modifying the registry, capturing screen shots, and exfiltrating data.</li>
+</ul>
+<ul>
+<li>Typeframe, a trojan being used by North Korea state-sponsored cybercriminals. This family consists of 32-bit and 64-bit Windows executable files, as well as a malicious Microsoft Word document that contains Visual Basic for Applications (VBA) macros. According to their research, these files are capable of downloading and installing malware, installing proxy and remote access trojans (RATs), connect to command control (C&amp;C) servers to receive instructions, and alter the victim's firewall to allow incoming connections.</li>
+</ul>
+<p><strong>Detections added to InsightIDR:</strong> 23, for KEYMARBLE and Typeframe trojans.</p>
+        </p>
+    </div>
+</li>
+
+<li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        Leafminer
+            <span>Verticals targeted: Government</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2>Leafminer Attack Group<br /><br /></h2>
+<p><strong>Verticals targeted:</strong> Government, businesses</p>
+<p><span>Symantec has uncovered the operations of a threat actor named Leafminer that is targeting a broad list of government organizations and business verticals in various regions in the Middle East since at least early 2017. The group tends to adapt publicly available techniques and tools for their attacks and experiments with published proof-of-concept exploits.</span></p>
+<p><strong>Detections added to InsightIDR</strong>: 54, all related to the Leafminer attack group IOCs identified by Symantec.</p>
+        </p>
+    </div>
+</li>
+
+<li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        Luoxkep Campaign
+            <span>Verticals targeted: All</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2>Luoxkep Campaign<br /><br /></h2>
+<p><strong>Verticals targeted:</strong> All</p>
+<p>Malicious campaign identified by 360 Safe that is exploiting CVE-2018-2893 for cryptomining and DDoS attacks.</p>
+<p><strong>Detections added to InsightIDR:</strong> 3, for downloads, domains, and IPs related to Luoxkep.</p>
+        </p>
+    </div>
+</li>
+
+<li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        Remote Desktop Brute-Force Attempt IPs, Existing ABA Updates
+            <span>Verticals targeted: All</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2>Remote Desktop Brute-Force Attempt IPs</h2>
+<p><strong><br />Verticals targeted</strong>: All, utilized via legitimate Windows protocol</p>
+<p>Remote Desktop Protocol (RDP) is a legitimate protocol used for remote management of Windows systems, however it is often abused by attackers to gain access and control of systems. One way attackers gain access is by brute forcing RDP passwords. This threat identifies all source IPs seen to authenticate more that 50 times against RDP across ALL&nbsp;<a href="https://blog.rapid7.com/tag/project-heisenberg/" target="_blank">Heisenberg honeypots</a>&nbsp;during the previous day.</p>
+<p><strong>Detections added to InsightIDR:</strong>&nbsp;20, which identify IPs authenticating against RDP across Heisenberg honeypots.</p>
+<p>_______________________________________________________________________<br /><br /></p>
+<h2>Updates and Additions to Existing ABA Threats:</h2>
+<p><strong><br />Malicious Document Threat:&nbsp;</strong>1 new behavior added — Word Spawns Executable from Users Directory</p>
+<p><strong>Malicious PowerShell: </strong>2&nbsp;new behaviors added — Obfuscated Script and Download Cradles</p>
+<p><strong>Privilege Escalation:&nbsp;</strong>2&nbsp;new behaviors added — UACMe Privilege Escalation Tool, Company Name in Binary Metadata; and UACMe Privilege Escalation Tool, Original Name in Binary Metadata</p>
+<p><strong>Credential Theft: </strong>4&nbsp;new behaviors added — Mimikatz Flats (DumpCreds or DumpCerts), Mimikatz Sekurlsa, Mimipenguin, and Hashcat</p>
+        </p>
+    </div>
+</li>
+
+<li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        Thrip Attack Group, Remote Admin Tools
+            <span>Verticals targeted: Communications, defense contractors, others</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2>Thrip Attack Group</h2>
+<p><strong><br />Verticals targeted:</strong>&nbsp;Telecommunications, satellite communications, mapping and geospacial imaging, defense<br /><br />Thrip is an adversary group identified by Symantec that they have been tracking since 2013. This adversary group focuses on espionage activities, primarily targeting telecommunications, satellite communications, mapping and geospatial imaging, and defense contractors in the United States and Southeast Asia. They use a combination of <a href="../../../fundamentals/malware-attacks/index.html" target="_blank">malware</a> and other tools such as PSExec and Mimikatz to compromise and move through systems, identifying and exfiltrating information.</p>
+<p><strong>Detections added to InsightIDR:</strong>&nbsp;123, which identify activity around specific trojans and backdoors.</p>
+<p>_______________________________________________________________________<br /><br /></p>
+<h2>Remote Admin Tools</h2>
+<p><strong><br />Verticals targeted</strong>: All</p>
+<p>An attacker may use legitimate remote access software, such as Ammyy Admin, to create a command and control ability to target systems. These services are commonly used as legitimate technical support software and may be whitelisted in an environment.&nbsp; Admin tools such as Ammyy Admin are commonly used by attackers, as seen by the Rapid7 <a href="../../../services/managed-services/managed-detection-and-response-services/index.html" target="_blank">MDR SOC</a>.</p>
+<p><strong>Detections added to InsightIDR:</strong>&nbsp;3, which look for the presense of Ammy Admin.</p>
+        </p>
+    </div>
+</li>
+
+<li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        VPNFilter
+            <span>Verticals targeted: All</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2>VPNFilter</h2>
+<p><strong><br />Verticals targeted:</strong> All<br /><br />VPNFilter is a new modular malware tracked by Cisco's Talos group. This malware has been primarily targeting home and small business routers, namely MikroTik, Netgear, Linksys, and QNAP network storage devices. This malware can be used for website credential theft and data collection, and has a destructive capability where the firmware can be destroyed, thus causing the device to be unusable.</p>
+<p><strong>Detections added to InsightIDR:</strong> 51, which identify specific indicators related to VPNFilter activity.</p>
+        </p>
+    </div>
+</li>
+
+<li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        Malicious PowerShell
+            <span>Verticals targeted: All</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2>Malicious PowerShell</h2>
+<p><strong><br />Verticals targeted:</strong>&nbsp;All</p>
+<p>PowerShell is an interactive command-line interface and scripting environment included in the Windows operating system. Adversaries can use PowerShell to perform a number of actions, including discovery of information and execution of code. These are behaviors that are commonly used by attackers, as seen by the Rapid7 MDR SOC.&nbsp;&nbsp;</p>
+<p><strong>Detections added to InsightIDR:</strong>&nbsp;10, which identify specific behaviors related to malicious PowerShell activity.</p>
+        </p>
+    </div>
+</li>
+
+<li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        Valyria Downloader, OilRig
+            <span>Verticals targeted: All</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2>Valyria Downloader</h2>
+<p><span><strong><br />Verticals targeted:</strong></span>&nbsp;All, presents as phishing email</p>
+<p>The Valyria Downloader is a trojan that is sent via phishing emails, often using "invoice overdue" or "outstanding payment" themed emails. Once the emails are opened, the downloader will initiate a connection to a command and control domain to download additional files, typical associated with the URSNIF data-stealing malware family.</p>
+<p><strong>Detections added to InsightIDR:</strong>&nbsp;9,&nbsp;which identify hashes related to the downloader installation and malicious documents, and the use of Powershell spawning process out of Users/Public/Documents.</p>
+<p>_______________________________________________________________________<br /><br /></p>
+<h2>OilRig</h2>
+<p><span><strong><br />Verticals targeted</strong></span><strong>:</strong> All</p>
+<p>OilRig is a threat group tracked by Palo Alto Labs' Unit 42. They primarily target organizations in the Middle Eastern region, however, this group has targeted organizations outside of the Middle East as well. OilRig often leverages the trust relationship between organizations to attack their primary targets. The OilRig threat group overlaps with APT 34.</p>
+<p><strong>Detections added to InsightIDR:</strong>&nbsp;9, which identify malicious credential harvesting domains and a tactic where an adversary dumps credentials from the command line, often seen with Mimikatz.</p>
+        </p>
+    </div>
+</li>
+
+<li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        Satan Ransomworm, Orangeworm
+            <span>Verticals targeted: Healthcare, manufacturing, agriculture</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2>Orangeworm Attacks</h2>
+<p><strong><br />Verticals targeted:</strong> Healthcare, manufacturing, agriculture<br /><br />Symantec has identified an attack group named Orangeworm, who are deploying the Kwampirs backdoor in a targeted attack campaign against the healthcare, manufacturing, and agriculture sectors, as well as information technology companies who support these industries. This attack group and malware are both noisy and do not try to hide their activity, relying primarily on their targeting of older devices that are often not well monitored.</p>
+<p><strong>Detections added to InsightIDR:</strong> 43, which identify dropper and payload hashes, along with connections to command &amp; control IP addresses.</p>
+<p>______________________________________________________________________</p>
+<h2>Satan Ransomware</h2>
+<p><strong><br />Verticals targeted:</strong> None, offered as ransomware-as-a-service</p>
+<p>Satan Ransomware appeared in early 2017 and was one of the original "Ransomware as a Service" offerings on dark websites. The ransomware is spread via phishing emails or malicious links, and has recently been updated to include the EternalBlue SMB exploit for spreading within a network.</p>
+<p><strong>Detections added to InsightIDR:</strong> 6, which identify variants of the Satan ransomware and dropper, the EternalBlue SMB exploit, and suspicious associated command line activity.</p>
+        </p>
+    </div>
+</li>
+
+<li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">
+        Fauxpersky, SamSam
+            <span>Verticals targeted: Healthcare, government, education</span>
+    </a>
+    <div class="accordion-content" data-tab-content>
+        <p>
+            <h2>Fauxpersky Keylogger Malware</h2>
+<p><strong><br />Verticals targeted:</strong> None, spreads via USB drives<br /><br />Fauxpersky is a new keylogger malware disguised as Kaspersky antivirus. The malware is based on the AutoHotKey app, which lets users write codes to automate tasks. Researchers say that the malware is highly efficient, self propagating, and persistent. It infects Windows PCs by spreading through USB drives and then replicates to all the drives on the machine. Fauxpersky then collects data using Google Forms, sends that data to the attackers' inbox, and deletes the original data from the drive.</p>
+<p><strong>Detections added to InsightIDR:</strong> 6, which identify variants of the Fauxpersky malware.</p>
+<p>_______________________________________________________________________<br /><br /></p>
+<h2>SamSam Ransomware</h2>
+<p><strong><br />Verticals targeted</strong>: Healthcare, government, education</p>
+<p>SamSam Ransomware is a ransomware variant used by a group tracked as the SamSam Group or Gold Lowell. This group will gain access to the target, often using RDP access or scanning for server-side vulnerabilities, and then deploy their ransomware variant. SamSam is targeted, the actors will often focus on a particular industry or vertical and target organizations within that vertical before moving onto a different focus.</p>
+<p><strong>Detections added to InsightIDR:</strong> 7, which identify variants of the SamSam ransomware, as well as Shadow Copy deletion, a common ransomware behavior to thwart recovery efforts.</p>
+        </p>
+    </div>
+</li>
+
+
+                                </ul>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+    <!-- Alternating Media Blocks (Internal Alternating Block Page) -->
+
+    <!-- Jump Blocks (Internal Jump Page) -->
+
+    <!-- CTA area -->
+    
+
+    <!-- Second content area -->
+    <!-- Second CTA area -->
+    
+
+        <section class="callToActionDark videoGallery">
+                <div class="row medium-collapse">
+                    <div class="medium-8 medium-offset-2 columns">
+                            <h2>Attacker Behavior Analytics in Action</h2>
+                                                    <p>See how attacker behavior is detected in InsightIDR, and learn more about our cloud SIEM.</p>
+                    </div>
+                </div>
+            <div class="row">
+                        <div class="large-7 large-offset-1 medium-10 medium-offset-2 small-12 columns">
+                            <div class="row videoEmbed mini" id="videoGallery">
+                                <div class="medium-6 columns">
+                                    <span id="vidyardVideo" class="vidyard_player">
+                                        <span id="vidyard_span" style="display: block; margin: auto; position: relative; width: 640px; height: 360px;">
+
+                                            <iframe id="main-video" style="border: 0; opacity: 1; background-color: transparent; position: absolute; right: 0px; top: 0px;" title="Video" src="http://play.vidyard.com/A73HktYzbvsMe84bESC4Xr.html?v=3.1.1&amp;type=inline" height="100%" width="100%"></iframe>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="medium-6 end columns">
+                                    <div class="video-caption">
+                                        <h3>Investigating PowerShell and Mimikatz Activity with InsightIDR</h3>
+                                        <p>Learn how InsightIDR detects attacker behavior that uses PowerShell to download executables from the internet.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="large-3 large-offset-0 medium-offset-1 medium-10 small-12 end columns">
+                        <div class="video-thumb-wrap">
+<img alt="Investigating PowerShell and Mimikatz Activity with InsightIDR" class="video-thumb active lazy" data-description="Learn how InsightIDR detects attacker behavior that uses PowerShell to download executables from the internet." data-src="https://play.vidyard.com/A73HktYzbvsMe84bESC4Xr.jpg" src="../../../includes/img/placeholder.png" /><img alt="Deprovisioning Users in InsightIDR" class="video-thumb lazy" data-description=" In this short video, we show you how to seamlessly deprovision users directly from an investigation in InsightIDR." data-src="https://play.vidyard.com/6P8bfKBHtAbhZwKE9W4PYu.jpg" src="../../../includes/img/placeholder.png" /><img alt="Rapid7 InsightIDR 3-Min Overview" class="video-thumb lazy" data-description="Watch for a quick introduction to the capabilities of InsightIDR, Rapid7&#39;s incident detection and response solution that unifies SIEM, user behavior analytics, and endpoint detection capabilities. " data-src="https://play.vidyard.com/BsmHabbYSHAZM8Wec62R5F.jpg" src="../../../includes/img/placeholder.png" /><img alt="Whiteboard Wednesday: Why the Modern SIEM Is in the Cloud" class="video-thumb lazy" data-description="Learn why modern security information and event management, or SIEM, is moving to the cloud. " data-src="https://play.vidyard.com/fqSQW6V7tBwCgMPTXJXTEP.jpg" src="../../../includes/img/placeholder.png" />
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+<section id="marketingCalloutBlock" class="callToActionDark callToActionOrange largeCta" >
+    <div class="row expanded medium-collapse">
+        <div class="medium-12 columns">
+            <h2>Curious about other attack types adversaries are using?</h2>
+            <p></p>
+            <a href="../../fundamentals/types-of-attacks/index.html" class="button darkClear mdBtn" id="callout_block">Learn More</a>
+        </div>
+    </div>
+</section>  
+
+</div>
+
+
+<footer >
+    <section class="search-scroll">
+        <div class="row">
+            <div class="footer__search">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="検索" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                </form>
+            </div>
+            <div class="footer__scroll">
+                <a href="#__" class="smooth">
+                    <span>トップに戻る</span>
+                    <img class="lazy" data-src="/includes/img/up-arrow-lightgray.png" src="../../../includes/img/placeholder.png" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+        <section class="footer__links row">
+            <div class="footer__links-wrapper">
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__contact">
+                        <a href="../../../index.html">
+                            <img alt="Rapid7 logo" class="logo lazy" data-src="/includes/img/Rapid7_logo.svg" src="../../../includes/img/placeholder.png" />
+                        </a>
+                                        <div class="footer__links-title">ラピッドセブン・ジャパン株式会社</div>
+                <a class="link" href="#">〒104-0031</a>
+                <a class="link" href="#">東京都中央区京橋2-2-1</a>
+                <a class="link" href="#">京橋エドグラン26階</a>
+
+                            <div class="footer__breach">
+                                <div class="footer__breach-title">代表番号</div>
+                                <div class="footer__breach-contact">
+                                    <div class="footer__breach-icon"></div>
+                                    <div class="footer__breach-phone"><a href="tel:0368389720">03-68280-720</a></div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="footer__links-section footer__solutions">
+                                        <div class="footer__links-title">製品</div>
+                <a class="link" href="../../products/insightvm/index.html">InsightVM</a>
+                <a class="link" href="../../products/insightidr/index.html">InsightIDR</a>
+                <a class="link" href="../../products/insightappsec/index.html">InsightAppSec</a>
+                <a class="link" href="../../products/metasploit/index.html">Metasploit</a>
+                <div class="footer__links-title">ソリューション（英語）</div>
+                <a class="link" href="../index.html">すべてのソリューション</a>
+                <a class="link" href="../industry/index.html">業界別ソリューション</a>
+                <a class="link" href="../compliance/index.html">コンプライアンスソリューション</a>
+
+                    </div>
+                </div>
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__support">
+                                        <div class="footer__links-title">サポート（英語）</div>
+                <a class="link" href="../../for-customers/index.html">製品サポート</a>
+                <div class="footer__links-title">リソース（英語）</div>
+                <a class="link" href="../../products/insightappsec/resources/index.html">リソースライブラリ</a>
+                <a class="link" href="../../about/customers/index.html">導入実績</a>
+                <a class="link" href="../../about/events-webcasts/index.html">イベント</a>
+                <a class="link" href="../../services/training-certification/index.html">トレーニングと認定資格</a>
+                <a class="link" href="../../fundamentals/index.html">ITセキュリティの基本知識</a>
+                <a class="link" href="../../../db/index.html">脆弱性と感染データベース</a>
+
+                    </div>
+                    <div class="footer__links-section footer__about">
+                                        <div class="footer__links-title">会社情報</div>
+                <a class="link" href="../../rapid7-japan/index.html">ラピッドセブン・ジャパン</a>
+                <a class="link" href="../../about/index.html">企業情報</a>
+                <a class="link" href="../../about/leadership/index.html">経営陣（英語）</a>
+                <a class="link" href="../../about/news/index.html">ニュース（英語）</a>
+                <a class="link" href="../../about/customers/index.html">導入実績（英語）</a>
+                <a class="link" href="../../about/public-policy/index.html">パブリックポリシー（英語）</a>
+                <a class="link" href="https://investors.rapid7.com/">投資家向け情報（英語）</a>
+
+                    </div>
+                </div>
+
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__connect">
+                                        <div class="footer__links-title">ラピッドセブンとつながる</div>
+                <a class="link" href="../../contact/index.html">お問いわせ</a>
+                <a class="link" href="https://blog.rapid7.com/">ブログ（英語）</a>
+                <a class="link" href="https://rapid7support.force.com/customers/">サポートログイン（英語）</a>
+                <a class="link" href="../../careers/index.html">採用情報（英語）</a>
+
+                        <div class="footer__links-social">
+                            <a class="linkedin" href="https://www.linkedin.com/company/39624" target="_blank"></a>
+                            <a class="twitter" href="https://twitter.com/Rapid7" target="_blank"></a>
+                            <a class="facebook" href="https://www.facebook.com/rapid7" target="_blank"></a>
+                            <a class="instagram" href="https://www.instagram.com/rapid7/" target="_blank"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <section class="footer__legal">
+        <div class="row">
+            <div class="footer__legal-copyright">&copy; Rapid7</div>
+
+                    <div class="footer__legal-link"><a href="../../legal/index.html">Legal Terms</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../../privacy-policy/index.html">Privacy Policy</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../export-notice/index.html">Export Notice</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../trust/index.html">Trust</a></div>
+        </div>
+    </section>
+
+        <!-- *************************** sticky contact us modal *************************** -->
+        <section class="contact-sticky">
+            <div class="row expanded">
+                <div id="stickyButtons" class="driftInit">
+                    <div class="chatBtn show-if-chat-online" id="stickyChat">
+                        <a class="gray button">Chat</a>
+                    </div>
+                    <div class="contactBtn" data-open="stickyContact">
+                        <a id="sticky_contact_btn" class="gray button">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="reveal light hasSidebar" id="stickyContact" data-reveal>
+            <section class="contactForm">
+                <div class="row">
+                    <div class="large-9 columns">
+                        <form id="contactModal" class="formBlock freemail">
+                            <div id="intro" class="row">
+                                <div id="thankyouText" style="display:none;" class="messageBox green">
+                                    <div class="medium-12">
+                                        <h4><span class="success">Success!</span> Thank you for submission. We will be in touch shortly.</h4>
+                                    </div>
+                                </div>
+                                <div id="errorText" style="display:none;" class="messageBox red">
+                                    <div class="medium-12">
+                                        <h4><span class="error">Oops!</span> There was a problem in submission. Please <a href="../../../contact/index.html" title="Visit our Contact Us Page">contact us</a>.</h4>
+                                    </div>
+                                </div>
+                                <div class="columns medium-12">
+                                    <h2>Contact Us</h2>
+                                    <p id="fieldInstruction" class="">We're happy to answer any questions you may have about Rapid7</p>
+                                </div>
+                            </div>
+                            <fieldset>
+                                <dl class="clearfix expand">
+                                    <dd>
+                                        <select name="contactType" id="contactType" tabindex="21" class="normalSelect dropdownSelect">
+                                            <option value="0">お問い合わせ内容</option>
+                                                <option value="3557252">一般的なお問い合わせ</option>
+                                                <option value="3557253">製品デモ</option>
+                                                <option value="3557256">価格</option>
+                                                <option value="3557257">マネージドサービス</option>
+                                                <option value="3557359">提案のご依頼</option>
+                                        </select>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix expand" id="productNameParent" style="display:none;">
+                                    <dd>
+                                        <select name="productName" id="productName" tabindex="22" class="normalSelect dropdownSelect">
+                                            <option value="0">Select Product</option>
+                                            <option value="3558027">Metasploit</option>
+                                            <option value="8209765">InsightIDR</option>
+                                            <option value="11407979">InsightVM</option>
+                                            <option value="10417511">InsightOps</option>
+                                            <option value="18912840">InsightAppSec</option>
+                                            <option value="6184447">AppSpider</option>
+                                            <option value="1550853">Nexpose</option>
+                                        </select>
+                                    </dd>
+                                </dl>
+                                <dl class="">
+                                    <dd>
+                                        <label for="firstName">名</label>
+                                        <input id="firstName" type="text" name="firstName" tabindex="23" />
+                                    </dd>
+                                </dl>
+                                <dl class="">
+                                    <dd>
+                                        <label for="lastName">姓</label>
+                                        <input id="lastName" type="text" name="lastName" tabindex="24" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="jobTitle">役職</label>
+                                        <input id="jobTitle" type="text" name="jobTitle" tabindex="25" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="companyName">会社名</label>
+                                        <input id="companyName" type="text" name="companyName" tabindex="26" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="email">企業メールアドレス</label>
+                                        <input id="email" type="text" tabindex="27" name="email" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <div class="intl-phone">
+                                            <label for="phone">電話番号</label>
+                                            <div class="flag-container">
+                                                <div class="selected-flag">
+                                                    <div class="iti-flag"></div>
+                                                </div>
+                                                <ul class="country-list"></ul>
+                                            </div>
+                                            <input id="phone" type="text" name="phone" tabindex="28" />
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="country">国</label>
+                                        <select name="country" id="country" tabindex="29" class="form_SelectInstruction normalSelect country_select" onchange='updateCountryData("#contactModal")'></select>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="state">都道府県</label>
+                                        <select name="state" id="state" tabindex="30" class="form_SelectInstruction normalSelect dropdownSelect"></select>
+                                    </dd>
+                                </dl>
+                                <dl class="expand checkboxContainer" id="optout" style="display:none;">
+                                    <dd>
+                                        <input id="explicitOptOutAlt" type="checkbox" class="r7-check">
+                                        <label for="explicitOptOut">今後、ラピッドセブンからのマーケティング情報を希望しない。（こちらのチェックボックスにオフにすると、私の個人情報が、ラピッドセブンのプライバシーポリシーに従って利用されること、ならびに、その情報がラピッドセブンの事業所が存在する他の国へ転送されることに同意するものとします。今後、マーケティングメールがご入力いただいたメール アドレスに配信されます。 配信設定の管理や配信登録の解除はいつでもおこなえます。） </label>
+                                    </dd>
+                                    <p class="disc">
+                                        <p><small><em><a title="プライバシーポリシー（英語）" href="../../../privacy-policy/index.html" target="_blank" rel="noopener">プライバシーポリシー（英語）</a></em></small></p>
+                                    </p>
+                                </dl>
+                                <dl class="expand" id="consultant" style="display: none;">
+                                    <input id="consultantFieldAlt" type="checkbox" class="r7-check">
+                                    <label for="consultantFieldAlt">私は、コンサルタントもしくは販売代理店です</label>
+                                </dl>
+                                <dl class="expand">
+                                    <button id="submit" class="submit button blue mdBtn" tabindex="31">送信</button>
+                                </dl>
+                                <input type="hidden" id="formName" value="ContactModal" />
+                            </fieldset>
+
+                        </form>
+                    </div>
+                    <div class="large-3 columns sidebar">
+                        <img alt="Rapid7 logo" class="logo lazy" data-src="/includes/img/logo-black.png" src="../../../includes/img/placeholder.png" />
+                        <h3>General:</h3>
+                        <p><a href="mailto:info@rapid7.com">info@rapid7.com</a></p>
+                        <h3>Sales: </h3>
+                        <p>
+                            <a href="tel:1-866-772-7497">+1&ndash;866&ndash;7&ndash;Rapid7</a><br />
+                            <a href="mailto:sales@rapid7.com">sales@rapid7.com</a>
+                        </p>
+                        <h3>Support:</h3>
+                        <p>
+                            <a href="tel:1-866-390-8113">+1&ndash;866&ndash;390&ndash;8113(toll free)</a><br />
+                            <a href="mailto:support@rapid7.com">support@rapid7.com</a>
+                        </p>
+                        <h3>Incident Response:</h3>
+                        <p><a href="tel:1-844-787-4947">1-844-RAPID-IR</a></p>
+                        <p><a href="../../../contact/index.html" class="view_more">More Contact Info</a></p>
+                    </div>
+                </div>
+            </section>
+            <button class="close-button" data-close="" aria-label="Close reveal" type="button"></button>
+        </div>
+        <!-- *************************** end sticky contact us modal *************************** -->
+</footer>
+
+
+
+
+
+
+
+
+            <!-- *************************** navigation close module *************************** -->
+        </div><!-- off-canvas-content -->
+    </div><!-- off-canvas-wrapper-inner -->
+</div><!-- off-canvas-wrapper -->
+
+
+    <!-- scripts -->
+    <!--[if lte IE 11]>
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+    <![endif]-->
+    <script src="../../../includes/js/all.mined79.js?cb=1576099002710"></script>
+    
+    
+
+
+    
+    <!-- end scripts -->
+
+</body>
+
+<!-- Mirrored from www.rapid7.com/ja/solutions/attacker-behavior-analytics/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:30:55 GMT -->
+</html>

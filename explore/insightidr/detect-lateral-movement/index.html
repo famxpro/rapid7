@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+    
+<!-- Mirrored from www.rapid7.com/explore/insightidr/detect-lateral-movement/index.php by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:52:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>InsightIDR Interactive Demo: Detect Lateral Movement</title>
+        <meta name="title" content="InsightIDR Interactive Demo: Detect Lateral Movement"/>
+        <meta name="description" content="Try InsightIDR with our live interactive demo. See how you can detect and investigate attacker’s lateral movement on your network. Try now!"/>
+        <meta property="og:title" content="InsightIDR Interactive Demo: Detect Lateral Movement"/> 
+        <meta property="og:image" content="../img/idr-explore-og.jpg" />
+        <meta property="og:url" content="index.html" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Rapid7" />
+        <meta property="og:description" content="Try InsightIDR with our live interactive demo. See how you can detect and investigate attacker’s lateral movement on your network. Try now!" />
+
+                    <link rel="canonical" href="index.html" />
+        
+        <link rel="stylesheet" href="../../../includes/css/all.min.css">
+        <link rel="stylesheet" href="../../css/animate.css">
+        <script src="../../../includes/js/jquery.min.js"></script>  
+        <script src="../../../includes/js/populateCountryState.js"></script>
+
+        <link type="text/css" href="../../css/jscrollpane.css" rel="stylesheet" media="all" />
+        <link rel="stylesheet" href="../../css/protip.min.css">
+        <script src="http://js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>
+        <script>
+  dataLayer = [];
+</script>
+<!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WBTPTVC');</script>
+<!-- End Google Tag Manager -->    </head>
+
+    <body id="demo" class="insightidr mainPage singleSection noscroll">
+        
+        <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBTPTVC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->          <!-- GDPR Modal -->
+            <div id="gdprAlert" class="overlay" style="display:none;">
+                <div class="gdpr-modal">
+                    <div>
+                        <h2>Quick Cookie Notification</h2>
+                        <p>This site uses cookies, including for analytics, personalization, and advertising purposes.  For more information or to change your cookie settings, <a href="../../../privacy-policy/tracking-technologies/index.html" target="_blank">click here</a>.  <br /><br />If you continue to browse this site without changing your cookie settings, you agree to this use.</p>
+                        <button class="button mdBtn blue" id="gdprClose">I AGREE, LET’S GO!</button>
+                        <hr>
+                        <p class="fineprint">View <a href="../../../privacy-policy/tracking-technologies/index.html" target="_blank">Cookie Policy</a> for full details</p>
+                    </div>
+         
+                </div>
+            </div>
+        <!-- EndGDPR Modal -->
+
+        <!--[if lte IE 9]>
+        <div id="ie-conditional"><spa>Your IE browser is out of date - Upgrade to the latest version of IE or Chrome for an optimal website experience.</span> <a href="https://support.microsoft.com/en-us/help/17621/internet-explorer-downloads" title="Upgrade IE Now" class="button smBtn darkClear" target="_blank">Upgrade IE Now</a>
+        <button class="close-button" type="button" id="closeIEBar">
+            <img src="/includes/img/close_white.svg">
+        </button> 
+        </div>
+        <![endif]--> 
+      
+        <section class="simpleHeader">
+            <div class="row expanded">
+                <div class="medium-12 end columns">
+                    <div class="brand">
+                        <a href="../../../index.html" class="logo" target="_blank">
+                            <img src="../../../includes/img/Rapid7_logo.svg" alt="Rapid7 logo">
+                        </a>
+                    </div>  
+                    <div class="socialLinks">
+                        <a href="../index.html" class="button darkClear smBtn">All Use Cases</a>
+                        <a href="../../../products/insightidr/try/index.html" class="button smBtn orange">Try for Free</a>
+                    </div>
+                    <div id="productName">
+                        <a href="../../../products/insightidr/index.html" target="_blank">insight<span>IDR</span></a>
+                    </div>    
+                </div>
+            </div>                      
+        </section>
+		
+			<script type="text/javascript">
+			  var use_case_bg_main = "../img/detect-lateral-movement/detect-lateral-movement-main-bg.jpg";
+			  var use_case_id = "5";
+			</script>
+
+			<div class="content">
+			  <div class="mainPage">
+				  <div id="loadingWrapper" class="centered">
+					  <div class="loadingIcon">
+						  <div class="loader">
+								<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+								 width="110px" height="110px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+								<path opacity="0.3" fill="#ffffff" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+								  s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+								  c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+								<path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+								  C22.32,8.481,24.301,9.057,26.013,10.047z">
+								  <animateTransform attributeType="xml"
+									attributeName="transform"
+									type="rotate"
+									from="0 20 20"
+									to="360 20 20"
+									dur="0.9s"
+									repeatCount="indefinite"/>
+								  </path>
+								</svg>
+							</div>
+							<div class="loading-icon icon-1">
+							  	<img src="../img/icons/user-alerts.svg" class="icon" alt="">
+							</div>
+					  </div>
+				  </div>
+				  
+				  
+<div id="navBarRow" class='loading'>
+    <div class="row expanded">   
+        <a class="all_use_cases show-for-medium">
+            <img src="../../img/all-use-cases.png" alt="View All Use Cases" height="16" width="15" />
+        </a>  
+        <a class="all_use_cases_m show-for-small-only" href="../index.html">
+            <img src="../../img/all-use-cases.png" alt="View All Use Cases" height="16" width="15" />
+        </a>      
+        <div class="medium-12 columns end" id="navBarRowLinks">
+            <a href="../manage-threat-intelligence/index.html" class="next protip" data-pt-gravity="bottom-right" data-pt-skin="square" data-pt-scheme="black" data-pt-title="Add and Manage Threat Intelligence">Next<span class="hide-for-small-only"> Use Case</span></a>   
+            <a href="../search-visualize-any-data/index.html" class="prev protip" data-pt-gravity="bottom-left" data-pt-skin="square" data-pt-scheme="black" data-pt-interactive="true" data-pt-title="Search and Visualize Security Data">Prev<span class="hide-for-small-only"> Use Case</span></a>
+
+        </div>      
+        <div class="row" id="navBarRowViewAll">         
+            <div class="medium-1 columns prev-arrow"> 
+                <img src="../../img/previous.png" alt="View More" />
+            </div>
+            <div class="medium-10 columns" id="other-use-cases">                     
+                <div class="row">
+                    <div class="first-set-use-cases">
+                        
+                        <div class="medium-3 columns blockArea">
+                            <a href="../immediate-context/index.html" class="iconContent">
+                                <img src="../img/icons/search-details.svg" class="icon" alt="" height="50" width="50" />
+                                <p class="meta" >Get Immediate Context as Data Streams In</p>
+                            </a>
+                        </div>
+                        
+                        
+                        <div class="medium-3 columns blockArea">
+                            <a href="../endpoint-capabilities/index.html" class="iconContent">
+                                <img src="../img/icons/endpoint-interrogator.svg" class="icon" alt="" height="50" width="50" />
+                                <p class="meta" >Access Endpoint Detection & Response Capabilities</p>
+                            </a>
+                        </div>
+                        
+                        
+                        <div class="medium-3 columns blockArea">
+                            <a href="../detect-attacker-recon/index.html" class="iconContent">
+                                <img src="../img/icons/honeypot.svg" class="icon" alt="" height="50" width="50" />
+                                <p class="meta" >Detect and Investigate Attacker Reconnaissance</p>
+                            </a>
+                        </div>
+                        
+                        
+                        <div class="medium-3 columns blockArea end">
+                            <a href="../search-visualize-any-data/index.html" class="iconContent">
+                                <img src="../img/icons/monitoring-icon.svg" class="icon" alt="" height="50" width="50" />
+                                <p class="meta" >Search and Visualize Security Data</p>
+                            </a>
+                        </div>
+                        
+                                        </div>
+                    <div class="second-set-use-cases" style="display: none;">  
+                         
+                        <div class="medium-3 columns blockArea">
+                            <a href="index.html" class="iconContent">
+                                <img src="../img/icons/user-alerts.svg" class="icon" alt="" height="50" width="50" />
+                                <p class="meta" >Detect and Investigate Lateral Movement</p>
+                            </a>
+                        </div>
+                         
+                        <div class="medium-3 columns blockArea">
+                            <a href="../manage-threat-intelligence/index.html" class="iconContent">
+                                <img src="../img/icons/checklist.svg" class="icon" alt="" height="50" width="50" />
+                                <p class="meta" >Add and Manage Threat Intelligence</p>
+                            </a>
+                        </div>
+                         
+                        <div class="medium-3 columns blockArea">
+                            <a href="../detect-remote-file-execution/index.html" class="iconContent">
+                                <img src="../img/icons/command-line.svg" class="icon" alt="" height="50" width="50" />
+                                <p class="meta" >Detect and Investigate Remote File Execution</p>
+                            </a>
+                        </div>
+                         
+                        <div class="medium-3 columns blockArea end">
+                            <a href="../easy-reporting-compliance/index.html" class="iconContent">
+                                <img src="../img/icons/answer-questions.svg" class="icon" alt="" height="50" width="50" />
+                                <p class="meta" >Answer Operational Questions from a Single Place</p>
+                            </a>
+                        </div>
+                                        </div>
+                </div>
+            </div>
+            <div class="medium-1 columns end next-arrow"> 
+               <img src="../../img/next.png" alt="View More" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="overlayContainer"></div>				  
+				  <div class="afterContainer"></div>
+				  <div class="overlayStartBox">
+					  <div class="row">         
+						  <div class="small-10 small-offset-1 medium-8 medium-offset-2 large-6 large-offset-3 columns end" id="overlayContainer">
+							  <h2>InsightIDR Product Use Case</h2>
+							  <h1>Detect and Investigate Lateral Movement</h1>
+							  <a href="index0c17.html?step=1" class="blue button lgBtn" id="startButton">Start Exploring</a>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+			</div>
+	  
+		
+		
+		
+		<footer class="simpleFooter mini fixed">
+            <div class="row expanded">         
+                <div class="medium-12 columns end">
+                    <div class="copyright">&copy; Rapid7</div>  
+                    <div class="footer-links">
+                        <ul>
+                            <li><a href="../../../legal/index.html" title="Legal Terms">Legal Terms</a></li>
+                            <li><a href="../../../privacy-policy/index.html" title="Privacy Policy">Privacy Policy</a></li>
+                            <li><a href="../../../export-notice/index.html" title="Export Notice">Export Notice</a></li>
+                            <li><a href="../../../trust/index.html" title="Trust">Trust</a></li>
+                        </ul>
+                    </div>   
+                                  
+                </div>
+            </div>                            
+        </footer>
+        
+        <div id="ls" class="hide">11906531</div> 
+		
+        <div class="reveal" id="stickyContact" data-reveal>
+            <section class="contactForm">                            
+                <div class="row">
+                    <div class="large-9 columns">
+                        <form id="contactModal" class="formBlock freemail">
+                            <div id="intro" class="row">
+                                <div id="thankyouText" style="display:none;" class="row intro">
+                                    <div class="medium-12">
+                                        <h4><span class="success">Success!</span> Thank you for submission. We will be in touch shortly.</h4>
+                                    </div>
+                                </div>
+                                <div id="errorText" style="display:none;" class="row intro">
+                                    <div class="medium-12">
+                                        <h4><span class="error">Oops!</span> There was a problem in submission. Please <a href="../../../contact/index.html" title="Visit our Contact Us Page">contact us</a>.</h4>
+                                    </div>
+                                </div>
+                                <div class="columns medium-12">
+                                    <h2>Contact Us</h2>
+                                    <p id="fieldInstruction" class="">We're happy to answer any questions you may have about Rapid7</p>
+                                </div>
+                            </div>
+                            <fieldset>
+
+                                    <input name="contactType" type="hidden" id="contactType" tabindex="21" class="normalSelect dropdownSelect" value="11934492" />
+                                <dl class=""> 
+                                    <dd><input id="firstName" type="text" name="firstName" tabindex="23" placeholder="First Name"/></dd>
+                                </dl>
+                                <dl class="">
+                                    <dd><input id="lastName" type="text" name="lastName" tabindex="24" placeholder="Last Name"/></dd>
+                                </dl>
+                                <dl>
+                                    <dd><input id="jobTitle" type="text" name="jobTitle" tabindex="25" placeholder="Job Title" /></dd>
+                                </dl>
+                                <dl>
+                                    <dd><input id="companyName" type="text" name="companyName" tabindex="26" placeholder="Company"/></dd>
+                                </dl>
+                                <dl>
+                                    <dd><input id="email" type="text" tabindex="27" name="email" placeholder="Email Address" /></dd>
+                                </dl>
+                                 <dl>
+                                    <dd>
+                                        <div class="intl-phone">
+                                            <div class="flag-container">
+                                                <div class="selected-flag">
+                                                    <div class="iti-flag"></div>
+                                                </div>
+                                                <ul class="country-list">
+                                                </ul>
+                                            </div>
+                                            <input id="phone" type="text" name="phone" tabindex="28" placeholder="Phone" />
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd><select name="country" id="country" tabindex="29" class="form_SelectInstruction normalSelect country_select" onchange='updateCountryData("#contactModal")'></select></dd>
+                                </dl>
+                                <dl>
+                                    <dd><select name="state" id="state" tabindex="30" class="form_SelectInstruction normalSelect dropdownSelect"></select></dd>
+                                </dl>
+                                <dl class="expand checkboxContainer" id="optout" style="display:none;">
+                                    <dd>
+                                        <input id="explicitOptOutAlt" type="checkbox" >
+                                        <label for="explicitOptOutAlt">I do not want to receive emails regarding Rapid7's products and services.</label>
+                                    </dd>
+                                    <p class="disc">Please refer to our <a href="../../../privacy-policy/index.html">Privacy Policy</a> or contact us at <a href="mailto:info@rapid7.com">info@rapid7.com</a> for more details
+                                    </p>
+                                </dl>
+                                <dl class="expand" id="consultant" style="display: none;">
+                                    <input id="consultantFieldAlt" type="checkbox">
+                                    <label for="consultantFieldAlt">I am a consultant, partner, or reseller.</label>
+                                </dl>
+                                <dl class="expand">
+                                    <input id="submit" type="submit" value="Submit" class="submit" tabindex="31" />
+                                    <label>&nbsp;</label>
+                                    
+                                </dl>
+                                <input type="hidden" id="formName" value="ContactModal" />
+                            </fieldset>
+                            
+                        </form>
+                    </div>
+                    <div class="large-3 columns stickyContactSidebar">
+                        <img src="../../../includes/img/logo-black.png" alt="Rapid7 logo" class="logo">
+                        <h3>General:</h3>
+                        <p><a href="mailto:info@rapid7.com">info@rapid7.com</a></p>
+                        <h3>Sales: </h3>
+                        <p>
+                            <a href="tel:1-866-772-7497">+1&ndash;866&ndash;7&ndash;Rapid7</a><br />
+                            <a href="mailto:sales@rapid7.com">sales@rapid7.com</a>
+                            </p>
+                        <h3>Support:</h3>
+                        <p>
+                            <a href="tel:1-866-390-8113">+1&ndash;866&ndash;390&ndash;8113(toll free)</a><br />
+                            <a href="mailto:support@rapid7.com">support@rapid7.com</a>
+                        </p>
+                        <h3>Incident Response:</h3>
+                        <p><a href="tel:1-844-787-4947">1-844-RAPID-IR</a></p>
+                        <p><a href="../../../contact/index.html" class="view_more">More Contact Info</a></p>                                        
+                    </div>
+                </div>
+            </section>
+            <button class="close-button" data-close="" aria-label="Close reveal" type="button">
+                <span aria-hidden="true"><img src="../../../includes/img/modal_close.svg"></span>
+            </button>
+        </div>
+
+        <!-- scripts -->
+        <script type="text/javascript" src="../../../includes/js/all.min.js"></script>
+        <script type="text/javascript" src="../../js/demo.js"></script>
+        <script type="text/javascript" src="../../js/jquery.mousewheel.js"></script>
+        <script type="text/javascript" src="../../js/jquery.jscrollpane.js"></script> 
+        <script type="text/javascript" src="../../js/jquery.matchheights.js" ></script>
+        <script type="text/javascript" src="../../js/jquery.protip.min.js" ></script> 
+        <script type="text/javascript" src="../../js/jquery.cookie.js" ></script> 
+              
+        <!-- end scripts -->
+
+	</body>
+
+<!-- Mirrored from www.rapid7.com/explore/insightidr/detect-lateral-movement/index.php by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:52:14 GMT -->
+</html>

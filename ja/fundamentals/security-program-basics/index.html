@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja" dir="ltr">
+
+<!-- Mirrored from www.rapid7.com/ja/fundamentals/security-program-basics/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:34:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Security Program Basics</title>
+
+
+            <meta property="og:url" content="../../../fundamentals/security-program-basics/index.html" />
+        <link rel="canonical" href="../../../fundamentals/security-program-basics/index.html"  />
+        <link rel="alternate" href="../../../fundamentals/security-program-basics/index.html" hreflang="en" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="title" content="Security Program Basics" />
+    <meta name="description" content="Learn more about the cyber security basics like: asset management, patch management, network segmentation, and decentralization." />
+    <meta property="og:title" content="Security Program Basics" />
+        <meta property="og:image" content="../../../globalassets/rapid7-og.jpg" />
+        <meta name="twitter:image" content="../../../globalassets/rapid7-og.jpg" />
+    <meta name="twitter:title" content="Security Program Basics">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="Rapid7" />
+    <meta property="og:description" content="Learn more about the cyber security basics like: asset management, patch management, network segmentation, and decentralization." />
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+'conversionType': 'secondary',            
+        });
+    </script>
+
+    
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WBTPTVC');</script>
+    
+
+    <link rel="icon" type="image/x-icon" href="../../../includes/img/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:800,900|Roboto:300,400,700|Noto+Sans+JP">
+    <link rel="stylesheet" href="../../../includes/css/all.mined79.css?cb=1576099002710">
+    <script src="../../../includes/js/jquery.min.js"></script>
+    <script src="http://js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>
+    <script src="../../../includes/js/populateCountryState.js"></script>
+    <script src="http://information.rapid7.com/js/forms2/js/forms2.min.js"></script>
+    
+    
+
+</head>
+<body id="knowledge_center_detail" class="pg-id-1399 ">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBTPTVC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+        <div id="gdprAlert" class="overlay" style="display:none;">
+            <div class="gdpr-modal">
+                <div>
+                    <h2>Quick Cookie Notification</h2>
+                    <p>This site uses cookies, including for analytics, personalization, and advertising purposes.  For more information or to change your cookie settings, <a href="../../../privacy-policy/tracking-technologies/index.html" target="_blank">click here</a>.  <br /><br />If you continue to browse this site without changing your cookie settings, you agree to this use.</p>
+                    <button class="button mdBtn blue" id="gdprClose">I AGREE, LET&rsquo;S GO!</button>
+                    <hr>
+                    <p class="fineprint">View <a href="../../../privacy-policy/tracking-technologies/index.html" target="_blank">Cookie Policy</a> for full details</p>
+                </div>
+
+            </div>
+        </div>
+
+    <div id="__"></div>
+    <!--[if lte IE 9]>
+    <div id="ie-conditional"><spa>Your IE browser is out of date - Upgrade to the latest version of IE or Chrome for an optimal website experience.</span> <a href="https://support.microsoft.com/en-us/help/17621/internet-explorer-downloads" title="Upgrade IE Now" class="button smBtn darkClear" target="_blank">Upgrade IE Now</a>
+    <button class="close-button" type="button" id="closeIEBar">
+        <img src="../includes/img/close_white.svg">
+    </button>
+    </div>
+    <![endif]-->
+
+    
+
+
+<div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <div class="off-canvas__overlay"></div>
+<div class="off-canvas position-left" id="offCanvas" data-off-canvas data-transition="overlap">
+    <!-- Menu -->
+    <div class="off-canvas__content">
+        <!-- Mobile Menu -->
+        <div class="off-canvas__menu">
+            <div class="off-canvas__top">
+                <div class="off-canvas-close" data-toggle="offCanvas" aria-expanded="false" aria-controls="offCanvas"></div>
+                <div class="menuLabel">Main Menu</div>
+                <div id="btnMobileSearch" class="off-canvas-search"></div>
+            </div>
+                <ul class="vertical menu" data-accordion-menu data-multi-open="false">
+
+                    <li>
+                        <a href="../../products/index.html">
+                            <div class="menu__title">製品<span></span></div>
+                        </a>
+                        <ul class="menu vertical nested">
+                                            <li>
+                    <a href="../../products/insightidr/index.html">
+                        <p class="navTitle">InsightIDR</p>
+                        ユーザー行動分析とSIEM
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/insightvm/index.html">
+                        <p class="navTitle">InsightVM</p>
+                        脆弱性管理
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/insightappsec/index.html">
+                        <p class="navTitle">InsightAppSec</p>
+                        動的アプリケーションセキュリティ
+                    </a>
+                </li>
+                <li>
+                    <a href="../../products/insightconnect/index.html">
+                        <p class="navTitle">InsightConnect</p>
+                        オーケストレーションと自動化
+                    </a>
+                </li>
+
+                                            <li>
+                    <a href="../../products/metasploit/index.html">
+                        <p class="navTitle">Metasploit</p>
+                        ペンテストツール
+                    </a>
+                </li>
+
+                        </ul>
+                    </li>
+                                        <li>
+
+                            <a href="#">
+                                <div class="menu__title">サービス<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../services/security-consulting/index.html">
+                                            <p class="navTitle">Security Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/product-consulting/index.html">
+                                            <p class="navTitle">Product Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/managed-services/index.html">
+                                            <p class="navTitle">Managed Services</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/training-certification/index.html">
+                                            <p class="navTitle">Training &amp; Certification</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../services/support-and-customer-success/index.html">
+                                            <p class="navTitle">Support &amp; CSM</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="#">
+                                <div class="menu__title">パートナー<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../partners/sales-partners/index.html">
+                                            <p class="navTitle">Sales Partners</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../partners/technology-partners/index.html">
+                                            <p class="navTitle">Technology Partners</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../partners/index.html">
+                                            <p class="navTitle">Find a Partner</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="../../research/index.html">
+                                <div class="menu__title">リサーチ</div>
+                            </a>
+
+
+                    </li>
+
+                </ul>
+
+                <ul class="vertical menu sideUtilityLinks">
+                        <li><a href="https://blog.rapid7.com/">ブログ</a></li>
+                        <li><a href="../../for-customers/index.html">サポート</a></li>
+                        <li><a href="../../contact/index.html">お問い合わせ</a></li>
+                </ul>
+
+            <div class="menu__cta">
+                <a href="../../../try/insight/index.html" class="button smBtn blue">Free Trial</a>
+            </div>
+        </div>
+
+        <!-- Mobile Search -->
+        <div class="off-canvas__search">
+            <div id="btnCloseMobileSearch" class="off-canvas-close"></div>
+            <div class="searchContainer">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                    <span class="sb-icon-search"></span>
+                </form>
+                <div class="search-links">
+                    <header>Helpful Links</header>
+                            <a href="../../for-customers/index.html">Product Support</a>
+                            <a href="../../pricing/index.html">Product Pricing</a>
+                            <a href="../../resources/index.html">Resource Library</a>
+                            <a href="../../about/events-webcasts/index.html">Events &amp; Webcasts</a>
+                            <a href="../../services/training-certification/index.html">Training &amp; Certification</a>
+                            <a href="../../about/news/index.html">News &amp; Press Releases</a>
+                            <a href="../../about/index.html">About Rapid7</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- end .off-canvas -->
+
+
+        <div class="off-canvas-content" data-off-canvas-content>
+            <div id="menuOverlay" class="reveal-overlay"></div>
+
+                <section class="longHero" >
+
+                    
+
+    <!-- nav -->
+    <div class="utility row">
+
+        <!-- nav toggle (mobile only) -->
+        <button type="button" class="button hamburger hamClosed" data-toggle="offCanvas" aria-expanded="false" aria-controls="offCanvas">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- main nav links -->
+        <div class="nav__main">
+
+            <div class="nav__main-top">
+                <a href="../../index.html" class="nav__main-logo">
+                    <img src="../../../includes/img/Rapid7_logo.svg" alt="Rapid7 logo">
+                </a>
+                    <div class="top-bar">
+                        <ul class="dropdown menu nav__main-links" data-dropdown-menu data-disable-hover="true" data-click-open="true">
+                                    <li class="megamenu">
+                                        <a data-toggle="megamenu-製品" href="#">製品</a>
+
+                                        <div class="dropdown-pane megamenu__wrapper" id="megamenu-製品" data-dropdown data-disable-hover="true" data-click-open="true" data-options="closeOnClick:true;">
+                                            <div class="row collapse megamenu__content">
+                                                <div class="megamenu__info">
+                                                    <div class="megamenu__header">Rapid7 Insight Cloud</div>
+<p><em>Visutalization - 可視化 Analytics - 分析 Automation - 自動化</em></p>
+<p>ラピッドセブンのテクノロジーを凝縮した Rapid7 Insight Cloudなら、IT環境全体のデータ収集、脆弱性の管理の自動化、ユーザーの行動の監視、ログの検索、アプリケーションの脆弱性テストなど、セキュリティ、IT、DevOpsの部門間をまたいだコラボレーションが可能になります。</p>
+                                                </div>
+                                                <div class="megamenu__items">
+                                                    <div class="megamenu__items-main">
+                                                        <div class="megamenu__items-left ">
+                                                                <div class="megamenu__subheader">Insight製品</div>
+                                                            <div class="">
+                                                                                <div class="megamenu__item">
+                    <a href="../../products/insightidr/index.html" target="">
+                        <div class="megamenu__item-title">InsightIDR</div>
+                        <p>ユーザー行動分析とSIEM</p>
+                    </a>
+                    <a href="../../trial/insightidr/index.html" target=" ">無償試用版</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/insightvm/index.html" target="">
+                        <div class="megamenu__item-title">InsightVM</div>
+                        <p>脆弱性管理</p>
+                    </a>
+                    <a href="../../trial/insightvm/index.html" target=" ">無償試用版</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/insightappsec/index.html" target="">
+                        <div class="megamenu__item-title">InsightAppSec</div>
+                        <p>動的アプリケーションセキュリティ</p>
+                    </a>
+                    <a href="../../trial/insightappsec/index.html" target=" ">無償試用版</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../products/insightconnect/index.html" target="">
+                        <div class="megamenu__item-title">InsightConnect</div>
+                        <p>オーケストレーションと自動化</p>
+                    </a>
+                    <a href="../../info/insightconnect-contact/index.html" target=" ">デモンストレーション</a>
+                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="megamenu__items-right">
+                                                                            <div class="megamenu__item">
+                    <a href="../../products/metasploit/index.html" target="">
+                        <div class="megamenu__item-title">Metasploit</div>
+                        <p>ペンテストツール</p>
+                    </a>
+                    <a href="../../try/metasploit-pro/index.html" target=" ">無償試用版</a>
+                </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="megamenu__items-links">
+                                                        <a href="../../products/index.html">View All 製品</a> &nbsp;
+                                                            <span> &vert; &nbsp; <a href="../../solutions/index.html">ソリューション検索（英語）</a></span>
+                                                    </div>
+                                                </div>
+                                                <div class=" megamenu__search searchContainer">
+                                                    <form action="https://www.rapid7.com/search/">
+                                                        <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                                                        <input class="sb-search-submit" type="submit" value="">
+                                                        <span class="sb-icon-search"></span>
+                                                    </form>
+                                                    <div class="search-links">
+                                                        <div class="megamenu__subheader">Helpful Links</div>
+                                                                <a href="../../for-customers/index.html">Product Support</a>
+                                                                <a href="../../pricing/index.html">Product Pricing</a>
+                                                                <a href="../../resources/index.html">Resource Library</a>
+                                                                <a href="../../about/events-webcasts/index.html">Events &amp; Webcasts</a>
+                                                                <a href="../../services/training-certification/index.html">Training &amp; Certification</a>
+                                                                <a href="../../about/news/index.html">News &amp; Press Releases</a>
+                                                                <a href="../../about/index.html">About Rapid7</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="#">サービス</a>
+                                            <ul class="menu vertical">
+                                                    <li><a href="../../services/security-consulting/index.html">Security Consulting</a></li>
+                                                    <li><a href="../../services/product-consulting/index.html">Product Consulting</a></li>
+                                                    <li><a href="../../services/managed-services/index.html">Managed Services</a></li>
+                                                    <li><a href="../../services/training-certification/index.html">Training &amp; Certification</a></li>
+                                                    <li><a href="../../services/support-and-customer-success/index.html">Support &amp; CSM</a></li>
+                                            </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">パートナー</a>
+                                            <ul class="menu vertical">
+                                                    <li><a href="../../partners/sales-partners/index.html">Sales Partners</a></li>
+                                                    <li><a href="../../partners/technology-partners/index.html">Technology Partners</a></li>
+                                                    <li><a href="../../partners/index.html">Find a Partner</a></li>
+                                            </ul>
+                                    </li>
+                                    <li>
+                                        <a href="../../research/index.html">リサーチ</a>
+                                    </li>
+                        </ul>
+                    </div>
+
+            </div>
+
+            <!-- breadcrumbs -->
+    <div class="row expanded">
+        <div class="medium-12 columns">
+            <ul class="breadcrumbs">
+                <li><a href="../../index.html">Home</a></li>
+                            <li><a href="../index.html">Fundamentals</a></li>
+            <li>Security Program Basics</li>
+
+            </ul>
+        </div>
+    </div>
+
+
+
+        </div>
+
+        <div class="nav__utility">
+            <!-- utility links -->
+            <div id="utilityLinks" class="nav__utility-links hide-for-small-only" data-auth="false">
+                    <div class="tooltip white">
+                        <span class="close"></span>
+                        お使いのブラウザの言語設定が日本語になっていることを検知しました。残念ながらこのページはEnglishでのみご覧いただいたけます。
+                    </div>
+
+                <ul class="dropdown menu" data-dropdown-menu data-disable-hover="true" data-click-open="true">
+                    <li class="language-toggle has-menu">
+                        <a href="#" class="text-uppercase">日本語</a>
+                        <ul class="menu">
+                                <li >
+                                    <a href="../../../fundamentals/security-program-basics/index.html">English</a>
+                                </li>
+                                <li >
+                                    <a href="../../../de/fundamentals/security-program-basics/index.html">Deutsch</a>
+                                </li>
+                                <li class=selected>
+                                    <a href="#">日本語</a>
+                                </li>
+                        </ul>
+                    </li>
+                            <li >
+                                <a href="https://blog.rapid7.com/">ブログ</a>
+                            </li>
+                            <li >
+                                <a href="../../for-customers/index.html">サポート</a>
+                            </li>
+                            <li >
+                                <a href="../../contact/index.html">お問い合わせ</a>
+                            </li>
+                                            <li>
+                            <a id="utilitySignin" href="https://insight.rapid7.com/saml/SSO?fromURI=https%3a%2f%2fwww.rapid7.com%2fja%2ffundamentals%2fsecurity-program-basics%2f" class="notlogged">Sign In</a>
+                        </li>
+                </ul>
+            </div>
+            <!-- utility user -->
+            <div class="nav__utility-trial" data-auth="false">
+                    <a href="../../../link/69587fa6945744918c7ab6cd21db04e4.html" target="_blank">
+                        <span id="trialCta" class="button blue mdBtn cta">無償試用版はこちら</span>
+                    </a>
+            </div>
+        </div>
+
+    </div><!-- utility -->
+
+
+                    <div class="overlayText">
+                        <div class="row">
+                            <div class="longHero__content medium-10 medium-offset-1 large-8 large-offset-2 columns">
+
+                                <h1>
+                                    Security Program Basics
+                                </h1>
+                                    <h2 class="subtitle">
+                                        Laying the foundation for stronger security
+                                    </h2>
+                                
+                                
+                            </div>
+                            
+
+                        </div>
+                    </div>
+
+                    
+                </section>
+            
+
+
+<div class="pageContent">
+    
+
+<div data-sticky-container>
+    <div class="sticky-nav" id="stickyNav" data-sticky data-options="marginTop:0;" style="width:100%" data-top-anchor="stickyTrigger:top" data-sticky-on="small">
+        <div class="sticky-nav__main">
+            <a href="../../../index.html" class="sticky-nav__logo">
+                <img alt="Rapid7 logo" class="lazy" data-src="/includes/img/Rapid7_logo.svg" src="../../../includes/img/placeholder.png" />
+            </a>
+            <div class="sticky-nav__title show-for-medium">
+                    <a href="#__" class="smooth">Security Program Basics</a>
+            </div>
+                    <div class="sticky-nav__share hide-for-medium">
+                        <a href="#" class="sticky-nav__share-title">
+                            <img alt="Share" class="lazy" data-src="/includes/img/icon-share.svg" src="../../../includes/img/placeholder.png" />
+                        </a>
+                    </div>
+                <div class="sticky-nav__share sticky-nav__share--options">
+                        <span class="sticky-nav__share-title">
+                            Share:
+                        </span>
+                    <ul>
+                            <li>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.rapid7.com%2fja%2ffundamentals%2fsecurity-program-basics%2f&amp;title=Security+Program+Basics" onclick="window.open(this.href, 'linkedin-share', 'width=520,height=570');return false;">
+                                    <img class="lazy" data-src="/includes/img/linkedin-white.svg" src="../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/intent/tweet?text=Security+Program+Basics&amp;url=https%3a%2f%2fwww.rapid7.com%2fja%2ffundamentals%2fsecurity-program-basics%2f" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                                    <img class="lazy" data-src="/includes/img/twitter-white.svg" src="../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.rapid7.com%2fja%2ffundamentals%2fsecurity-program-basics%2f" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                                    <img class="lazy" data-src="/includes/img/facebook-white.svg" src="../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                                                
+                    </ul>
+                </div>
+ 
+            <div class="sticky-nav__cta">
+                <a href="../../../try/insight/index.html">
+                    <button class="blue button">
+                        Try Now
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="stickyTrigger"></div>
+
+    <!-- Intro -->
+    <section class="pageBlock bgWhite">
+        <div class="row">
+            <div class="small-10 small-offset-1 columns wrapper">
+                <h2>
+                    What are Some Security Program Basics?
+                </h2>
+                <p>Security in tech is growing, and so is the vocabulary associated with it. If you&rsquo;re new to the security space, you may be wondering where to start, how to do it, what you need, why you need it, and so on.&nbsp;The truth of the matter is, before you do anything else you need to ensure you and your organization have a combination of these five fundamental best practices in place:</p>
+<ol>
+<li><a href="#asset-inventory">Asset inventory</a></li>
+<li><a href="#mfa">Multi-factor authentication (MFA)</a></li>
+<li><a href="#patch">Patch management</a></li>
+<li><a href="#segmentation">Network segmentation</a></li>
+<li><a href="#decentralization">Decentralization</a></li>
+</ol>
+            </div>
+        </div>
+    </section>
+    <section class="pageBlock bgGrayLight mainContent-container">
+        <!--  data-equalizer data-equalize-on="large" -->
+        <div class="sidebar-container row show-for-large">
+            <!-- sidebar -->
+            <div class="large-3 large-offset-8 end columns" id="sidebar">
+                <!-- data-equalizer-watch -->
+                <div class="sidebarmenu">
+                        <div class="chapter">Chapter 1</div>
+                        <h2>Security Teams, People, and Processes</h2>
+                        <span>Select Section</span>
+                        <ul>
+                                <li>
+                                    <a href="index.html" class=active>
+                                        Security Program Basics
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../security-awareness-training/index.html" >
+                                        Security Awareness Training
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../user-behavior-analytics/index.html" >
+                                        User and Entity Behavior Analytics (UEBA)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../siem/index.html" >
+                                        SIEM
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../system-monitoring-and-troubleshooting/index.html" >
+                                        System Monitoring and Troubleshooting
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../security-orchestration/index.html" >
+                                        Security Orchestration
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../security-automation/index.html" >
+                                        Security Automation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../chatops/index.html" >
+                                        ChatOps
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../security-operations-center/index.html" >
+                                        Security Operations Center (SOC)
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../gartner-magic-quadrant-for-siem/index.html" >
+                                        Gartner Magic Quadrant for SIEM
+                                    </a>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- content -->
+            <div class="small-10 small-offset-1 large-6 large-offset-1 columns wrapper mainContent">
+                <!-- data-equalizer-watch -->
+                <p>In most cases, simply doing these things well will greatly reduce your overall risk. Here&rsquo;s what you need to know:</p>
+<h2 id="asset-inventory"><a id="asset-inventory"></a>Asset Inventory</h2>
+<p>This is the bedrock and fundamental foundation of every successful security program. Without it, the other best practices in this article would be much less effective.</p>
+<p>Having a solid asset inventory depends a few simple things: knowing what assets you have, where they are on your network, what software and configurations are on them, and which users and systems have access to them.&nbsp;</p>
+<p>What counts as an &ldquo;asset&rdquo; from a security perspective? For starters, any kind of network-accessible electronic system, including: laptops, desktops, servers, firewalls, switches, routers, phones, printers, cloud applications, and more.</p>
+<p>If your asset inventory has gaps, that means your security program will also have gaps. If you require that all laptops have full-disk encryption enabled on them before your IT team gives them to employees, but you and your IT team don&rsquo;t know about the five new laptops that your HR team just purchased using a corporate credit card, then they likely won&rsquo;t get encrypted (until someone finds out about it).</p>
+<p><a href="../../products/insightvm/index.html" target="_blank" rel="noopener">Network and vulnerability scanning solutions</a> can help maintain and identify gaps in your organization&rsquo;s asset inventory. Using a combination of network scans and endpoint agents will help provide rich, near real-time asset data for your asset inventory.<strong>&nbsp;</strong></p>
+<h2 id="multi-factor-authentication"><a id="mfa"></a>Multi-Factor Authentication</h2>
+<p>Any good security program starts with <a href="../security-awareness-training/index.html" target="_blank" rel="noopener">multi-factor authentication</a> for accessing critical personal or business data. Forms of authentication fall into three categories:</p>
+<ul>
+<li>Something you know: A password, for example</li>
+<li>Something you have: A phone, ATM card, etc.</li>
+<li>Something you are: A fingerprint</li>
+</ul>
+<p>Passwords are fundamentally flawed and can be easily stolen via phishing attacks, password guessing attacks, and malware, for example. By simply using a password to safeguard your data, an attacker only needs to jump through one hoop to compromise your account. Requiring multiple forms of authentication for users makes gaining user credentials (and therefore access) much more difficult and expensive for attackers.</p>
+<p>One important thing to note here is that requiring two forms of authentication from the same category will not suffice from a security perspective. For example, if you require users to enter a password and then answer a security question, such as &ldquo;What&rsquo;s your mother&rsquo;s maiden name?&rdquo;, then that doesn&rsquo;t count as two-factor authentication. Since those are both &ldquo;something you know,&rdquo; it&rsquo;s simply single factor authentication, twice. Requiring a password (something you know) and then a 6-digit code generated by an app on a smartphone (something you have) does count, however.</p>
+<h2 id="patch-management"><a id="patch"></a>Patch Management</h2>
+<p>Simply put, <a href="../../products/insightvm/use-cases/maximize-your-tech-stack/index.html" target="_blank" rel="noopener">patch management</a> means making sure all of your software is up to date, installed, and configured correctly. This involves obtaining, testing, and installing patches (i.e. software updates) to your organization&rsquo;s systems and devices. To do this effectively, you&rsquo;ll need to continuously stay aware of available patches, determine which patches are needed on what systems, oversee their installation, and test for issues after patch installation. This is typically handled as a partnership between IT and DevOps teams as opposed to the security team.</p>
+<p>Patch management plays closely with <a href="../vulnerability-management-and-scanning/index.html">vulnerability management</a>, or the process of determining whether you have any vulnerabilities in your IT environment. There are three elements behind patch management: prioritizing vulnerability remediation, evaluating compensating controls (i.e. existing security techniques or systems that lower the risk of a vulnerability), and making sure any patch you implement is installed correctly.</p>
+<p>Here&rsquo;s why these elements matter: applying a patch will sometimes break another part of the software you&rsquo;re using, causing more harm than good. Understanding this inherent risk will play a large role in how you prioritize which patches you want to apply. In the event a patch does break some software, requiring you to remove the patch, then having compensating controls in place will make it harder for an attacker to exploit any vulnerabilities that reemerge. An example of a compensating control that could be put in place includes implementing firewall rules that limit the number of systems that can communicate with a vulnerable system that can&rsquo;t be easily patched.</p>
+<p>To help mitigate potential fallout, test patches on non-critical systems or in test environments that mirror your production environment before installing patches across your entire fleet of systems.</p>
+<h2 id="decentralization"><a id="decentralization"></a>Decentralization</h2>
+<p>Decentralization is a concept that involves keeping data spread out across your networks and cloud services to ensure that if one user or server in your organization&rsquo;s network is compromised, the attacker won&rsquo;t necessarily have access to additional company data that&rsquo;s stored in the rest of the networks and cloud services your company uses. For example, if an attacker finds a way into one of your office&rsquo;s internal file share systems in a decentralized environment, they&rsquo;ll likely only be able to access that office&rsquo;s shared files but not necessarily all of the files in your cloud storage provider. However, if you have a centralized environment and an attacker compromises one server, they may find ways to easily move from that server to additional company systems and data, such as email servers, financial statements, or user directories.&nbsp;</p>
+<p>Decentralization provides two benefits:</p>
+<p><strong>1. The benefit of a decentralized security team, contingent on a good vendor management process:</strong> If you have a small or moderate-sized security team, it can be incredibly difficult to monitor the dozens of cloud applications your company uses. Luckily, well-established cloud service providers are usually investing heavily in their own security teams and program, focused on protecting their environment in depth. Keeping the vendor&rsquo;s application separate from the rest of your network allows your security team to focus on your organization&rsquo;s core environment, while the vendor&rsquo;s security team can focus on protecting the application or service they host on your behalf.</p>
+<p><strong>2. The benefit of containing a breach&rsquo;s impact if one specific application or user is compromised:</strong> If one vendor application is compromised in a decentralized environment, that means the breach&rsquo;s impact is contained to that one application or vendor. Doing this makes it more difficult, but not impossible as seen in recent breaches, for an attacker to access the rest of your systems and information. The more difficult it is for an attacker to reach a central server, the more time and money they&rsquo;ll need to invest in the attack, and the more likely they are to abandon it or get caught.</p>
+<h2 id="network-segmentation"><a id="segmentation"></a>Network Segmentation</h2>
+<p><a href="../../resources/network-segmentation/index.html">Network segmentation</a> takes decentralization one step further: It&rsquo;s the concept of figuring out which systems and devices on your network need to talk to each other, and then only allowing those systems to talk to each other and nothing else.</p>
+<p>For example, consider a nurse working on a hospital laptop. In a securely segmented network, the laptop would only be able to talk to one or two other systems, such as a print server (for printing patient records) and the patient record application itself. However, in a &ldquo;flat network,&rdquo; i.e., a network with no segmentation between systems, this laptop could talk to <em>every other system on the network.</em> If an attacker compromises that laptop, they&rsquo;ll be able to attack every other system on the network through completely unchecked <a href="../../products/insightidr/use-cases/detect-compromised-users-and-lateral-movement/index.html" target="_blank" rel="noopener">lateral movement</a>.</p>
+<p>To segment your network effectively, it&rsquo;s essential that you inventory your most critical assets, understand where they sit on your network, and which systems and users can access them. If the assets are accessible by more than the specific systems and users who actually need that access, then that should be remedied. Access should always be granted based on the principal of least privilege to minimize a system or application&rsquo;s overall attack surface. You&rsquo;ll also need to ensure nothing on the network is able to communicate directly to your database servers, which is where critical application data is typically stored.</p>
+<h2>Putting the Foundation In Place</h2>
+<p>Once you&rsquo;ve incorporated these fundamental best practices into your environment, your security foundation is set. Not only will it be more difficult for an attacker to move around your network, but it&rsquo;ll be more costly, too. The more expensive and time-intensive an attack is, the more likely the attacker will be to abandon their attempt or to get caught if they persist.</p>
+
+                <!-- next and previous arrows -->
+                <div id="next-previous">
+                    <div class="row">
+                                                    <!-- Next -->
+                            <div class="large-6 columns end">
+                                <a class="next-link" href="../security-awareness-training/index.html">
+                                    <span>Security Awareness Training</span>
+                                    <div class="next-img"></div>
+                                </a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div><!-- end page content -->
+
+
+
+<footer >
+    <section class="search-scroll">
+        <div class="row">
+            <div class="footer__search">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="検索" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                </form>
+            </div>
+            <div class="footer__scroll">
+                <a href="#__" class="smooth">
+                    <span>トップに戻る</span>
+                    <img class="lazy" data-src="/includes/img/up-arrow-lightgray.png" src="../../../includes/img/placeholder.png" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+        <section class="footer__links row">
+            <div class="footer__links-wrapper">
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__contact">
+                        <a href="../../../index.html">
+                            <img alt="Rapid7 logo" class="logo lazy" data-src="/includes/img/Rapid7_logo.svg" src="../../../includes/img/placeholder.png" />
+                        </a>
+                                        <div class="footer__links-title">ラピッドセブン・ジャパン株式会社</div>
+                <a class="link" href="#">〒104-0031</a>
+                <a class="link" href="#">東京都中央区京橋2-2-1</a>
+                <a class="link" href="#">京橋エドグラン26階</a>
+
+                            <div class="footer__breach">
+                                <div class="footer__breach-title">代表番号</div>
+                                <div class="footer__breach-contact">
+                                    <div class="footer__breach-icon"></div>
+                                    <div class="footer__breach-phone"><a href="tel:0368389720">03-68280-720</a></div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="footer__links-section footer__solutions">
+                                        <div class="footer__links-title">製品</div>
+                <a class="link" href="../../products/insightvm/index.html">InsightVM</a>
+                <a class="link" href="../../products/insightidr/index.html">InsightIDR</a>
+                <a class="link" href="../../products/insightappsec/index.html">InsightAppSec</a>
+                <a class="link" href="../../products/metasploit/index.html">Metasploit</a>
+                <div class="footer__links-title">ソリューション（英語）</div>
+                <a class="link" href="../../solutions/index.html">すべてのソリューション</a>
+                <a class="link" href="../../solutions/industry/index.html">業界別ソリューション</a>
+                <a class="link" href="../../solutions/compliance/index.html">コンプライアンスソリューション</a>
+
+                    </div>
+                </div>
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__support">
+                                        <div class="footer__links-title">サポート（英語）</div>
+                <a class="link" href="../../for-customers/index.html">製品サポート</a>
+                <div class="footer__links-title">リソース（英語）</div>
+                <a class="link" href="../../products/insightappsec/resources/index.html">リソースライブラリ</a>
+                <a class="link" href="../../about/customers/index.html">導入実績</a>
+                <a class="link" href="../../about/events-webcasts/index.html">イベント</a>
+                <a class="link" href="../../services/training-certification/index.html">トレーニングと認定資格</a>
+                <a class="link" href="../index.html">ITセキュリティの基本知識</a>
+                <a class="link" href="../../../db/index.html">脆弱性と感染データベース</a>
+
+                    </div>
+                    <div class="footer__links-section footer__about">
+                                        <div class="footer__links-title">会社情報</div>
+                <a class="link" href="../../rapid7-japan/index.html">ラピッドセブン・ジャパン</a>
+                <a class="link" href="../../about/index.html">企業情報</a>
+                <a class="link" href="../../about/leadership/index.html">経営陣（英語）</a>
+                <a class="link" href="../../about/news/index.html">ニュース（英語）</a>
+                <a class="link" href="../../about/customers/index.html">導入実績（英語）</a>
+                <a class="link" href="../../about/public-policy/index.html">パブリックポリシー（英語）</a>
+                <a class="link" href="https://investors.rapid7.com/">投資家向け情報（英語）</a>
+
+                    </div>
+                </div>
+
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__connect">
+                                        <div class="footer__links-title">ラピッドセブンとつながる</div>
+                <a class="link" href="../../contact/index.html">お問いわせ</a>
+                <a class="link" href="https://blog.rapid7.com/">ブログ（英語）</a>
+                <a class="link" href="https://rapid7support.force.com/customers/">サポートログイン（英語）</a>
+                <a class="link" href="../../careers/index.html">採用情報（英語）</a>
+
+                        <div class="footer__links-social">
+                            <a class="linkedin" href="https://www.linkedin.com/company/39624" target="_blank"></a>
+                            <a class="twitter" href="https://twitter.com/Rapid7" target="_blank"></a>
+                            <a class="facebook" href="https://www.facebook.com/rapid7" target="_blank"></a>
+                            <a class="instagram" href="https://www.instagram.com/rapid7/" target="_blank"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <section class="footer__legal">
+        <div class="row">
+            <div class="footer__legal-copyright">&copy; Rapid7</div>
+
+                    <div class="footer__legal-link"><a href="../../legal/index.html">Legal Terms</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../../privacy-policy/index.html">Privacy Policy</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../export-notice/index.html">Export Notice</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../trust/index.html">Trust</a></div>
+        </div>
+    </section>
+
+        <!-- *************************** sticky contact us modal *************************** -->
+        <section class="contact-sticky">
+            <div class="row expanded">
+                <div id="stickyButtons" class="driftInit">
+                    <div class="chatBtn show-if-chat-online" id="stickyChat">
+                        <a class="gray button">Chat</a>
+                    </div>
+                    <div class="contactBtn" data-open="stickyContact">
+                        <a id="sticky_contact_btn" class="gray button">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="reveal light hasSidebar" id="stickyContact" data-reveal>
+            <section class="contactForm">
+                <div class="row">
+                    <div class="large-9 columns">
+                        <form id="contactModal" class="formBlock freemail">
+                            <div id="intro" class="row">
+                                <div id="thankyouText" style="display:none;" class="messageBox green">
+                                    <div class="medium-12">
+                                        <h4><span class="success">Success!</span> Thank you for submission. We will be in touch shortly.</h4>
+                                    </div>
+                                </div>
+                                <div id="errorText" style="display:none;" class="messageBox red">
+                                    <div class="medium-12">
+                                        <h4><span class="error">Oops!</span> There was a problem in submission. Please <a href="../../../contact/index.html" title="Visit our Contact Us Page">contact us</a>.</h4>
+                                    </div>
+                                </div>
+                                <div class="columns medium-12">
+                                    <h2>Contact Us</h2>
+                                    <p id="fieldInstruction" class="">We're happy to answer any questions you may have about Rapid7</p>
+                                </div>
+                            </div>
+                            <fieldset>
+                                <dl class="clearfix expand">
+                                    <dd>
+                                        <select name="contactType" id="contactType" tabindex="21" class="normalSelect dropdownSelect">
+                                            <option value="0">お問い合わせ内容</option>
+                                                <option value="3557252">一般的なお問い合わせ</option>
+                                                <option value="3557253">製品デモ</option>
+                                                <option value="3557256">価格</option>
+                                                <option value="3557257">マネージドサービス</option>
+                                                <option value="3557359">提案のご依頼</option>
+                                        </select>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix expand" id="productNameParent" style="display:none;">
+                                    <dd>
+                                        <select name="productName" id="productName" tabindex="22" class="normalSelect dropdownSelect">
+                                            <option value="0">Select Product</option>
+                                            <option value="3558027">Metasploit</option>
+                                            <option value="8209765">InsightIDR</option>
+                                            <option value="11407979">InsightVM</option>
+                                            <option value="10417511">InsightOps</option>
+                                            <option value="18912840">InsightAppSec</option>
+                                            <option value="6184447">AppSpider</option>
+                                            <option value="1550853">Nexpose</option>
+                                        </select>
+                                    </dd>
+                                </dl>
+                                <dl class="">
+                                    <dd>
+                                        <label for="firstName">名</label>
+                                        <input id="firstName" type="text" name="firstName" tabindex="23" />
+                                    </dd>
+                                </dl>
+                                <dl class="">
+                                    <dd>
+                                        <label for="lastName">姓</label>
+                                        <input id="lastName" type="text" name="lastName" tabindex="24" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="jobTitle">役職</label>
+                                        <input id="jobTitle" type="text" name="jobTitle" tabindex="25" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="companyName">会社名</label>
+                                        <input id="companyName" type="text" name="companyName" tabindex="26" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="email">企業メールアドレス</label>
+                                        <input id="email" type="text" tabindex="27" name="email" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <div class="intl-phone">
+                                            <label for="phone">電話番号</label>
+                                            <div class="flag-container">
+                                                <div class="selected-flag">
+                                                    <div class="iti-flag"></div>
+                                                </div>
+                                                <ul class="country-list"></ul>
+                                            </div>
+                                            <input id="phone" type="text" name="phone" tabindex="28" />
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="country">国</label>
+                                        <select name="country" id="country" tabindex="29" class="form_SelectInstruction normalSelect country_select" onchange='updateCountryData("#contactModal")'></select>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="state">都道府県</label>
+                                        <select name="state" id="state" tabindex="30" class="form_SelectInstruction normalSelect dropdownSelect"></select>
+                                    </dd>
+                                </dl>
+                                <dl class="expand checkboxContainer" id="optout" style="display:none;">
+                                    <dd>
+                                        <input id="explicitOptOutAlt" type="checkbox" class="r7-check">
+                                        <label for="explicitOptOut">今後、ラピッドセブンからのマーケティング情報を希望しない。（こちらのチェックボックスにオフにすると、私の個人情報が、ラピッドセブンのプライバシーポリシーに従って利用されること、ならびに、その情報がラピッドセブンの事業所が存在する他の国へ転送されることに同意するものとします。今後、マーケティングメールがご入力いただいたメール アドレスに配信されます。 配信設定の管理や配信登録の解除はいつでもおこなえます。） </label>
+                                    </dd>
+                                    <p class="disc">
+                                        <p><small><em><a title="プライバシーポリシー（英語）" href="../../../privacy-policy/index.html" target="_blank" rel="noopener">プライバシーポリシー（英語）</a></em></small></p>
+                                    </p>
+                                </dl>
+                                <dl class="expand" id="consultant" style="display: none;">
+                                    <input id="consultantFieldAlt" type="checkbox" class="r7-check">
+                                    <label for="consultantFieldAlt">私は、コンサルタントもしくは販売代理店です</label>
+                                </dl>
+                                <dl class="expand">
+                                    <button id="submit" class="submit button blue mdBtn" tabindex="31">送信</button>
+                                </dl>
+                                <input type="hidden" id="formName" value="ContactModal" />
+                            </fieldset>
+
+                        </form>
+                    </div>
+                    <div class="large-3 columns sidebar">
+                        <img alt="Rapid7 logo" class="logo lazy" data-src="/includes/img/logo-black.png" src="../../../includes/img/placeholder.png" />
+                        <h3>General:</h3>
+                        <p><a href="mailto:info@rapid7.com">info@rapid7.com</a></p>
+                        <h3>Sales: </h3>
+                        <p>
+                            <a href="tel:1-866-772-7497">+1&ndash;866&ndash;7&ndash;Rapid7</a><br />
+                            <a href="mailto:sales@rapid7.com">sales@rapid7.com</a>
+                        </p>
+                        <h3>Support:</h3>
+                        <p>
+                            <a href="tel:1-866-390-8113">+1&ndash;866&ndash;390&ndash;8113(toll free)</a><br />
+                            <a href="mailto:support@rapid7.com">support@rapid7.com</a>
+                        </p>
+                        <h3>Incident Response:</h3>
+                        <p><a href="tel:1-844-787-4947">1-844-RAPID-IR</a></p>
+                        <p><a href="../../../contact/index.html" class="view_more">More Contact Info</a></p>
+                    </div>
+                </div>
+            </section>
+            <button class="close-button" data-close="" aria-label="Close reveal" type="button"></button>
+        </div>
+        <!-- *************************** end sticky contact us modal *************************** -->
+</footer>
+
+
+
+
+            <!-- *************************** navigation close module *************************** -->
+        </div><!-- off-canvas-content -->
+    </div><!-- off-canvas-wrapper-inner -->
+</div><!-- off-canvas-wrapper -->
+
+
+    <!-- scripts -->
+    <!--[if lte IE 11]>
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+    <![endif]-->
+    <script src="../../../includes/js/all.mined79.js?cb=1576099002710"></script>
+    
+    
+
+    
+    <!-- end scripts -->
+
+</body>
+
+<!-- Mirrored from www.rapid7.com/ja/fundamentals/security-program-basics/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:34:42 GMT -->
+</html>

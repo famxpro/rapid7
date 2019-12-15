@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html class="no-js" lang="de" dir="ltr">
+
+<!-- Mirrored from www.rapid7.com/de/research/reports/under-the-hoodie-2019/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:18:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Under the Hoodie 2019: Das haben wir aus 180 Penetrationstests gelernt</title>
+
+
+            <meta property="og:url" content="index.html" />
+        <link rel="canonical" href="index.html"  />
+        <link rel="alternate" href="index.html" hreflang="de" />
+        <link rel="alternate" href="../../../../research/report/under-the-hoodie-2019/index.html" hreflang="en" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="title" content="Under the Hoodie 2019: Das haben wir aus 180 Penetrationstests gelernt" />
+    <meta name="description" />
+    <meta property="og:title" content="Under the Hoodie 2019: Das haben wir aus 180 Penetrationstests gelernt" />
+        <meta property="og:image" content="../../../../globalassets/rapid7-og.jpg" />
+        <meta name="twitter:image" content="../../../../globalassets/rapid7-og.jpg" />
+    <meta name="twitter:title" content="Under the Hoodie 2019: Das haben wir aus 180 Penetrationstests gelernt">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="Rapid7" />
+    <meta property="og:description" />
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+'conversionType': 'secondary',            
+        });
+    </script>
+
+    
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WBTPTVC');</script>
+    
+
+    <link rel="icon" type="image/x-icon" href="../../../../includes/img/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:800,900|Roboto:300,400,700|Noto+Sans+JP">
+    <link rel="stylesheet" href="../../../../includes/css/all.mined79.css?cb=1576099002710">
+    <script src="../../../../includes/js/jquery.min.js"></script>
+    <script src="http://js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>
+    <script src="../../../../includes/js/populateCountryState.js"></script>
+    <script src="http://information.rapid7.com/js/forms2/js/forms2.min.js"></script>
+    
+    
+
+</head>
+<body id="longFormContent" class="pg-id-15800 internal">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBTPTVC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+        <div id="gdprAlert" class="overlay" style="display:none;">
+            <div class="gdpr-modal">
+                <div>
+                    <h2>Quick Cookie Notification</h2>
+                    <p>This site uses cookies, including for analytics, personalization, and advertising purposes.  For more information or to change your cookie settings, <a href="../../../../privacy-policy/tracking-technologies/index.html" target="_blank">click here</a>.  <br /><br />If you continue to browse this site without changing your cookie settings, you agree to this use.</p>
+                    <button class="button mdBtn blue" id="gdprClose">I AGREE, LET&rsquo;S GO!</button>
+                    <hr>
+                    <p class="fineprint">View <a href="../../../../privacy-policy/tracking-technologies/index.html" target="_blank">Cookie Policy</a> for full details</p>
+                </div>
+
+            </div>
+        </div>
+
+    <div id="__"></div>
+    <!--[if lte IE 9]>
+    <div id="ie-conditional"><spa>Your IE browser is out of date - Upgrade to the latest version of IE or Chrome for an optimal website experience.</span> <a href="https://support.microsoft.com/en-us/help/17621/internet-explorer-downloads" title="Upgrade IE Now" class="button smBtn darkClear" target="_blank">Upgrade IE Now</a>
+    <button class="close-button" type="button" id="closeIEBar">
+        <img src="../includes/img/close_white.svg">
+    </button>
+    </div>
+    <![endif]-->
+
+    
+
+
+<div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <div class="off-canvas__overlay"></div>
+<div class="off-canvas position-left" id="offCanvas" data-off-canvas data-transition="overlap">
+    <!-- Menu -->
+    <div class="off-canvas__content">
+        <!-- Mobile Menu -->
+        <div class="off-canvas__menu">
+            <div class="off-canvas__top">
+                <div class="off-canvas-close" data-toggle="offCanvas" aria-expanded="false" aria-controls="offCanvas"></div>
+                <div class="menuLabel">Main Menu</div>
+                <div id="btnMobileSearch" class="off-canvas-search"></div>
+            </div>
+                <ul class="vertical menu" data-accordion-menu data-multi-open="false">
+
+                    <li>
+                        <a href="../../../products/index.html">
+                            <div class="menu__title">Produkte<span></span></div>
+                        </a>
+                        <ul class="menu vertical nested">
+                                            <li>
+                    <a href="../../../products/insightvm/index.html">
+                        <p class="navTitle">InsightVM</p>
+                        Schwachstellen-Management
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../products/insightidr/index.html">
+                        <p class="navTitle">InsightIDR</p>
+                        User Behavior Analytics &amp; SIEM
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../products/insightappsec/index.html">
+                        <p class="navTitle">InsightAppSec</p>
+                        Application Security
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../products/insightconnect/index.html">
+                        <p class="navTitle">InsightConnect</p>
+                        Orchestration &amp; Automation
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../products/insightops/index.html">
+                        <p class="navTitle">InsightOps</p>
+                        Log-Management
+                    </a>
+                </li>
+
+                                            <li>
+                    <a href="../../../products/metasploit/index.html">
+                        <p class="navTitle">Metasploit</p>
+                        Penetration-Testing
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../products/appspider/index.html">
+                        <p class="navTitle">AppSpider</p>
+                        Anwendungssicherheit On-Premise
+                    </a>
+                </li>
+
+                        </ul>
+                    </li>
+                                        <li>
+
+                            <a href="#">
+                                <div class="menu__title">Services<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../../services/security-consulting/index.html">
+                                            <p class="navTitle">Security Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/product-consulting/index.html">
+                                            <p class="navTitle">Product Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/managed-services/index.html">
+                                            <p class="navTitle">Managed Services</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/training-certification/index.html">
+                                            <p class="navTitle">Training &amp; Certification</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/support-and-customer-success/index.html">
+                                            <p class="navTitle">Support &amp; CSM</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="#">
+                                <div class="menu__title">Partner<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../../partners/sales-partners/index.html">
+                                            <p class="navTitle">Vertrieb-Partner</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../partners/technology-partners/index.html">
+                                            <p class="navTitle">Technologie-Partner</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../partners/index.html">
+                                            <p class="navTitle">Einen Partner finden</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="../../index.html">
+                                <div class="menu__title">Forschung</div>
+                            </a>
+
+
+                    </li>
+
+                </ul>
+
+                <ul class="vertical menu sideUtilityLinks">
+                        <li><a href="https://blog.rapid7.com/">Blog</a></li>
+                        <li><a href="../../../contact/index.html">Kontakt</a></li>
+                        <li><a href="https://help.rapid7.com/">Hilfe</a></li>
+                </ul>
+
+            <div class="menu__cta">
+                <a href="../../../../try/insight/index.html" class="button smBtn blue">Free Trial</a>
+            </div>
+        </div>
+
+        <!-- Mobile Search -->
+        <div class="off-canvas__search">
+            <div id="btnCloseMobileSearch" class="off-canvas-close"></div>
+            <div class="searchContainer">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                    <span class="sb-icon-search"></span>
+                </form>
+                <div class="search-links">
+                    <header>Helpful Links</header>
+                            <a href="https://help.rapid7.com/">Produkt-Support</a>
+                            <a href="../../../pricing/index.html">Product Pricing</a>
+                            <a href="../../../resources/index.html">Ressourcen</a>
+                            <a href="../../../about/events-webcasts/index.html">Events &amp; Webcasts</a>
+                            <a href="../../../services/training-certification/index.html">Training &amp; Zertifizierung</a>
+                            <a href="../../../about/news/index.html">News &amp; Pressemitteilungen</a>
+                            <a href="../../../about/index.html">&#220;ber Rapid7</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- end .off-canvas -->
+
+
+        <div class="off-canvas-content" data-off-canvas-content>
+            <div id="menuOverlay" class="reveal-overlay"></div>
+
+                <section class="longHero" style=background-image:url(../../../../globalassets/_images/hero-images/background-herosm-uth.jpg)>
+
+                    
+
+    <!-- nav -->
+    <div class="utility row">
+
+        <!-- nav toggle (mobile only) -->
+        <button type="button" class="button hamburger hamClosed" data-toggle="offCanvas" aria-expanded="false" aria-controls="offCanvas">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- main nav links -->
+        <div class="nav__main">
+
+            <div class="nav__main-top">
+                <a href="../../../index.html" class="nav__main-logo">
+                    <img src="../../../../includes/img/Rapid7_logo.svg" alt="Rapid7 logo">
+                </a>
+                    <div class="top-bar">
+                        <ul class="dropdown menu nav__main-links" data-dropdown-menu data-disable-hover="true" data-click-open="true">
+                                    <li class="megamenu">
+                                        <a data-toggle="megamenu-Produkte" href="#">Produkte</a>
+
+                                        <div class="dropdown-pane megamenu__wrapper" id="megamenu-Produkte" data-dropdown data-disable-hover="true" data-click-open="true" data-options="closeOnClick:true;">
+                                            <div class="row collapse megamenu__content">
+                                                <div class="megamenu__info">
+                                                    <div class="megamenu__header">Rapid7 Insight-Cloud</div>
+<p>Rapid7 Insight erm&ouml;glicht den SecOps-Ansatz, indem Ihre Teams die Transparenz, Analytics und Automatisierung bekommen, die sie brauchen, um effizienter zusammen zu arbeiten.</p>
+<p><a href="../../../../products/insight-platform/index.html">Insight-Cloud &Uuml;bersicht</a> <a class="button xsmBtn blue" href="../../../../try/insight/index.html">Jetzt testen</a></p>
+                                                </div>
+                                                <div class="megamenu__items">
+                                                    <div class="megamenu__items-main">
+                                                        <div class="megamenu__items-left megamenu__items-cols-two">
+                                                                <div class="megamenu__subheader">Insight-Produkte</div>
+                                                            <div class="megamenu__items-col">
+                                                                                <div class="megamenu__item">
+                    <a href="../../../products/insightvm/index.html" target="">
+                        <div class="megamenu__item-title">InsightVM</div>
+                        <p>Schwachstellen-Management</p>
+                    </a>
+                    <a href="../../../products/insightvm/download/index.html" target=" ">Kostenlos testen</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../../products/insightidr/index.html" target="">
+                        <div class="megamenu__item-title">InsightIDR</div>
+                        <p>User Behavior Analytics &amp; SIEM</p>
+                    </a>
+                    <a href="../../../try/insightidr/index.html" target=" ">Kostenlos testen</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../../products/insightappsec/index.html" target="">
+                        <div class="megamenu__item-title">InsightAppSec</div>
+                        <p>Application Security</p>
+                    </a>
+                    <a href="../../../products/insightappsec/try/index.html" target=" ">Kostenlos testen</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../../products/insightconnect/index.html" target="">
+                        <div class="megamenu__item-title">InsightConnect</div>
+                        <p>Orchestration &amp; Automation</p>
+                    </a>
+                    <a href="../../../info/insightconnect-contact/index.html" target=" ">Demo anfordern</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../../products/insightops/index.html" target="">
+                        <div class="megamenu__item-title">InsightOps</div>
+                        <p>Log-Management</p>
+                    </a>
+                    <a href="../../../products/insightops/try/index.html" target=" ">Kostenlos testen</a>
+                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="megamenu__items-right">
+                                                                            <div class="megamenu__item">
+                    <a href="../../../products/metasploit/index.html" target="">
+                        <div class="megamenu__item-title">Metasploit</div>
+                        <p>Penetration-Testing</p>
+                    </a>
+                    <a href="../../../products/metasploit/download/index.html" target=" ">Kostenlos testen</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../../products/appspider/index.html" target="">
+                        <div class="megamenu__item-title">AppSpider</div>
+                        <p>Anwendungssicherheit On-Premise</p>
+                    </a>
+                    <a href="../../../products/appspider/download/index.html" target=" ">Kostenlos testen</a>
+                </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="megamenu__items-links">
+                                                        <a href="../../../products/index.html">View All Produkte</a> &nbsp;
+                                                            <span> &vert; &nbsp; <a href="../../../solutions/index.html">Kostenlos testen</a></span>
+                                                    </div>
+                                                </div>
+                                                <div class=" megamenu__search searchContainer">
+                                                    <form action="https://www.rapid7.com/search/">
+                                                        <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                                                        <input class="sb-search-submit" type="submit" value="">
+                                                        <span class="sb-icon-search"></span>
+                                                    </form>
+                                                    <div class="search-links">
+                                                        <div class="megamenu__subheader">Helpful Links</div>
+                                                                <a href="https://help.rapid7.com/">Produkt-Support</a>
+                                                                <a href="../../../pricing/index.html">Product Pricing</a>
+                                                                <a href="../../../resources/index.html">Ressourcen</a>
+                                                                <a href="../../../about/events-webcasts/index.html">Events &amp; Webcasts</a>
+                                                                <a href="../../../services/training-certification/index.html">Training &amp; Zertifizierung</a>
+                                                                <a href="../../../about/news/index.html">News &amp; Pressemitteilungen</a>
+                                                                <a href="../../../about/index.html">&#220;ber Rapid7</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="#">Services</a>
+                                            <ul class="menu vertical">
+                                                    <li><a href="../../../services/security-consulting/index.html">Security Consulting</a></li>
+                                                    <li><a href="../../../services/product-consulting/index.html">Product Consulting</a></li>
+                                                    <li><a href="../../../services/managed-services/index.html">Managed Services</a></li>
+                                                    <li><a href="../../../services/training-certification/index.html">Training &amp; Certification</a></li>
+                                                    <li><a href="../../../services/support-and-customer-success/index.html">Support &amp; CSM</a></li>
+                                            </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">Partner</a>
+                                            <ul class="menu vertical">
+                                                    <li><a href="../../../partners/sales-partners/index.html">Vertrieb-Partner</a></li>
+                                                    <li><a href="../../../partners/technology-partners/index.html">Technologie-Partner</a></li>
+                                                    <li><a href="../../../partners/index.html">Einen Partner finden</a></li>
+                                            </ul>
+                                    </li>
+                                    <li>
+                                        <a href="../../index.html">Forschung</a>
+                                    </li>
+                        </ul>
+                    </div>
+
+            </div>
+
+            <!-- breadcrumbs -->
+    <div class="row expanded">
+        <div class="medium-12 columns">
+            <ul class="breadcrumbs">
+                <li><a href="../../../index.html">Home</a></li>
+                            <li><a href="../../index.html">Research</a></li>
+
+            </ul>
+        </div>
+    </div>
+
+
+
+        </div>
+
+        <div class="nav__utility">
+            <!-- utility links -->
+            <div id="utilityLinks" class="nav__utility-links hide-for-small-only" data-auth="false">
+                    <div class="tooltip white">
+                        <span class="close"></span>
+                        We detected that you're visiting from an English speaking region. Click here to visit our English site.
+                    </div>
+
+                <ul class="dropdown menu" data-dropdown-menu data-disable-hover="true" data-click-open="true">
+                    <li class="language-toggle has-menu">
+                        <a href="#" class="text-uppercase">de</a>
+                        <ul class="menu">
+                                <li >
+                                    <a href="../../../../research/report/under-the-hoodie-2019/index.html">English</a>
+                                </li>
+                                <li class=selected>
+                                    <a href="#">Deutsch</a>
+                                </li>
+                                <li >
+                                    <a href="../../../../ja/research/report/under-the-hoodie-2019/index.html">日本語</a>
+                                </li>
+                        </ul>
+                    </li>
+                            <li >
+                                <a href="https://blog.rapid7.com/">Blog</a>
+                            </li>
+                            <li >
+                                <a href="../../../contact/index.html">Kontakt</a>
+                            </li>
+                            <li >
+                                <a href="https://help.rapid7.com/">Hilfe</a>
+                            </li>
+                                            <li>
+                            <a id="utilitySignin" href="https://insight.rapid7.com/saml/SSO?fromURI=https%3a%2f%2fwww.rapid7.com%2fde%2fresearch%2freports%2funder-the-hoodie-2019%2f" class="notlogged">Sign In</a>
+                        </li>
+                </ul>
+            </div>
+            <!-- utility user -->
+            <div class="nav__utility-trial" data-auth="false">
+                    <a href="../../../try/insight/index.html" target="_blank">
+                        <span id="trialCta" class="button blue mdBtn cta">Jetzt testen</span>
+                    </a>
+            </div>
+        </div>
+
+    </div><!-- utility -->
+
+
+                    <div class="overlayText">
+                        <div class="row">
+                            <div class="longHero__content medium-10 medium-offset-1 large-8 large-offset-2 columns">
+
+                                <h1>
+                                    Under the Hoodie 2019
+                                </h1>
+                                    <h2 class="subtitle">
+                                        Von Rapid7 Global Consulting
+                                    </h2>
+                                
+                                
+                            </div>
+                            
+
+                        </div>
+                    </div>
+
+                    
+                </section>
+            
+
+
+
+<!-- Page Content -->
+<div class="pageContent">
+    
+
+<div data-sticky-container>
+    <div class="sticky-nav" id="stickyNav" data-sticky data-options="marginTop:0;" style="width:100%" data-top-anchor="stickyTrigger:top" data-sticky-on="small">
+        <div class="sticky-nav__main">
+            <a href="../../../../index.html" class="sticky-nav__logo">
+                <img alt="Rapid7 logo" class="lazy" data-src="/includes/img/Rapid7_logo.svg" src="../../../../includes/img/placeholder.png" />
+            </a>
+            <div class="sticky-nav__title show-for-medium">
+                    <a href="#__" class="smooth">Under the Hoodie 2019</a>
+            </div>
+                    <div class="sticky-nav__share hide-for-medium">
+                        <a href="#" class="sticky-nav__share-title">
+                            <img alt="Share" class="lazy" data-src="/includes/img/icon-share.svg" src="../../../../includes/img/placeholder.png" />
+                        </a>
+                    </div>
+                <div class="sticky-nav__share sticky-nav__share--options">
+                        <span class="sticky-nav__share-title">
+                            Share:
+                        </span>
+                    <ul>
+                            <li>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.rapid7.com%2fde%2fresearch%2freports%2funder-the-hoodie-2019%2f&amp;title=Under+the+Hoodie+2019" onclick="window.open(this.href, 'linkedin-share', 'width=520,height=570');return false;">
+                                    <img class="lazy" data-src="/includes/img/linkedin-white.svg" src="../../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/intent/tweet?text=Under+the+Hoodie+2019&amp;url=https%3a%2f%2fwww.rapid7.com%2fde%2fresearch%2freports%2funder-the-hoodie-2019%2f" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                                    <img class="lazy" data-src="/includes/img/twitter-white.svg" src="../../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.rapid7.com%2fde%2fresearch%2freports%2funder-the-hoodie-2019%2f" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                                    <img class="lazy" data-src="/includes/img/facebook-white.svg" src="../../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../../../../globalassets/_pdfs/research/rapid7-under-the-hoodie-2019-research-report.pdf" target="_blank">
+                                    <img class="lazy" data-src="/includes/img/download-white.svg" src="../../../../includes/img/placeholder.png" />
+                                </a>
+                             </li>
+                        
+                    </ul>
+                </div>
+ 
+            <div class="sticky-nav__cta">
+                <a href="../../../../globalassets/_pdfs/research/rapid7-under-the-hoodie-2019-research-report.pdf">
+                    <button class="blue button">
+                        Report herunterladen
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="stickyTrigger"></div>
+    <!-- Main Section -->
+    <div class="row expanded">
+
+        <!-- Sticky SideNav Menu -->
+        <div class="medium-3 columns hide-for-small-only longFormToc" data-sticky-container id="stickySideNav">
+            <nav class="sticky" data-sticky data-sticky-on="medium" data-top-anchor="longFormContentMenu:top" data-margin-bottom="10" data-btm-anchor="longFormContentMenu:bottom">
+                <div class="title">Contents</div>
+                <ul class="vertical menu" data-magellan>
+                    <li><a href="#introduction">Introduction</a></li>
+                                    <li>
+                    <a href="#Umfang-der-Penetrationstests">Umfang der Penetrationstests</a>
+                </li>
+                <li>
+                    <a href="#Entdeckte-Schwachstellen">Entdeckte Schwachstellen</a>
+                </li>
+                <li>
+                    <a href="#Social-Engineering">Social Engineering</a>
+                </li>
+                <li>
+                    <a href="#Incident-Detection-and-Response">Incident Detection and Response</a>
+                </li>
+                <li>
+                    <a href="#Erbeutung-von-Zugangsdaten">Erbeutung von Zugangsdaten</a>
+                </li>
+                <li>
+                    <a href="#Verteidigung-gegen-diese-dunklen-Knste">Verteidigung gegen diese dunklen K&#252;nste</a>
+                </li>
+                <li>
+                    <a href="#Anhang">Anhang</a>
+                </li>
+                <li>
+                    <a href="#ber-Rapid7-Global-Consulting">&#220;ber Rapid7 Global Consulting</a>
+                </li>
+                <li>
+                    <a href="#ber-Rapid7">&#220;ber Rapid7</a>
+                </li>
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Content Section -->
+        <div class="medium-9 columns no-gutter" id="longFormContentMenu">
+            <section class="longFormBackground" id="introduction" data-magellan-target="introduction">
+                <div class="row">
+                    <div class="small-10 small-offset-1 columns introStandard sectionContainerOuter">
+                        <div class="sectionContent">
+
+                                    <div class="sectionContainerInner">
+                                        <div class="headerOffset"></div>
+                                        <h3 class="introTitle">Introduction</h3>
+                                        <p>Es ist Sommer 2019! <a href="#f1" name="f1"><sup>[1]</sup></a> Und das bedeutet: Es ist wieder einmal Zeit f&uuml;r Rapid7s &bdquo;Under the Hoodie&ldquo;, unsere j&auml;hrlich erscheinende statistische Untersuchung zur Kunst des Penetrationstestens. Penetrationstests fristen im Bereich der Informationssicherheit nach wie vor ein relatives Nischendasein. Selbst die am st&auml;rksten ausgelasteten Tester f&uuml;hren pro Jahr selten mehr als 20 Auftr&auml;ge aus, deren Ergebnisse fast immer geheim bleiben und durch strenge Vertraulichkeitsvereinbarungen gesichert sind. Entsprechend schwierig gestaltet es sich h&auml;ufig f&uuml;r den einzelnen Interessierten, einen allgemeinen Querschnitt der Penetrationstest-Branche zu erhalten. Dieser j&auml;hrliche Bericht, der nun bereits zum dritten Mal erscheint, stellt einen Teil der Bem&uuml;hungen von Rapid7 dar, die Inhalte eines typischen Penetrationstests klar darzustellen und Kunden wie Testern einen &Uuml;berblick dar&uuml;ber zu geben, was sie im Verlauf eines Einsatzes erwartet.</p>
+<p>Von Mitte September 2018 bis Ende Mai 2019 haben wir &uuml;ber einen Zeitraum von neun Monaten die Daten von 180 Penetrationstests gesammelt. Seit unserem letzten Bericht haben wir eine brandneue Umfrage mit 94 Fragen erstellt, die den Penetrationstestern erm&ouml;glicht, rasch qualitativ hochwertige Daten zu sammeln. Diese Umfrage, die in Anhang B n&auml;her beschrieben wird, behandelt nicht nur die &uuml;bliche interne und externe Analyse des Netzwerks, sondern auch physisches Eindringen, pers&ouml;nliche und elektronische Social-Engineering-Techniken und Source Code Analysen jenseits des Entwicklungskontextes. Zu den wichtigsten Ergebnissen geh&ouml;ren folgende Punkte:</p>
+<ul>
+<li>Bei den meisten Auftr&auml;gen (96 %), die entweder eine Netzwerk- oder eine Anwendungsanalyse umfassten, kam mindestens eine Schwachstelle zutage, die Angreifer ausnutzen konnten. Wir fanden uns dadurch in unserer Ansicht best&auml;tigt, dass Penetrationstests ein wesentlicher Bestandteil einer ganzheitlichen Schwachstellenmanagement-Strategie sind.</li>
+<li>Passwortmanagement stellt selbst f&uuml;r die technisch ausgereiftesten IT-Sicherheitsorganisationen eine Herausforderung dar. Bei fast drei Vierteln (72 %) der Auftr&auml;ge, die das Erbeuten von Zugangsdaten beinhalteten, wurde mindestens ein Passwort offengelegt. Davon waren 60 % leicht zu erratende Passw&ouml;rter, f&uuml;r die der Penetrationstester Password Spraying mit generischen Passw&ouml;rtern, bekannten Standardpassw&ouml;rtern und leicht zu erratenden firmenspezifischen Passw&ouml;rtern durchf&uuml;hrte.</li>
+<li>Doch es gibt auch Grund f&uuml;r Optimismus. Grundlegende Netzwerksegmentierung zwischen &bdquo;internen&rdquo; und &bdquo;externen&rdquo; Netzwerken scheinen allgemein Wirkung zu zeigen, besonders angesichts des fortw&auml;hrenden Umzugs extern zug&auml;nglicher Ressourcen in die Cloud. Studienteilnehmer, die einen externen Angriff ausf&uuml;hrten, konnten nur in 21 % aller F&auml;lle ins interne LAN eindringen. Speziell gegen Webanwendungen gerichtete Angriffe endeten fast nie (weniger als 3 % aller F&auml;lle) in einer Gef&auml;hrdung des ganzen Standortes. Die meisten Webanwendungen (&uuml;ber 70 %) wurden nicht im Rechenzentrum des Kunden gehostet. Dadurch wird dem Angreifer der Weg &uuml;ber eine kompromittierte Webanwendung erheblich erschwert.</li>
+</ul>
+<p>Mit diesen Kernaussagen im Hinterkopf wird sich der Rest dieses Berichts mit der Untersuchung der Daten befassen, die wir in unserer j&uuml;ngsten Testsaison sammeln konnten. Zudem werden darin auf realen Erfahrungen basierende Beispielf&auml;lle wiedergegeben. Unser Ziel ist es, dass Sie nach dem Durchlesen dieses Berichts ein grundlegendes Verst&auml;ndnis daf&uuml;r gewonnen haben, wie Penetrationstester Organisationen bei der Identifizierung ihrer spezifischen und allgemeinen IT-Risiken unterst&uuml;tzen k&ouml;nnen. <span id="_ftn1">&nbsp;</span></p>
+<p>___________________________________________</p>
+<p>[1] <em>Wenn Sie einen unangenehmen Stich versp&uuml;rt haben, als Sie im Einleitungssatz Ihr Passwort &bdquo;Sommer2019!&ldquo; gelesen haben, wird es Zeit, Ihre Algorithmen f&uuml;r die Passwortauswahl zu &auml;ndern.</em></p>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="headerOffset" data-magellan-target="Umfang-der-Penetrationstests" id="Umfang-der-Penetrationstests"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Umfang der Penetrationstests</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">Leserinnen und Leser unserer vergangenen Berichte werden sich erinnern, dass wir fr&uuml;her unsere Auftragsrahmen in zwei gro&szlig;e Bereiche unterteilt haben:</p>
+<ol class="ol1">
+<li class="li2">Externe Analysen, bei denen der Penetrationstester im Internet beginnt und die Webanwendungen, VPN- und Datei- Server und sonstige aus dem Internet erreichbare Systeme des Kunden ins Visier nimmt</li>
+<li class="li3">Interne Analysen, bei denen der Tester sich haupts&auml;chlich auf Dinge wie Windows-Active-Directory-Dom&auml;nen, Drucker und IoT-Integrationen sowie sonstige IT-Infrastruktur konzentriert, die (&uuml;blicherweise) keinen Kontakt zum Internet hat</li>
+</ol>
+<p class="p1">Obwohl diese grobe Unterteilung wichtig ist, haben wir unsere Studie 2019 so strukturiert, dass gemischte Szenarien ber&uuml;cksich- tigt werden, die die (haupts&auml;chlich imagin&auml;re) Grenze zwischen &bdquo;Innen&ldquo; und &bdquo;Au&szlig;en&ldquo; &uuml;berschreiten. Dies schlie&szlig;t beispielsweise elektronisches und physisches Social Engineering, Red-Team-&Uuml;bungen mit einem aktiven Verteidiger, Webanwendungen, die in der Cloud gehostet werden, sowie Code Review f&uuml;r Mobilanwendungen, die auf kunden- oder mitarbeitereigenen Mobilger&auml;ten installiert werden, mit ein. Abbildung 1 schl&uuml;sselt diese allgemeinen &Uuml;berlegungen zum Rahmen der durchgef&uuml;hrten und erfassten Tests auf.</p>
+<p class="p1"><img src="../../../../contentassets/ac7ec77df7434eeebec8da36d6a76426/figure-1.jpg" alt="Abbildung 1: Ausgef&uuml;hrte Penetrationstestauftr&auml;ge" width="925" height="630" /></p>
+<p class="p1">Wie wir hier erkennen k&ouml;nnen, ist der traditionelle externe Angriff, bei dem der Kunde Schwachstellen und Risikobereiche aufdecken m&ouml;chte, die mit dem Internet im Allgemeinen in Verbindung stehen, die popul&auml;rste Wahl im Hinblick auf den Testrahmen. Solche Tests machten rund 40 % der erfassten Auftr&auml;ge aus. Das macht Sinn, weil die meisten Kunden sich Sorgen um externe T&auml;ter machen &ndash; kriminelle Hacker, die noch keinen Zugang zum internen Netzwerk haben und nach wirksamen Mitteln suchen, ihr illegales Vorhaben umzusetzen.</p>
+<p class="p1">Allerdings stellen wir auch das dritte Jahr in Folge fest, dass der Abstand zwischen der Anzahl interner und externer Analysen kleiner wird. Betrachten wir die Kundenbasis von Rapid7, konzentrierten sich 36 % unserer Auftr&auml;ge prim&auml;r auf interne Netzwerkkomponenten. Damit liegt dieser Bereich nur sechs Prozentpunkte hinter den externen Komponenten. Social-Engineering- und Code Review-Auftr&auml;ge hinzugenommen liegt der Anteil der von dieser Studie erfassten Auftr&auml;ge, deren Testrahmen nicht nur auf &bdquo;externe&ldquo; Bedrohungen aus dem Internet abzielt, sogar bei 45 %. Uns als Sicherheitsverfechtern wird angesichts dieser Zahlen ganz warm ums Herz, da sie darauf hindeuten, dass umfassenderer Schutz wirklich ernst genommen wird. Kunden wird zunehmend klar, dass die Grenze zwischen Innen und Au&szlig;en ziemlich verschwommen ist. Diese Kunden zeigen gro&szlig;es Interesse daran, die Effektivit&auml;t ihrer internen Netzwerksicherheitstechnologien zu messen &ndash; von Incident Detection and Response (IDR) und User Behavior Analytics (UBA) bis hin zu wesentlichen Netzwerksicherheitsma&szlig;nahmen wie Benutzerrechtetrennung und Netzwerksegmentierung.</p>
+<h2 class="p1">Erw&auml;gungen zum Zeitaufwand</h2>
+<p class="p1">Der andere Faktor neben dem Testrahmen, den Penetrationstester ber&uuml;cksichtigen m&uuml;ssen, ist die vorgesehene Dauer ihrer T&auml;tigkeit f&uuml;r den Kunden. Im Verlauf des Jahres konnten wir eine Entwicklung beobachten: Die durchschnittliche Anzahl der Arbeitsstunden stieg sowohl f&uuml;r interne als auch externe Analysen auf rund zwei Wochen (oder 80 Stunden) an. Einige bemerkenswerte Sonderf&auml;lle lagen sogar bei mehreren hundert Stunden.</p>
+<p class="p1"><img src="../../../../contentassets/ac7ec77df7434eeebec8da36d6a76426/figure-2.jpg" alt="Abbildung 2: Arbeitsstunden nach Auftragsart" width="1200" height="538" /></p>
+<p class="p1">Man kann nat&uuml;rlich das Argument anbringen, dass die automatisierten Angriffe, die wir regelm&auml;&szlig;ig im Internet beobachten k&ouml;nnen, keine Zeitlimits haben. Sie laufen kontinuierlich und opportunistisch ab, was sich nicht sehr gut mit dem Vertrags- modell der Penetrationstests vereinbaren l&auml;sst. Allerdings gibt es bei dieser Art von Angriffen schon praktisch der Definition nach keine fokussierte Sondierungs- und Planungsphase. Entweder funktionieren sie oder sie funktionieren nicht, und den Angreifer k&uuml;mmert es nicht besonders, welche Ziele verwundbar sind.</p>
+<p class="p1">Allerdings werden Penetrationstests auch nicht daf&uuml;r eingesetzt, um die Abwehr gegen solche automatisierten Attacken zu untersuchen. Vielmehr lassen automatisierte Angriffe sich in der Regel ziemlich effektiv durch automatisierte Verteidigungsmecha-nismen wie routinem&auml;&szlig;iges Schwachstellenmanagement (Vulnerability Management, VM) und Asset-Management-Scans abwehren. Stattdessen sind Penetrationstests eher dazu gedacht, herauszufinden, welche IT-Komponenten nicht bereits hinreichend durch automatisierte L&ouml;sungen gesch&uuml;tzt sind. Zu diesem Zweck widmet der Penetrationstester in der Regel einen gro&szlig;en Teil seiner Zeit umfangreichen Sondierungs- und Planungst&auml;tigkeiten, um mehr mit den ernsthafteren Bedrohungen gemein zu haben, mit denen sich Organisationen und Firmen heutzutage konfrontiert sehen. Abbildung 3 zeigt, aufgegliedert nach Testrahmen, den Prozentanteil der Vertragszeit, die f&uuml;r die Planung vor einem Angriff aufgewendet wird.</p>
+<p class="p1"><img src="../../../../contentassets/ac7ec77df7434eeebec8da36d6a76426/figure-3.jpg" alt="Abbildung 3: F&uuml;r Planung und Sondierung aufgewendete Auftragszeit (Der gezeigte Datensatz betrifft nur die Auftr&auml;ge, bei denen Details zur aufgewendeten Zeit angegeben wurden (n = 42))" width="1200" height="369" /></p>
+<p class="p1">Wenig &uuml;berraschend wird bei Red-Team-&Uuml;bungen, wo eine echte Angriffssituation m&ouml;glichst genau simuliert wird, in der Regel die meiste Zeit mit der Sondierung verbracht, dicht gefolgt von reinen Social-Engineering-Auftr&auml;gen. Es erfordert Zeit, ein Profil des Ziels zu erstellen und solide Szenarien zu entwickeln, die durch glaubw&uuml;rdige Identit&auml;ten untermauert werden. Selbst traditionelle interne und externe Netzwerkanalysen erfordern einige Nachforschungen, um die Dom&auml;nen, Netzwerkadressbereiche und Technologie-Stacks, die der Kunde verwendet, zu finden und sich ein Bild davon zu verschaffen.</p>
+<p class="p1">Letztendlich wird bei Penetrationstests nicht einfach nur eine Bedrohung ins Visier genommen und unmittelbar bek&auml;mpft. F&uuml;r derlei Aufgaben eignet sich automatisiertes Schwachstellen-Management viel besser. Organisationen, die eine Analyse durch Penetrationstests planen, sind gut beraten, zun&auml;chst ihr Schwachstellen-Management weitestgehend in den Griff zu bekommen, bevor sie die komplexen und spezialisierten Dienste von Penetrationstestern in Anspruch nehmen.</p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Entdeckte-Schwachstellen" id="Entdeckte-Schwachstellen"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Entdeckte Schwachstellen</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">In der Welt des Schwachstellenmanagements erfolgt die Einordnung von Schwachstellen in der Regel anhand von drei Mess-achsen, die betrachten, was von einer Ausnutzung der konkreten Schwachstelle betroffen w&auml;re: Vertraulichkeit (Confidentiality), Integrit&auml;t (Integrity) und Verf&uuml;gbarkeit (Availability). Zusammen werden diese drei Werte als &bdquo;CIA-Triade&ldquo; bezeichnet.<a href="#f2"><sup>[2]</sup></a></p>
+<h2 class="p1"><strong>Die CIA-Triade</strong></h2>
+<p class="p1">Penetrationstester interessieren sich haupts&auml;chlich f&uuml;r Schwachstellen, bei denen die Integrit&auml;t betroffen ist. Ihre erfolgreiche Ausnutzung bedeutet, das der Angreifer ein gewisses Ma&szlig; an Kontrolle &uuml;ber die verwundbare Anwendung oder Komponente erh&auml;lt. Dadurch er&ouml;ffnen sich dem Angreifer zahlreiche Optionen: Er kann das kompromittierte System f&uuml;r dauerhaften Zugang nutzen, sich als einer der rechtm&auml;&szlig;igen Benutzer mit den entsprechenden Zugriffsrechten ausgeben oder vom betroffenen System gespeicherte, empfangene oder &uuml;bertragene vertrauliche Daten stehlen. Wenn Penetrationstester den Begriff &bdquo;Remote Root&ldquo; verwenden, dann bezeichnen sie damit einen Angriff, der die Integrit&auml;t des zugrunde liegenden Betriebssystems eines anvisierten Services vollst&auml;ndig kompromittiert.</p>
+<p class="p1">Andererseits geben speziell die Vertraulichkeit betreffende Schwachstellen dem Angreifer Zugriff auf ansonsten private Daten, aber keine volle, direkte Kontrolle &uuml;ber das System an sich. Derartige Schwachstellen sind f&uuml;r einen Angreifer definitiv sehr wertvoll, da vertrauliche Daten Dinge wie Passw&ouml;rter, Passwort-Hashes oder Sitzungstokens enthalten k&ouml;nnen, die ihrerseits verwendet werden k&ouml;nnen, um direkten Zugriff auf Systeme oder Anwendungen zu erhalten. Vertraulichkeitsschwachstellen k&ouml;nnen auch subtilere Probleme mit sich bringen, beispielsweise die M&ouml;glichkeit, Daten w&auml;hrend der &Uuml;bertragung abzufangen oder zu ver&auml;ndern. In den meisten F&auml;llen muss jedoch einiges an Arbeit investiert werden, damit aus einem Vertraulichkeits-problem ein Integrit&auml;tsproblem wird. Es handelt sich also nicht um einen direkten Remote-Root-Angriff. Andere Problemf&auml;lle aus dieser Kategorie setzen voraus, dass der Angreifer sich bereits in einer privilegierten Position im Netzwerk befindet, um es nutzen zu k&ouml;nnen. Das ist beispielsweise bei den meisten kryptographischen Schwachstellen der Fall, die die Vertraulichkeit beeintr&auml;chtigen.</p>
+<p class="p1">Das dritte Element der CIA-Triade, Verf&uuml;gbarkeit, bewegt sich f&uuml;r Penetrationstester in aller Regel ganz ausdr&uuml;cklich au&szlig;erhalb ihres Rahmens. Nur die allerwenigsten Organisationen m&ouml;chten gezielt Produktivit&auml;tsausf&auml;lle herbeif&uuml;hren, selbst im Rahmen eines Testszenarios. Denial-of-Service (DoS)-Attacken, egal ob Distributed oder anderer Art, sind sicherlich Bestandteil des Arsenals krimineller Angreifer, doch die meisten Ransomware-Angriffe nutzen heutzutage Integrit&auml;tsprobleme aus, um DoS zu verursachen. Sie nutzen zun&auml;chst Integrit&auml;tsschwachstellen aus, um sich Zugang zum System zu verschaffen. Diesen verwen-den sie dann, um den Speicher des Systems zu verschl&uuml;sseln und eine L&ouml;segeldforderung zu hinterlassen. Eine nennenswerte Ausnahme bilden hier so genannte &bdquo;Booter and Stressor&ldquo;-Aktivit&auml;ten. Bei dieser kriminellen Strategie wird das Netzwerk des Ziels regelm&auml;&szlig;ig mit unerw&uuml;nschtem Datenverkehr &uuml;berflutet und angeboten, dies f&uuml;r einen gewissen Preis zu unterlassen. Penetrationstester simulieren diese Art Angriff allerdings tendenziell nicht, da das Risiko f&uuml;r angrenzende und vorgelagerte Netzwerke sehr hoch ist.</p>
+<p class="p1">Abbildung 4 zeigt anhand dieser Klassifizierung die bei allen Auftragsarten gefundenen Schwachstellen:</p>
+<p class="p1"><img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/figure-4.png" alt="Abbildung 4: Schwachstellen nach Angriffsart (L&auml;nge der vertikalen Balken entspricht proportional der H&auml;ufigkeit.)" width="950" height="752" /></p>
+<p class="p1"><a id="f2"></a>___________________________________________</p>
+<p class="p1">[2]&nbsp;<em>Die genauen Urspr&uuml;nge der CIA-Triade sind unklar, doch Texte zur Informationssicherheit, in denen der Begriff auftaucht, reichen mindestens bis in die 1990er zur&uuml;ck. Wenn Sie weiterf&uuml;hrende Informationen zur Suche nach den etymologischen Urspr&uuml;ngen und der erstmaligen Verwendung dieses Begriffs beitragen k&ouml;nnen, w&auml;ren wir Ihnen sehr dankbar!</em></p>
+<h2 class="p1">Netzwerk-Schwachstellen</h2>
+<p class="p1">Bei 96 % aller erfassten internen und externen Netzwerk- und Code Review-Auftr&auml;ge meldeten die Penetrationstester mindes-tens eine Schwachstelle. Doch nicht jede Schwachstelle ist gleich. Unter Ber&uuml;cksichtigung des CIA-Triaden-Modells konnten wir feststellen, dass es sich bei den von Penetrationstestern in externen Netzwerken aufgedeckten Schwachstellen tendenziell um Vertraulichkeitsschwachstellen wie schwache Verschl&uuml;sselungsstandards oder User-Enumeration-Probleme handelt. Der Gro&szlig;teil der Integrit&auml;tsschwachstellen hingegen wird nur bei internen Netzwerkanalysen gefunden und ausgenutzt.</p>
+<h3 class="p1">Externe Netzwerk-Schwachstellen</h3>
+<p class="p1">Abbildung 5 schl&uuml;sselt die Arten der Schwachstellen auf, die im von uns untersuchten Zeitraum bei externen Analysen gefunden wurden.</p>
+<p class="p1"><img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imagehxq6f.png" alt="Abbildung 5: Externe Angriffe: Gefundene Schwachstellen (Die angegebene Anzahl zeigt die Gesamtzahl der gefundenen Schwachstellen. Der Prozentsatz zeigt Anteil an der Gesamtzahl der Schwachstellen.)" width="1000" height="490" /></p>
+<p class="p1">Die bei weitem am h&auml;ufigsten gemeldete Schwachstelle war &ldquo;Weak Transport Layer Security (TLS)&rdquo; &ndash; eine Schwachstelle in der Verschl&uuml;sselung von Datenverbindungen und das Musterbeispiel f&uuml;r eine Vertraulichkeitsschwachstelle. Diese Schwachstellen deuten auf veraltete oder nicht vorhandene Verschl&uuml;sselungs-standards hin, die in nach au&szlig;en gerichteten Systemen verwendet werden. Eine Website beispielsweise ist m&ouml;glicherweise &uuml;berhaupt nicht verschl&uuml;sselt (reine HTTP-Ressourcen oder Authentifizierungsmechanismen, die Anmeldeinformationen in Klartext darstellen) oder verwenden Verschl&uuml;sselung, die schw&auml;cher ist als die aktuelle Standardempfehlung (z. B. 40 Bit statt 128 Bit Schl&uuml;ssell&auml;nge). Diese Schwachstellen k&ouml;nnen Daten wie Passw&ouml;rter oder sonstige vertrauliche Informationen w&auml;hrend der &Uuml;bertragung f&uuml;r jeden blo&szlig;legen, der die M&ouml;glichkeit hat, die Netzwerkverbindung abzuh&ouml;ren. Derartige Angriffe sind heut-zutage allt&auml;glich, besonders seit der Ver&ouml;ffentlichung von Firesheep<span class="s1"><a href="#f3"><sup>[3]</sup></a>&nbsp;</span> durch Eric Butler in 2010.</p>
+<p class="p1">Ebenfalls unter den Spitzenreitern der Liste ist die &bdquo;Schwache Passwortrichtlinie&ldquo;. In diesem Zusammenhang ist es Benutzern m&ouml;glich, relativ schwache Passw&ouml;rter f&uuml;r den Zugang zu ihren Konten auszuw&auml;hlen. Diese werden in der Regel durch ein &bdquo;Password Spraying&ldquo; genanntes Verfahren enth&uuml;llt &ndash; mehr dazu im Abschnitt &bdquo;Erbeutung von Zugangsdaten&ldquo;. Zusammen mit anderen Bedrohungen wie der &bdquo;OWA-Timing-Attacke&ldquo; und der &bdquo;SMTP-Mailadressen-Enumeration&ldquo; k&ouml;nnen solche aufgefundenen Schwachstellen, obwohl sie nur Informationslecks darstellen, schnell dazu f&uuml;hren, dass Benutzerkonten &uuml;bernommen werden.</p>
+<p class="p1">Beachtenswert sind au&szlig;erdem die Schwachstellen &bdquo;Veraltete Software&ldquo; und &bdquo;Fehlende Patches&ldquo;. Wenn derartige Sicherheits-l&uuml;cken extern identifiziert werden, deuten sie auf Fehler beim Schwachstellen-Management und Asset Management hin.</p>
+<p class="p1">Zusammengenommen sind diese Schwachstellen, die Informationen ungesch&uuml;tzt lassen, tendenziell schwerwiegend genug, um sie unseren Kunden zu melden. Allerdings haben Penetrationstester selten die M&ouml;glichkeit, diese Schwachstellen auszunutzen, um die Grenze zwischen externen und internen Netzwerken zu &uuml;berschreiten; siehe hierzu Abbildung 6.<img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imagekjr5n.png" alt="Abbildung 6: Externer Angriff: Interner Zugriff wurde erlangt" width="1000" height="162" />Wie sich herausstellt, kam es nur bei 20 % aller extern fokussierten Auftr&auml;ge zu einem Eindringen ins interne Netzwerk. Das ist im Wesentlichen zwei Faktoren zuzuschreiben: Kundenorganisationen nutzen zunehmend externe Hosting-L&ouml;sungen wie die-jenigen von Amazon AWS, Microsoft Azure, Google Cloud Platform und sonstigen Cloud-Computing-Anbietern. Daher gibt es h&auml;ufig im Anschluss an die externe Kompromittierung einer vernetzten Softwarekomponente eines Kunden keinen eindeutigen Weg in dessen internes Netzwerk.</p>
+<p class="p1">Tendenziell betreffen solche Ergebnisse nur die Vertraulichkeit; ein Angreifer kann auf sonst private Daten zugreifen, diese aber nicht nutzen, um intern eine Pr&auml;senz aufzubauen. F&uuml;r einen Penetrationstester (oder einen externen Angreifer) kann das aller- dings schon ausreichen. Stellen Sie sich ein Datenleck vor, bei dem s&auml;mtliche Benutzernamen und Passw&ouml;rter Ihrer Kunden offengelegt wurden, die Zugangsdaten Ihrer Mitarbeiter aber verschont geblieben sind. Die Tatsache, dass der Angreifer keinen Zugriff auf interne Netzwerk-Assets erlangen konnte, d&uuml;rfte in einem solchen Fall nur m&auml;&szlig;ig beruhigend sein.</p>
+<p class="p1">Eine interessante Teilansicht der Studiendaten wirft einen genaueren Blick auf die 20 % der Angriffe, bei denen Penetrationstester tats&auml;chlich in der Lage waren, externe Schwachstellen auszunutzen, um Zugriff auf interne Ressourcen zu erlangen. Diese Ansicht wird in Abbildung 7 dargestellt.</p>
+<p class="p1"><img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imageqk588.png" alt="Abbildung 7: Externer Angriff: Identifizierte Schwachstellen, &uuml;ber die Zugriff auf das interne Netzwerk erlangt wurde (Die angegebene Anzahl gibt nur die erhaltenen Antworten und nicht die Gesamtzahl der externen Angriffe wieder.)" width="1000" height="424" /></p>
+<p class="p1">Wir stellen fest, dass das Ergebnis &bdquo;Weak password policy&ldquo; nun an die erste Stelle der Liste aufr&uuml;ckt. Gelegentlich (etwa 4 % der F&auml;lle) werden Benutzernamen und Passw&ouml;rter, die nach au&szlig;en nicht oder unzureichend gesch&uuml;tzt sind, auch zur Authentifi-zierung im internen Netzwerk genutzt. Das f&uuml;hrt zu einer relativ schnellen Kompromittierung des internen Netzwerks. Gefolgt wird dieser Punkt von &bdquo;Veraltete Software&ldquo; und dem eng verwandten Problem &bdquo;Fehlende Sicherheitspatches&ldquo;, die in &auml;hnlichem Ma&szlig;e die Ausnutzung von Integrit&auml;tsschwachstellen erm&ouml;glichen.</p>
+<div style="background-image: url('../../../../globalassets/_images/backgrounds/hoodie-walker-2.jpg'); background-repeat: no-repeat; width: auto; height: auto; padding: 1.5rem; border-radius: 15px;"><br />
+<p style="font-family: Muli ExtraBold; color: #ffd349; size: 1.5rem;">EINMAL BEIM PENETRATIONSTEST:</p>
+<h2 style="color: #fff; margin-top: 1rem !important;">Deine Maus ist meine Tastatur</h2>
+<p style="color: #fff; font-size: .85rem;">Penetrationstester: <strong>Jesse Gardner</strong> | Kundenbranche: <strong>Healthcare</strong></p>
+<p style="color: #fff;">Bei einem Auftrag sollten wir in das interne Netzwerk einer Einrichtung eindringen, die medizinische Studien durchf&uuml;hrte und in der es ein Labor gab, in dem an den Arzneimitteln f&uuml;r Tests gearbeitet wurde. Der erste Teil des Auftrags bestand aus einem Social-Engineeringsowie einem physischen Sicherheitstest, und obwohl das Labor eigentlich ein Hochsicherheitsbereich sein sollte, konnten wir uns durch Dr&auml;ngeln, schnelles Schl&uuml;pfen durch offene T&uuml;ren usw. hineinschleichen. Sobald wir physischen Zugang zum Rechenzentrum hatten, machten wir mit dem internen Netzwerk kurzen Prozess. Nachdem wir R&uuml;cksprache mit unserem Ansprechpartner gehalten hatten, entschieden wir, einen Fernangriff ohne physischen Zugang auszuprobieren.</p>
+<p style="color: #fff;">Ein Tool, das wir sehr gern verwenden, nennt sich Crazyradio PA, ein kleines Software-definiertes Radio (SDR).<a href="#f4"><sup>[4]</sup></a> In Kombination mit einer Open-Source-Implementierung<a href="#f5"><sup>[5]</sup></a> der von Bastille Security beschriebenen MouseJack-Sicherheitsl&uuml;cke<a href="#f6"><sup>[6]</sup></a> konnten wir einige ziemlich coole Angriffe gegen drahtlose Tastaturen und M&auml;use starten. MouseJack ist ein ziemlich h&auml;ufig auftretendes Sicherheitsproblem, das erstmals 2016 aufgedeckt wurde und ein breites Spektrum drahtloser Tastaturen und M&auml;use betrifft, die keine Bluetooth-Verbindung nutzen.</p>
+<p style="color: #fff;">Wir nahmen nun an, dass wir mit dieser Technik sowie der richtigen Hardware und Software Tastaturanschl&auml;ge einschleusen und manchmal sogar die Tastatureingaben des Benutzers aufzeichnen k&ouml;nnen w&uuml;rden, wenn es uns gelang, in Reichweite eines verwundbaren Ger&auml;ts zu kommen. Nachdem wir mit einem Mietwagen mehrere Runden um das Geb&auml;ude des Kunden gedreht hatten, fanden wir tats&auml;chlich einige verwundbare Ger&auml;te, die dort verwendet wurden.</p>
+<p style="color: #fff;">Uns gelang es, erfolgreich Angriffe zu starten und Schadsoftware auf verschiedenen Systemen auszuf&uuml;hren, die uns &uuml;ber das Internet Fernzugriff auf die Computer dieser Organisation gab &ndash; alles von unserem Mietwagen auf dem Parkplatz aus. Es war kein physischer Zugang erforderlich; wir mussten lediglich nah genug auf einem ungesicherten Parkplatz stehen.</p>
+<p style="color: #fff;">Diese Ergebnisse pr&auml;sentierten wir dem Kunden, der anhand unseres Berichts seine drahtlosen Tastaturen und M&auml;use durch g&uuml;nstigere und sicherere Kabelmodelle ersetzte. Das war ein gro&szlig;artiges Lehrbeispiel daf&uuml;r, dass man selbst dann, wenn man exzellente physische Sicherheitsma&szlig;nahmen eingerichtet und die eigenen Mitarbeiter darauf trainiert hat, auf Leute zu achten, die durch T&uuml;ren zu Sicherheitsbereichen schl&uuml;pfen, m&ouml;glicherweise trotzdem noch verwundbar f&uuml;r Over-the-Air-Funkangriffe ist.</p>
+</div>
+<p>&nbsp;</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[3]&nbsp;<a href="https://codebutler.com/2010/10/24/firesheep/" target="_blank" rel="noopener"><em><span class="s2">https://codebutler.com/2010/10/24/firesheep/</span></em></a></p>
+<p class="p1"><span class="s2">[4]&nbsp;</span><em><a href="https://www.bitcraze.io/crazyradio-pa/"><span class="s1">https://www.bitcraze.io/crazyradio-pa/&nbsp;</span></a></em></p>
+<p class="p1"><span class="s1">[5]<em>&nbsp;</em></span><em><a href="https://github.com/insecurityofthings/jackit"><span class="s1">https://github.com/insecurityofthings/jackit </span></a></em></p>
+<p class="p1"><span class="s1">[6]&nbsp;</span><a href="https://www.bastille.net/research/vulnerabilities/mousejack/technical-details"><em><span class="s1">https://www.bastille.net/research/vulnerabilities/mousejack/technical-details</span></em></a></p>
+<p class="p1">&nbsp;</p>
+<h3 class="p1">Interner Netzwerkzugang</h3>
+<p class="p1">&Uuml;blicherweise (etwa 88 % aller F&auml;lle in unseren Studiendaten) beginnt die Kompromittierung eines internen Netzwerks damit, dass der Penetrationstester eingeschr&auml;nkten Zugriff in Form eines Einstiegspunktes erh&auml;lt. In der Regel handelt es sich dabei um einen normalen Laptop, der drahtlos oder per Kabel mit dem internen Netzwerk verbunden wird. Dies wird vornehmlich gemacht, um ein Szenario zu simulieren, in dem eine nicht vertrauensw&uuml;rdige Partei sich auf die eine oder andere Weise bereits in die Infrastruktur eingeklinkt hat. Dadurch soll die Suche nach internen Schwachstellen des Netzwerks beschleunigt werden.</p>
+<p class="p1">Gelegentlich muss sich der Penetrationstester jedoch (auf Kundenwunsch) zun&auml;chst Zugang zum internen Netzwerk verschaffen, um Schwachstellen in den Zugangskontrollen des externen Netzwerks zu finden. In solchen F&auml;llen k&ouml;nnen zahlreiche Techniken angewendet und von den Penetrationstestern gemeldet werden, unter anderem:</p>
+<ul>
+<li class="p1">
+<p class="p2">Elektronisches Social Engineering (einen Benutzer dazu verleiten, auf seinem ans Netzwerk angeschlossenen Computer Malware f&uuml;r den Penetrationstester auszuf&uuml;hren)</p>
+</li>
+<li class="p1">
+<p class="p2">Physisches Social Engineering (in das Geb&auml;ude einschleichen und einen funktionierenden Netzwerkanschluss oder einen nicht gesperrten Computer finden)</p>
+</li>
+<li class="p1">
+<p class="p2">Ausnutzung einer externen Schwachstelle &uuml;ber das Internet als Zugangspunkt ins interne Netzwerk</p>
+</li>
+<li class="p1">
+<p class="p2">Umgehen der Zugangskontrollen auf Schicht 2 durch das Klonen von MAC-Adressen</p>
+</li>
+</ul>
+<p class="p1">Bitte beachten Sie, dass in allen F&auml;llen &bdquo;Zugang&ldquo; einfach als &bdquo;Verbindung zum lokalen Netzwerk&ldquo; definiert wird und der Penetrationstester nur selten Domain-Zugangsdaten oder &Auml;hnliches erh&auml;lt; wo w&auml;re da auch der Spa&szlig;?</p>
+<h3 class="p1">Vom Zugang zur Kompromittierung</h3>
+<p class="p1">Sobald der Penetrationstester Zugang erhalten hat, muss er sich in irgendeiner Form einen logischen Zugang verschaffen. Da Microsoft die interne Systemlandschaft der meisten Organisationen unver&auml;ndert dominiert, nutzen fast alle Clients eine Version von Microsoft Active Domain.<a href="#f7"><sup>[7]</sup></a><span class="s1">&nbsp;</span> Entsprechend sind die Schwachstellen und falschen Konfigurationen, die Penetrationstester ausnutzen, wenn sie sich im LAN wiederfinden, tendenziell alle auf Microsoft-Produkte zur&uuml;ckzuf&uuml;hren. Abbildung 8 bietet einen &Uuml;berblick &uuml;ber diese Schwachstellen.</p>
+<p class="p1"><img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imageco6jm.png" alt="Abbildung 8: Interner Angriff: Gefundene Schwachstellen (Die angegebene Anzahl zeigt die Gesamtzahl der gefundenen Schwachstellen. Der Prozentsatz zeigt Anteil an der Gesamtzahl der Schwachstellen.)" width="1000" height="424" /></p>
+<p class="p1">Wie in den vergangenen Berichtsjahren auch bleibt SMB-Relaying die wichtigste Technik f&uuml;r den Aufbau einer ersten sicheren Stellung als Benutzer in der Domain, was auf die Pr&auml;senz von LLMNR, NetBIOS-Poisoning und unsignierte SMBs zur&uuml;ckzu-f&uuml;hren ist. Anders als in den Vorjahren b&uuml;&szlig;te SMB-Relaying jedoch etwas von seiner Verbreitung als brauchbarer Angriffsvektor ein; diese fr&uuml;her sehr g&auml;ngige Technik konnte nur noch in 15 % aller Auftr&auml;ge eingesetzt werden. Zum Vergleich: Im Bericht von 2018 konnte SMB-Relaying in 26 % aller F&auml;lle genutzt werden. Dieser R&uuml;ckgang ist bemerkenswert. Zugeschrieben werden kann er dem gesteigerten Bewusstsein f&uuml;r die Notwendigkeit von SMB-Signaturen und dem allm&auml;hlichen Verschwinden &auml;lterer SMB-Clients, die keine Signatur unterst&uuml;tzen. Allerdings ist zu beachten, dass bei aktuellen Versionen von Windows 10 Signaturen nach wie vor nicht standardm&auml;&szlig;ig aktiviert sind<a href="#f7_10"><sup>[8]</sup></a><span class="s1">&nbsp;</span>. Es liegt also bei den Domain-Administratoren, dem Ratschlag von Microsoft zu folgen und dieses wichtige Integrit&auml;tsfeature manuell zu aktivieren.</p>
+<p class="p1">Der n&auml;chste Punkt auf der Liste gemeldeter Schwachstellen ist &bdquo;Kritische Sicherheitspatches fehlen&ldquo;. Dieser wurde bei rund 11 % aller gepr&uuml;ften Kundenstandorte festgestellt. Schwachstellen auszunutzen, f&uuml;r die Patches verf&uuml;gbar sind, ist im Rahmen von Penetrationstests ziemlich grundlegende Arbeit, und Conficker (MS08-067) sowie EternalBlue (MS17-010) geh&ouml;ren zum Zeitpunkt der Erstellung dieses Berichts zu den ber&uuml;chtigsten Windows-Schwachstellen.<a href="#f7_10"><sup>[9]</sup></a><span class="s1">&nbsp;</span> Beide werden mithilfe verl&auml;sslicher Metasploit-Module ausgenutzt. Daher geh&ouml;rt es zur Standardvorgehensweise, Windows-Hosts auf sie zu pr&uuml;fen, wie Abbildung 9 veranschaulicht.</p>
+<p class="p1"><img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/image8s2f2.png" alt="Abbildung 9: Waren Hosts anf&auml;llig f&uuml;r EternalBlue und/oder Conficker? (Die angegebene Anzahl gibt nur die erhaltenen Antworten wieder.)" width="1000" height="878" /></p>
+<p class="p1">Obwohl es erfreulich zu sehen ist, dass MS08-067 langsam aus internen Netzwerken verschwindet, wirkt die Tatsache, dass dieser Exploit nun bereits fast elf Jahre alt ist, ern&uuml;chternd. Eternal-Blue ist vermutlich die in den Mainstream-Medien am h&auml;ufigsten behandelte Schwachstelle, und dennoch wird sie, wenn die Geschichte von Conficker einen Anhalts-punkt darstellt, in einer starken Minderheit von Penetrationstestauftr&auml;gen noch mehrere Jahre leicht zug&auml;nglich bleiben.</p>
+<p class="p1">Abgerundet wird die Spitzengruppe der gemeldeten Schwachstellen durch die Kategorie &bdquo;Zugangsdaten im Klartext gespeichert&ldquo;. Leider handelt es sich hierbei in der modernen, Domain-basierten Informatik um ein schwer l&ouml;sbares Problem. Privilegierten Zugang zu einem Arbeitsplatzrechner vorausgesetzt, ist die Kunst des Abrufens lokal gespeicherter Passw&ouml;rter und wiederverwendbarer Passwort-Hashes sowohl f&uuml;r Penetrations-tester als auch f&uuml;r kriminelle Angreifer unverzichtbar. Obwohl mehrere kreative Verteidigungsma&szlig;nahmen definiert wurden, die der Blue Team Blog<a href="#f7_10"><sup>[<span class="s1">10]</span></sup></a> dankenswerterweise fast alle zusammengefasst hat, handelt es sich dabei weder um Standard &ndash; noch um besonders bekannte L&ouml;sungen. Au&szlig;erdem betreffen sie tendenziell den h&auml;ufigen Anwendungsfall, dass zwischengespeicherte Zugangsdaten verwendet werden, wenn kein Domain-Controller f&uuml;r die Validierung lokaler Logins mit Domain-Anmeldeinformationen verf&uuml;gbar ist. Gleichwohl sollten Organisationen unbedingt durch regelm&auml;&szlig;ige GPO-Pushes sicherstellen, dass auf den meisten Client-Rechnern wenigstens keine Domain-Administrator-Zugangsdaten im lokalen Speicher zwischengespeichert werden.</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[7] <em>Vielleicht wird n&auml;chstes Jahr das Jahr des Linux-basierten LDAP+Kerberos, doch diese Konfiguration war in der untersuchten Kundenbasis praktisch nicht vorhanden.</em></p>
+<p class="p1">[8] <em><a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/microsoft-network-client-digitally-sign-communications-always" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/microsoft-network-client-digitally-sign-communications-always</a></em></p>
+<p class="p1">[9]&nbsp;<em>Wir warten gespannt, wie ber&uuml;chtigt &bdquo;BlueKeep&ldquo;, die als CVE-2019-0708 erfasste RDP-Schwachstelle, am Ende sein wird.</em></p>
+<p class="p1">[10]&nbsp;<em><a href="https://medium.com/blue-team/preventing-mimikatz-attacks-ed283e7ebdd5" target="_blank" rel="noopener">https://medium.com/blue-team/preventing-mimikatz-attacks-ed283e7ebdd5</a></em></p>
+<h3 class="p1">Ausbreitung im Netzwerk (Lateral Movement)</h3>
+<p class="p1">Die Kompromittierung eines Systems ist f&uuml;r jeden Penetrationstest ein guter Anfang. Doch selbstverst&auml;ndlich ist es in der Regel genau das: Erst der Anfang. Sobald man im internen Netzwerk Fu&szlig; gefasst hat, besteht der n&auml;chste Schritt darin, diesen Zugang zu nutzen, um sich &bdquo;seitw&auml;rts&ldquo; durch das Netzwerk zu bewegen und Zugriff auf mehr und bessere dort befindliche Systeme zu erhalten. Abbildung 10 f&uuml;hrt die Methoden auf, die Penetrationstester &uuml;blicherweise nutzen, um ihre Reichweite im Firmennetzwerk auf der Suche nach vertraulichen Daten und besserem Domain-weitem Zugriff zu vergr&ouml;&szlig;ern.</p>
+<p class="p1"><img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imagerdzx.png" alt="Abbildung 10: Kompromittierung interner Netzwerke: Welche Technik haben Sie f&uuml;r die weitere Ausbreitung im Netzwerk vornehmlich verwendet? (Die angegebene Anzahl gibt nur die erhaltenen Antworten wieder.)" width="1000" height="284" /></p>
+<p class="p1">Interessanterweise scheint PowerShell einen definitiven R&uuml;ckgang zu verzeichnen &ndash; zumindest bei den befragten Penetrations-testern. PowerShell-Einschr&auml;nkungen finden in Windows-Firmennetzwerken zunehmende Verbreitung, und obwohl Angreifer in den vergangenen Jahren gro&szlig;en Nutzen aus PowerShell ziehen konnten, scheinen diese Techniken 2019 auf der Strecke zu bleiben.</p>
+<p class="p1">Im Gegensatz verweilen die Windows-Fernadministrationstechnologien Windows Management Instrumentation (WMI) und PsExec weiterhin an der Spitze der Technologien zur Ausbreitung im Netzwerk. Einige der erfolgreichsten Windows-W&uuml;rmer in der j&uuml;ngeren Vergangenheit haben sich diese Schnittstellen ebenfalls zunutze gemacht. Es ist also wenig verwunderlich, dass unsere simulierten Angriffe das gleiche Mittel nutzen.</p>
+<h4 class="p1">Vorsicht vor dem Remotedesktopprotokoll (RDP)</h4>
+<p class="p1">Besonders zu beachten ist das Vorhandensein des RDP. Im Juni 2019 warnte die Cybersecurity Infrastructure Security Agency (CISA) des US-Heimatschutzministeriums in einer Bekanntmachung vor der unmittelbaren Bedrohung durch die Windows-RDP-Schwachstelle &bdquo;BlueKeep&ldquo;<sup><a href="#f11">[<span class="s1">11]</span></a></sup>, auch bekannt als CVE-2019-0708. Hierbei handelt es sich um eine ernsthafte Sicherheitsl&uuml;cke, die bereits in Windows 2000 vorlag. &Auml;ltere Windows-Rechner mit RDP sind in einem modernen Netzwerk h&auml;ufig in schwer patchbaren Ger&auml;ten wie spezialisierter IoT-Ausstattung, Point-of-Sale-Systemen und medizinischer Ausr&uuml;stung anzutreffen.</p>
+<p class="p1">Zum Zeitpunkt der Erstellung dieses Berichts gibt es f&uuml;r die Ausnutzung dieser Schwachstelle noch keine allgemein verf&uuml;gbare Remotecodeausf&uuml;hrung (RCE), doch wir wissen, dass zumindest einige wenige Beh&ouml;rden und Privatorganisationen eine besitzen. Ein weiterer gro&szlig;fl&auml;chiger Angriff scheint also fast unvermeidlich zu sein. Wir haben die Hoffnung, dass man sich dadurch gen&ouml;tigt sehen wird, RDP-Endpunkte besser zu patchen. Doch wie wir es bereits am Beispiel von EternalBlue und Conficker beobachtet haben, gehen wir auch beim RDP davon aus, dass es f&uuml;r Penetrationstester noch viele weitere Jahre lang ein bevorzugtes Ziel f&uuml;r RCE und die Ausbreitung im Netzwerk bleiben wird.</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[11]&nbsp;<a href="https://www.us-cert.gov/ncas/alerts/AA19-168A" target="_blank" rel="noopener">https://www.us-cert.gov/ncas/alerts/AA19-168A</a></p>
+<h3 class="p1">Zielsetzungen in einem lokalen Netzwerk</h3>
+<p class="p1">Obwohl es nicht f&uuml;r jeden Auftrag als Ziel festgeschrieben ist, Domain- oder Enterprise-Administratorenzugriff zu erhalten, ist typischerweise bei allen internen Analysen eines der Ziele, Zug&auml;nge zu sensiblen Daten nachzuweisen. Bei Auftr&auml;gen, bei denen versucht wurde, ein internes Netzwerk zu kompromittieren, konnten die Penetrationstester von Rapid7 in rund 76 % aller F&auml;lle Domain-Administratorenzugriff (oder Vergleichbares) erlangen. Sonstige &bdquo;sensible Daten&ldquo; konnten in 87 % aller F&auml;lle entwendet werden. Diese &bdquo;Erfolgsquoten&ldquo; scheinen f&uuml;r Penetrationstester ziemlich typisch zu sein; sie bewegen sich innerhalb der Spanne der Studienergebnisse vergangener Jahre und beziehen die oben beschriebenen Arten von Schwachstellen ein, die Penetrationstestern begegnen.</p>
+<p class="p1"><img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imageudji.png" alt="Abbildung 11: Kompromittierung interner Netzwerke: Haben Sie Domain- oder Enterprise-Administrator-Zugang erhalten?" width="1000" height="138" />Tats&auml;chlich zeigt die Schnittmenge aus den Fragen &bdquo;Haben Sie Domain- oder Enterprise-Administratorenzugriff erhalten?&ldquo; und &bdquo;Konnten Sie sensible Daten finden?&ldquo; ziemlich eindeutig, dass das eine potenziell zum anderen f&uuml;hrt. Wie man sich denken kann, gestaltet es sich als recht schwierig, sensible Daten lange geheim zu halten, wenn der Domain- oder Enterprise-Administrationszugriff erst einmal besteht. Abbildung 12 veranschaulicht die Beziehung zwischen den beiden Zielen.</p>
+<p class="p1">Obwohl es technisch m&ouml;glich ist, sensible Daten au&szlig;erhalb der Reichweite eines rechtm&auml;&szlig;igen Domain-Administrators aufzubewahren, befassen sich die heute in Gebrauch befindlichen Netzwerk- und Datensegregationspraktiken selten mit so diffizilen und komplexen internen Sicherheitsl&ouml;sungen.</p>
+<p class="p1">Das ist kein Werturteil. Die Entwicklung der Architektur einer derartigen Computing-Umgebung ist nahezu unm&ouml;glich, sodass es viel, viel einfacher ist, darauf zu vertrauen, dass der eigene Domain-Administrator kein b&ouml;swilliger interner T&auml;ter ist. Letztendlich hat der Schutz der Anmeldeinformationen f&uuml;r Domain-Administratoren vor Missbrauch entscheidende Bedeutung f&uuml;r jede IT-Sicherheitsorganisation.</p>
+<p class="p1"><img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imagea5sd.png" alt="Abbildung 12: Der Weg des geringsten Widerstandes zu vertraulichen Daten (Privilegierte Konten sind der Schl&uuml;ssel zu den Zugangsdatenspeichern. Wert in der Zelle gibt die Menge der Angriffe an.)" width="1000" height="876" /></p>
+<h4 class="p1">Vorsicht vor Null Sessions</h4>
+<p class="p1">Schlie&szlig;lich sind Penetrationstester stets auf der Suche nach in Domains verf&uuml;gbaren Null Sessions und finden sie tendenziell in der H&auml;lfte aller F&auml;lle, wie Abbildung 13 zeigt.</p>
+<p class="p1"><img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/figure-13.jpg" alt="Abbildung 13: Waren bei einem Domain-Controller Null Sessions verf&uuml;gbar?" width="1000" height="162" />Null Sessions an sich werden in der Regel bei Schwachstellenanalysen als von geringer Priorit&auml;t eingestuft und nur zu Informationszwecken erfasst. Doch Penetrationstester setzen sie in erster Linie ein, um nach zugeordneten Laufwerken Ausschau zu halten und Credential-Stuffing- und Guessing-Attacken auf das interne Netzwerk auszuf&uuml;hren. In den vergangenen Jahren waren Null Sessions fast &uuml;berall zu finden. Die Tatsache, dass sie inzwischen nur noch in der H&auml;lfte aller F&auml;lle zu finden sind, l&auml;sst darauf schlie&szlig;en, dass die in den Unternehmen t&auml;tigen IT-Administratoren sie zunehmend ernst nehmen oder ihre Netzwerke in einer Weise segmentieren, die den gesamten SMB-basierten Traffic neutralisiert.</p>
+<h3 class="p1">Schwachstellen in Webanwendungen</h3>
+<p class="p1">Penetrationstester sind im Hinblick auf Technologiestacks &bdquo;Allesk&ouml;nner&ldquo;, die f&uuml;r verschiedenste Betriebssysteme und Programmiersprachen mindestens ein fachliches Grundverst&auml;ndnis aufweisen m&uuml;ssen. Doch einige Technologien wie Microsoft Active Directory und Microsoft Windows sind, was die effektive Demonstration h&auml;ufig auftretender Schwachstellen und Fehlkonfigurationen betrifft, ziemlich grundlegend. Ein weiteres breites Kompetenzfeld, das f&uuml;r diese Arbeit notwendig ist, sind Web Application Frameworks. Die meisten mittelst&auml;ndischen bis gro&szlig;en Unternehmen verf&uuml;gen heutzutage &uuml;ber recht umfangreiche Webanwendungsumgebungen. H&auml;ufig verwenden sie zwei oder mehrere unterschiedliche Frameworks, um alle Aufgaben zu erledigen. Abbildung 14 beschreibt diese Situation recht anschaulich.</p>
+<p class="p1"><img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imageiiwfo.png" alt="Abbildung 14: Angriffe auf Web-Anwendungen: Auf welcher Technologie basierte die Anwendung?" width="1000" height="341" /></p>
+<p class="p1">Wie wir darin sehen, ist ASP.NET im Bereich der Enterprise-Webanwendungen unver&auml;ndert stark, ebenso wie JQuery als JavaScript-Framework. In beiden Feldern jedoch verlangt die in 15 bis 20 % aller F&auml;lle vorliegende Kategorie &bdquo;Sonstiges&ldquo; von den Penetrationstestern erneut den Einsatz allgemeiner Sicherheitskenntnisse gegen h&auml;ufig unbekannte Implementierungen.</p>
+<div style="background-image: url('../../../../globalassets/_images/backgrounds/hoodie-walker-2.jpg'); background-repeat: no-repeat; width: auto; height: auto; padding: 1.5rem; border-radius: 15px;"><br />
+<p style="font-family: Muli ExtraBold; color: #ffd349; size: 1.5rem;">EINMAL BEIM PENETRATIONSTEST:</p>
+<h2 style="color: #fff; margin-top: 1rem !important;">Nachricht f&uuml;r Doktor Hackerman</h2>
+<p style="color: #fff; font-size: .85rem;">Penetrationstester: <strong>Nick Powers</strong> | Kundenbranche: <strong>Healthcare</strong></p>
+<p style="color: #fff;">Ich testete Schwachstellen im WLAN und internen Netzwerk eines Systems von acht Krankenh&auml;usern. Besonders das WLANNetzwerk schien ziemlich gut gesichert zu sein. Man verwendete dort EAP-TLS, das Ger&auml;ten gestattet, sich unter Verwendung strikt zertifikatbasierter Authentifizierung mit dem firmeneigenen WLANNetzwerk zu verbinden. Nach wie vor findet man eine konsistente Implementierung dieser Hochsicherheitskonfiguration relativ selten, da nicht jedes WLAN-f&auml;hige Ger&auml;t sich daf&uuml;r eignet. Mit anderen Worten: H&auml;ufig findet man bestimmte Ger&auml;te, f&uuml;r die Ausnahmen von dieser Authentifizierungsrichtlinie gelten.</p>
+<p style="color: #fff;">Allerdings brauchten wir ein bis zwei volle Testtage, bevor wir feststellten, dass die Standard-Exploits einfach nicht funktionieren w&uuml;rden &ndash; jedenfalls nicht f&uuml;r die Mitarbeiter-Arbeitspl&auml;tze, die sich aktuell in der N&auml;he befanden. Es sah so aus, als w&auml;re das EAP-TLS an diesen Standorten wirklich ziemlich wasserdicht. Ich machte einen Spaziergang durch die G&auml;nge der Krankenh&auml;user, um nachzusehen, welche anderen Arten WLAN-f&auml;higer Ger&auml;te ich finden konnte.</p>
+<p style="color: #fff;">Als ich in einem der Krankenh&auml;user am Eingang der Intensivstation vorbeikam, sah ich MAC-Adressen, welche zu denen von Pagern passten. Diese Pager, die vermutlich vom Krankenpflegepersonal und den &Auml;rzten verwendet wurden, stellten Verbindungen zum Firmen-WLAN her und interagierten damit. Ich steckte meine Antenne und meinen Laptop in meinen Rucksack, nachdem ich darauf einen &bdquo;b&ouml;sen Zwilling&ldquo; des Firmen-WLANs gestartet hatte, und begab mich erneut zur Intensivstation.Nachdem ich diskret und in unauff&auml;lligem Abstand etwa eine Viertelstunde in der N&auml;he der Intensivstation verbracht hatte, kehrte ich an einen Schreibtisch zur&uuml;ck und entdeckte dort den Domain-User und den Passwort-Hash, welche von den Pagern zur Authentifizierung verwendet wurden. Wie sich herausstellte, war dieser erbeutete Hash recht schnell zu knacken, sodass ich nun, ausgestattet mit einem Klartext-Passwort und Benutzernamen, ins Firmennetzwerk eindringen konnte.</p>
+<p style="color: #fff;">Im internen Netzwerk gab es zahlreiche Ger&auml;te unkonven-tionellerer Art, vor allem medizinische Ger&auml;te mit Netzwerk-verbindung. Eines davon, ein ungenutztes R&ouml;ntgenger&auml;t, lief mit einer veralteten Windows-Version. Auf das alte, vergessene R&ouml;ntgenger&auml;t hatte fr&uuml;her ein privilegierter Active-Directory-Benutzer mit Domain-Administrator-Privilegien Zugriff. Dessen Klartext-Benutzerdaten konnten aus dem Speicher abgerufen werden. Dieses R&ouml;ntgenger&auml;t gab uns die Schl&uuml;ssel zum gesamten Netzwerk.</p>
+</div>
+<p>&nbsp;</p>
+<p class="p1">Der Grund ist, dass Webanwendungen eine h&auml;ufige und eindeutige Fehlerquelle sind und dazu neigen, prominent aus dem Gestamtergebnis interner wie externer Analysen hervorzustechen. Abbildung 15 zeigt, welche Schwachstellen bei Auftr&auml;gen, in denen Webanwendungen in den Testrahmen fielen, in deren Umfeld gefunden werden konnten.</p>
+<p class="p1"><img src="../../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/image0mny.png" alt="Abbildung 15: Angriffe auf Web-Anwendungen: Welche Schwachstellen haben Sie gefunden?" width="1000" height="764" /></p>
+<p class="p1">Die gute Nachricht: Analyseergebnisse im Bereich Webanwendungen sind tendenziell Informationsl&uuml;cken, die in den bekannten Bereich &bdquo;Vertraulichkeit&ldquo; der CIA-Triade fallen. An der Spitze der Liste stehen User Enumeration, allgemeine &bdquo;Informationslecks&ldquo;, fehlende HSTS (HTTP Strict Transportation Security)-Header, die Verschl&uuml;sselungsfehler bei der Daten&uuml;bertragung verursachen k&ouml;nnen, sowie unsichere Cookies. Alle der genannten Schwachstellen k&ouml;nnen potenziell von Angreifern dazu genutzt werden, mehr &uuml;ber die Zielorganisation, ihre Benutzer und Session-Tokens, die umgedreht und zur Imitation authentifizierter Benutzer verwendet werden k&ouml;nnen, zu erfahren.</p>
+<p class="p1">Andere bekannte Sicherheitsprobleme sind Clickjacking, Cross-Site-Scripting (XSS) und SQL-Injections (SQLi). Hierbei handelt es sich um Schwachstellen, die tendenziell zu erweiterten Privilegien in Webanwendungen f&uuml;hren, entweder mit regul&auml;rem Benutzerkontenzugriff oder den Kontoprivilegien eines Anwendungsadministrators. Die gute Nachricht ist allerdings, dass SQL-Injektion (SQLi) als Analyseergebnis viel seltener zu werden scheint. Verbreitete Web Application Frameworks verringern die Anzahl der SQL Injection Schwachstellen in der Produktionsphase, da allgemeine T&auml;tigkeiten durch Framework-basierten &bdquo;syntactic sugar&rdquo; automatisiert werden, der Datenbankoperationen nicht nur leicht schreib- und lesbar macht, sondern auch verhindert, dass Entwickler sich mit einer SQL-Injektion selbst ein Bein stellen. Nat&uuml;rlich bedeutet &bdquo;seltener&ldquo; immer noch nicht &bdquo;nie&ldquo;. SQLi k&ouml;nnte sich potenziell jedes Mal wieder in Anwendungen einschleichen, wenn Entwickler komplexere Funktionen einbauen m&uuml;ssen, die nicht in einem Framework angeboten werden oder wenn eine Webanwendung von Grund auf neu entwickelt wird. Entwicklungsteams sollten also darauf achten, ihren SQL-basierten Code jedes Mal genau auf potenziellen Missbrauch zu untersuchen.</p>
+<p class="p1">Letztendlich wird sich die T&auml;tigkeit von Penetrationstestern zunehmend auf Webanwendungen fokussieren, je mehr Unternehmen den Wechsel zu Cloud-Hosting-Anbietern wie Amazon AWS, Microsoft Azure und Google Cloud (die drei beliebtesten Hosting-Anbieter, auf die wir in unserem Datensatz gesto&szlig;en sind) vollziehen. Entsprechend werden sie einige Sondierungsfachkenntnisse ben&ouml;tigen, um diese Anwendungen zu finden und zu analysieren, da man nicht einfach die normalen IP-Bereiche des Kunden danach scannen kann.</p>
+<div style="background-image: url('../../../../globalassets/_images/backgrounds/hoodie-walker-2.jpg'); background-repeat: no-repeat; width: auto; height: auto; padding: 1.5rem; border-radius: 15px;"><br />
+<p style="font-family: Muli ExtraBold; color: #ffd349; size: 1.5rem;">EINMAL BEIM PENETRATIONSTEST:</p>
+<h2 style="color: #fff; margin-top: 1rem !important;">Ihre Daten, frei und ungesch&uuml;tzt</h2>
+<p style="color: #fff; font-size: .85rem;">Penetrationstester: <strong>Trevor O'Donnal</strong> | Kundenbranche: <strong>Healthcare</strong></p>
+<p style="color: #fff;">Es war fr&uuml;h an einem Montagmorgen im tiefsten Winter. Ich hatte gerade gefr&uuml;hst&uuml;ckt, geduscht, mir einen hei&szlig;en Kakao gemacht und setzte mich nun an meinen Computer, um in eine neue Woche des Hackens zu starten. In dieser Woche sollte ich die Website eines Unternehmens testen, das Patientenakten speichert. Gesundheitsdienstleister und Patienten konnten &uuml;ber ein Webportal auf diese Akten zugreifen. Es war ungeheuer wichtig, dass diese Seite sicher war, da Patientenakten eine wahre F&uuml;lle an Informationen enthalten, die Identit&auml;tsdiebstahl einfach machen und im Internet-Untergrund sehr gefragt sind.</p>
+<p style="color: #fff;">Ich fing an, wie ich es immer tue: Ich st&ouml;berte auf der Seite herum, &uuml;berpr&uuml;fte ihre Funktionen und machte mir Notizen zu Bereichen, die wahrscheinliche Schwachstellen darstellen k&ouml;nnten. Ich verbrachte etwa eine Viertelstunde damit, mich umzusehen. Dann entschied ich mich, manuell einige Bereiche auszutesten, die vielversprechend f&uuml;r SQLi aussahen. Als Erstes &uuml;berpr&uuml;fte ich das Anmeldeformular. Ich trug in das Benutzernamen-Feld ein einzelnes Apostroph und in das Passwortfeld ein Nonsens-Passwort ein und dr&uuml;ckte die Eingabetaste.</p>
+<p style="color: #fff;">SQLi-Gelegenheiten sind neuerdings schwieriger zu finden. Ich erwartete also nicht allzu viel. Entwickler werden seit Jahren diesbez&uuml;glich geschult, und Web Application Frameworks machen eine versehentliche Implementierung schwieriger. Umso schockierter war ich, als ich sah, wie auf meinem Bildschirm eine SQL-Fehlermeldung aufging. Sie war sehr detailliert und gab den konkreten Bereich der zugrunde liegenden Datenbankabfrage an, der den Fehler enthielt. Zudem gab die Fehlermeldung n&uuml;tzlicherweise gleich noch den Gro&szlig;teil der Abfrage an und machte es somit kinderleicht, einen gezielteren Angriff zu starten.</p>
+<p style="color: #fff;">Ich brauchte eine Sekunde, um zu verarbeiten, was ich sah. Als ich mich wieder gefangen hatte, probierte ich einen simplen Authentication-Bypass aus, der funktionierte. Ich war nun als Website-Administrator authentifiziert, ohne &uuml;berhaupt das Passwort zu kennen. Praktisch aus Versehen geh&ouml;rte mir die Seite, und ich hatte noch nicht einmal meinen Morgenkakao ausgetrunken. Anstatt mit meinen neuen Privilegien herumzuspielen, entschied ich mich, einige exotischere Abfragen auszuprobieren. F&uuml;nf Minuten sp&auml;ter lie&szlig; ich mir den gesamten Speicherinhalt der Backend-Datenbank anzeigen &ndash; einschlie&szlig;lich aller personenbezogenen Daten, die darin enthalten waren.</p>
+<p style="color: #fff;">Ich kontaktierte den Kunden, um mir best&auml;tigen zu lassen, dass die Seite aktiv war und es sich bei den Daten um echte Produktivdaten handelte, wie in unserem einleitenden Telefongespr&auml;ch in der vorherigen Woche erw&auml;hnt worden war. Er best&auml;tigte mir erneut, dass das korrekt war. Anstatt also meine Untersuchung weiterzuverfolgen, vereinbarte ich umgehend eine Telefonkonferenz mit ihm. Schlie&szlig;lich ging es hier um die pers&ouml;nlichen Daten echter Patienten.</p>
+<p style="color: #fff;">W&auml;hrend meines Anrufs beschrieb ich, was ich gefunden hatte und wie einfach es f&uuml;r jeden Menschen im Internet war, das Gleiche zu tun. Ich betonte, wie wichtig es war, das Problem auf der Stelle zu beheben und bot meine Hilfe an. Am Ende nahm der Kunde die Website f&uuml;r eine Notfallwartung komplett vom Netz und wir verbrachten die n&auml;chsten Tage damit, gemeinsam mit den Website-Entwicklern die Sicherheitsl&uuml;cken zu beheben, bevor sie wieder online ging.</p>
+</div></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Social-Engineering" id="Social-Engineering"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Social Engineering</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">Vervollst&auml;ndigt wird das Spektrum &uuml;blicher Tests, die Penetrationstester durchf&uuml;hren, durch Social-Engineering-Techniken, unter denen elektronisches Social Engineering (ESE) per E-Mail wohl die popul&auml;rste Methode ist. Abbildung 16 schl&uuml;sselt auf, welche Techniken verwendet werden.</p>
+<p class="p1"><img src="../../../../contentassets/db68131f67ad4b1089ba1bf253c963bc/imagex8wq.png" alt="Abbildung 16: E-Mail-basiertes elektronisches Social Engineering: Was ist passiert? (Prozentwerte wurden auf der aggregierten Gesamtzahl der Versuche errechnet.)" width="1000" height="397" /></p>
+<p class="p1">Die am h&auml;ufigsten verwendete Technik sind gef&auml;lschte Domains, die fast immer der Domain des Kunden entsprechen. Leider hinken die meisten firmeninternen Organisationen heute mit ihrer DMARC-Implementierung (Domain-based Message Authentication, Reporting and Conformance) hinterher. Hinter diesem Fachbegriff verbirgt sich eine DNS-basierte technische Spezifikation, die es externen Angreifern erschweren soll, E-Mails zu versenden, die angeblich von einer gesch&uuml;tzten Domain stammen sollen. Anfangs wurde sie eingesetzt, um Kunden zu versichern, dass die E-Mail der jeweiligen Organisation tats&auml;chlich von der angegebenen Domain stammt. Allerdings erwies sich DMARC auch als h&ouml;chst effektive Gegenma&szlig;nahme gegen internes Phishing. Schlie&szlig;lich sind Angreifer, die nicht glaubw&uuml;rdigerweise E-Mails von &bdquo;rapid7.com&ldquo; versenden k&ouml;nnen, stattdessen gezwungen erkennbar andere Domains wie &bdquo;rapiid7.com&ldquo; zu verwenden. Nat&uuml;rlich neigen menschliche Augen dazu, kleine Schreibfehler zu &uuml;bergehen (was vermutlich auch in dieser Studie gilt). Doch DMARC macht es Angreifern schwerer und kann &auml;u&szlig;erst hilfreich dabei sein, Phishing-Kampagnen zu verhindern, bevor sie &uuml;berhaupt anfangen.</p>
+<p class="p1">Moderne E-Mail-Clients, bei denen es sich heutzutage tendenziell um Webanwendungen handelt, verf&uuml;gen &uuml;ber ziemlich gute serverseitige Anti-Spam- und Anti-Malware-Ma&szlig;nahmen. Daher ist der h&auml;ufigste Inhalt von Phishing-E-Mails die Aufforderung, auf einen Link zu klicken, der zu einer sch&auml;dlichen URL f&uuml;hrt. F&uuml;r gew&ouml;hnlich verwenden Penetrationstester beim Versuch, Benutzernamen und Passw&ouml;rter zu ergattern, gerne Attrappen anderweitig bekannter Anmeldebildschirme, etwa von Google Apps oder Outlook 365.</p>
+<p class="p1">Findige Penetrationstester k&ouml;nnen allerdings subtiler vorgehen und vertraute Webanwendungen nachbilden, deren aktuelle Verwendung mit ein wenig Sondierung auf der Kundenwebsite nachgewiesen werden kann. Ein TXT-DNS-Dokument f&uuml;r rapid7.com kann beispielsweise den Eintrag &bdquo;atlassian-domain-verification&ldquo; enthalten. Das deutet darauf hin, dass Atlassian-Produkte wie Jira und Confluence verwendet werden. Nur eine oberfl&auml;chliche LinkedIn-Suche sp&auml;ter kann ein Angreifer eine gut gestaltete, gezielte Phishing-E-Mail versenden, in der er vorgibt, der leitende Anwendungsentwickler eines Teams von Junior-Entwicklern zu sein und sie dazu auffordert, &bdquo;sich dieses P0-Jira-Ticket anzusehen&ldquo;, um sie mit einem Klick auf eine sch&auml;dliche Website gelangen zu lassen.</p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Incident-Detection-and-Response" id="Incident-Detection-and-Response"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Incident Detection and Response</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">Besonders zu beachten ist die Rolle, die IDR bei einem typischen Auftrag spielt. W&auml;hrend Incident Detection, Abwehrma&szlig;-nahmen und (letztendlich) Quarant&auml;ne wesentliche Komponenten jedes Red-Team- oder Social-Engineering-Auftrags sind, spielen sie nur bei rund der H&auml;lfte (52 %) aller Auftr&auml;ge eine Rolle, die die Kompromittierung eines Netzwerks beinhalten. Hierbei geht es vor allem um Kundenerwartungen. Wenn ein Kunde schlie&szlig;lich wei&szlig;, dass er nicht &uuml;ber ausgereifte Incident Detection and Response-Kapazit&auml;ten verf&uuml;gt, w&auml;re es auch sinnlos, diese zu testen. Der Penetrationstester konzentriert sich in dem Fall darauf, Schwachstellen zu finden und auszunutzen, ohne sich Gedanken um IDR machen zu m&uuml;ssen. Wenn eine entsprechende L&ouml;sung allerdings bereits eingef&uuml;hrt wurde, w&auml;re es unklug, wenn der Kunde automatisierte und manuelle IDR nicht &uuml;berall dort verwenden w&uuml;rde, wo er kann. IDR-Software und Schulungen zu diesem Thema sind eine Investition, die man nicht leichtfertig t&auml;tigt. Um das Angriffsverhalten also genauer nachbilden zu k&ouml;nnen, sollten Penetrationstester den gleichen Regeln unterliegen wie echte kriminelle Angreifer.</p>
+<p class="p1">Abbildung 17 zeigt, wie effektiv Penetrationstester in unserer Untersuchung vor dem Erreichen eines Ziels oder danach der Erkennung aus dem Weg gehen konnten.</p>
+<p class="p1"><img src="../../../../contentassets/773f2fc2b3f844ab9d9b08c18f8e12ab/imageyf0ah.png" alt="Abbildung 17: Wurden Sie vom blauen Team, dem SOC oder dem Sicherheitspersonal entdeckt und gefasst oder geblockt, bevor oder nachdem Sie internen Zugang erhalten hatten? (Enth&auml;lt nur Auftr&auml;ge, bei denen Infiltration im Auftragsrahmen enthalten war, und erhaltene Antworten.)" width="1000" height="644" /></p>
+<p class="p1">Die Studienteilnehmer wurden in Umgebungen, in denen IDR aktiv betrieben wurde, in nur rund 20 % aller F&auml;lle entdeckt, bevor sie sich internen Zugang zum lokalen Netzwerk verschaffen konnten. Nach ihrem Eindringen wurden sie in etwa 53 % aller F&auml;lle entdeckt. Betrachtet man die Untersuchungen der vergangenen Jahre<sup><a href="#f12">[</a><span class="s1"><a href="#f12">12]</a>&nbsp;</span></sup> und die Anekdoten der Superninjas unter den Penetrationstestern, sind diese Erkennungsquoten ziemlich gut. Selbstverst&auml;ndlich l&ouml;schen Penetrationstester f&uuml;r gew&ouml;hnlich keine Log-Dateien oder verwischen ihre Spuren, nachdem sie das Ziel erreicht haben<a id="f12"></a>; schlie&szlig;lich w&uuml;rde das ihren Abschlussbericht erschweren. Die Ergebnisse auf der rechten Seite sollten also im Vergleich mit m&ouml;glichen echten Angreifern mit einer gewissen Vorsicht betrachtet werden..</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[12] <em>Tats&auml;chlich haben wir in diesem Jahr zum ersten Mal die Vorher-/Nachher-Unterscheidung getroffen und erstmalig untersucht, ob Erkennungskapazit&auml;ten in den Testrahmen fielen. Da sie diese Daten nicht ber&uuml;cksichtigten, waren die &bdquo;Ausweichquoten&ldquo; der vergangenen Jahre etwas &uuml;berh&ouml;ht. Unter Ber&uuml;cksichtigung von au&szlig;erhalb des Testrahmens liegender Erkennung lag die Erkennungsquote in diesem Jahr bei rund 65 %, was sich mit dem Bericht von 2018 deckt.</em></p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Erbeutung-von-Zugangsdaten" id="Erbeutung-von-Zugangsdaten"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Erbeutung von Zugangsdaten</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">Unabh&auml;ngig vom geplanten Auftragsrahmen &ndash; interne oder externe Kompromittierung des Netzwerks, Social Engineering, Red-Team-Auftr&auml;gen oder sogar Code Review &ndash; f&auml;llt die Erbeutung und Verwendung von Zugangsdaten f&uuml;r gew&ouml;hnlich in den T&auml;tigkeitsbereich von Penetrationstestern. Warum sollte man schlie&szlig;lich komplizierte Exploits nutzen, wenn man ganz einfach vorgeben kann, ein legitimer Benutzer zu sein, um an geheime Informationen zu kommen? Tats&auml;chlich erbeuten Penetrationstester in etwa 73 % aller F&auml;lle mindestens einen Satz Zugangsdaten. Abh&auml;ngig von der Art des spezifischen Auftrags waren sie dabei mehr oder weniger erfolgreich.</p>
+<p class="p1"><img src="../../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/image3fbib.png" alt="Abbildung 18: Konnten Sie Zugangsdaten erbeuten? (Datensatz ist beschr&auml;nkt auf Auftr&auml;ge, bei denen das Erbeutung von Zugangsdaten in den Auftragsrahmen fiel.)" width="1000" height="286" /></p>
+<p class="p1"><img src="../../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/figure-18.5.jpg/index.html" alt="" width="1000" height="470" /></p>
+<h2 class="p1">Sammeln von Benutzernamen</h2>
+<p class="p1">Bei jedem Versuch, Zugangsdaten zu erbeuten geht es zun&auml;chst darum, herauszufinden, welche Benutzernamen im jeweiligen Zielbereich (z. B. Website) g&uuml;ltig sind. Benutzernamen sind selten geheim und folgen tendenziell bekannten Mustern wie Vorname_Nachname@domain.com, VNachname@domain.com oder VNach@domain.com. Der Versuch, diese Muster auszuf&uuml;llen, ist in der Regel mit Open Source Intelligence (OSINT) verbunden, wie Abbildung 19 zeigt.</p>
+<p class="p1"><img src="../../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/figure-19.jpg" alt="Abbildung 19: Wie haben Sie Benutzernamen gesammelt? (Datensatz enth&auml;lt nur Auftr&auml;ge, bei denen Zugangsdaten erfolgreich erbeutet wurden. Selten verwendete Methoden wurden ausgenommen.)" width="1000" height="291" /></p>
+<p class="p1">Zwei andere Techniken, die in Abbildung 19 erw&auml;hnt werden, sind User Enumeration, entweder durch lokalen Netzwerkzugriff oder extern verf&uuml;gbare Anwendungen. User-Enumeration-Techniken sind bew&auml;hrte Methoden f&uuml;r den anf&auml;nglichen Aufbau einer Liste m&ouml;glicher Ziele innerhalb einer Organisation. Doch obwohl es sich bei diesen Schwachstellen um das Musterbeispiel f&uuml;r CWE-203, &bdquo;Information Exposure Through Discrepancy&ldquo;&rdquo;<sup><a href="#f13_14">[</a><span class="s1"><a href="#f13_14">13]</a>&nbsp;</span></sup>, handelt, ist man sich unter Technologieanbietern immer noch nicht einig, ob User Enumeration &uuml;berhaupt eine Schwachstelle darstellt. Das Entwicklungsteam von Microsoft Exchange beispielsweise betrachtet Timing-Attacken gegen Benutzernamen nicht als ernsthaftes Sicherheitsproblem<sup><a href="#f13_14">[</a><span class="s1"><a href="#f13_14">14]</a>&nbsp;</span></sup>, da Benutzernamen nicht geheim sind. Andere bedeutende Anbieter wie Google hingegen ergreifen Ma&szlig;nahmen, um die Zahl der Benutzernamen, die schnell herausgefunden werden k&ouml;nnen, zu begrenzen.</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[13]&nbsp;<em><a href="https://cwe.mitre.org/data/definitions/203.html" target="_blank" rel="noopener">https://cwe.mitre.org/data/definitions/203.html</a></em></p>
+<p class="p1">[14]&nbsp;<em><a href="https://grimhacker.com/2017/07/24/office365-activesync-username-enumeration/" target="_blank" rel="noopener">https://grimhacker.com/2017/07/24/office365-activesync-username-enumeration/</a></em></p>
+<h2 class="p1">Password-Guessing</h2>
+<p class="p1">Nachdem eine Liste passender Benutzernamen erstellt wurde, sind die entsprechenden Passw&ouml;rter der n&auml;chste Schritt. Es herrscht keine Unstimmigkeit dar&uuml;ber, dass Passw&ouml;rter sowohl geheim als auch einzigartig sein sollen. Doch leider sind menschliche Benutzerinnen und Benutzer nach wie vor ziemlich schlecht darin, sich Passw&ouml;rter auszudenken, wohingegen Penetrationstester<sup><a href="#f15_16">[</a><span class="s1"><a href="#f15_16">15]</a>&nbsp;</span></sup> ziemlich gut darin sind, schlechte Passw&ouml;rter zu erraten. Abbildung 20 zeigt Quellen f&uuml;r g&uuml;ltige Passw&ouml;rter, welche bei den untersuchten Auftr&auml;gen genutzt wurden, bei denen der Diebstahl von Zugangsdaten im Testrahmen lag.</p>
+<p class="p1"><img src="../../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/imageumzi2.png" alt="Abbildung 20: Wie konnten Sie Passw&ouml;rter erhalten? (Datensatz enth&auml;lt nur Auftr&auml;ge, bei denen Zugangsdaten erfolgreich erbeutet wurden.)" width="1000" height="576" /></p>
+<p class="p1">Zusammengefasst stellen Passwort-Spraying (Austesten von universell gebr&auml;uchlichen Passw&ouml;rtern und Passwortmustern), erratbare organisationsspezifische Passw&ouml;rter und h&auml;ufig verwendete Standardpassw&ouml;rter die h&auml;ufigsten Quellen g&uuml;ltiger Passw&ouml;rter dar. Dieser Umstand deutet darauf hin, dass IT-Organisationen gut damit beraten sind, ihren Benutzern zuf&auml;llig erstellte Passw&ouml;rter zuzuweisen oder sie nachdr&uuml;cklich zu ermutigen, Passwortmanager f&uuml;r die Erstellung und Speicherung von Passw&ouml;rtern zu verwenden.</p>
+<p class="p1">Zu beachten gilt, dass die Zuweisung zuf&auml;lliger Passw&ouml;rter durch eine Passwortmanagement-Anwendung weit sicherer ist, als die blo&szlig;e Durchsetzung von Komplexit&auml;ts- und Rotationsregeln f&uuml;r die Passworterstellung. Heutzutage ist es &uuml;blich, sich in einem Umfeld zu bewegen, in dem Passw&ouml;rter einen Gro&szlig;- und einen Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten m&uuml;ssen und alle 90 Tage ge&auml;ndert werden. Doch leider neigen derartige Passwortbeschr&auml;nkungen dazu, die Passwortkomplexit&auml;t zu reduzieren, da Menschen das System austricksen und unabh&auml;ngig von einander Muster entwickeln wie beispielsweise &bdquo;Sommer2019!&ldquo;, &bdquo;Herbst2019!&ldquo; und so weiter.</p>
+<h2 class="p1">Password-Cracking</h2>
+<p class="p1">Password-Cracking &ndash; die Kunst, anhand einer Liste von Passwort-Hashes herauszufinden, welche Passw&ouml;rter diese Hashes generieren &ndash; ist in der diesj&auml;hrigen Studie &uuml;berraschend stark vertreten. Die Erbeutung einer Hash-Datei war in diesem Jahr die h&auml;ufigste Quelle f&uuml;r Passwortmaterial. Auch spezifischere Urspr&uuml;nge f&uuml;r Hashes wie beispielsweise Challenge-Response-Traffic und /etc/shadow wurden gemeldet. Auch hier stellen wir jedoch fest, dass viele der gecrackten Passw&ouml;rter mit ein wenig Zeit und Gl&uuml;ck auch m&uuml;helos h&auml;tten erraten werden k&ouml;nnen, wenn man die Gelegenheit dazu gehabt h&auml;tte.</p>
+<p class="p1">&nbsp;</p>
+<p class="p1"><img src="../../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/image7m3hl.png" alt="Abbildung 21: Erratbare gecrackte Passw&ouml;rter
+(Datensatz ist beschr&auml;nkt auf Auftr&auml;ge, bei denen Passwort-Cracking in den Auftragsrahmen fiel.)" width="1000" height="354" /></p>
+<p class="p1">Teil unserer Untersuchung war auch, woher die Passwort-Hashes stammten. Wie in Abbildung 22 zu sehen ist, stammten die meisten wenig &uuml;berraschend aus Quellen in Microsoft Windows.</p>
+<p class="p1"><img src="../../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/image1qszl.png" alt="Abbildung 22: Welche Art von Hashes konnten Sie sammeln? (Datensatz enth&auml;lt nur Auftr&auml;ge, bei denen erfolgreich Hashes gesammelt wurden.)" width="1000" height="308" /></p>
+<p class="p1">Besonders zu beachten sind die erbeuteten LM-Hashes. Diese sind extrem unsicher, laufen einigen grundlegenden empfohlenen Methoden der Kryptographie zuwider und wurden von Microsoft schon lange zugunsten st&auml;rkerer Hashing-Mechanismen verworfen. Doch obwohl sie in Microsoft-Umgebungen, die in den vergangenen zehn Jahren aktualisiert wurden, im Grunde keine Rolle mehr spielen, bestehen sie weiterhin hartn&auml;ckig und warten nur darauf, von Angreifern ausgenutzt zu werden. Domain-Administratoren werden nachdr&uuml;cklich aufgefordert<a id="f15_16"></a>, diese LM-Hashes endg&uuml;ltig auszurotten, wobei ihnen Microsofts Ratschl&auml;ge zur Deaktivierung von LM-Hash-Speicher helfen k&ouml;nnen.<a href="#f15_16"><sup>[<span class="s1">16]</span></sup></a></p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[15]&nbsp;<em>Strikt gesehen auch Menschen. Normalerweise.</em></p>
+<p class="p1">[16]&nbsp;<em><a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/network-security-do-not-store-lan-manager-hash-value-on-next-password-change" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/network-security-do-not-store-lan-manager-hash-value-on-next-password-change</a></em></p>
+<div style="background-image: url('../../../../globalassets/_images/backgrounds/hoodie-walker-2.jpg'); background-repeat: no-repeat; width: auto; height: auto; padding: 1.5rem; border-radius: 15px;"><br />
+<p style="font-family: Muli ExtraBold; color: #ffd349; size: 1.5rem;">EINMAL BEIM PENETRATIONSTEST:</p>
+<h2 style="color: #fff; margin-top: 1rem !important;">Sie haben da etwas &uuml;bersehen</h2>
+<p style="color: #fff; font-size: .85rem;">Penetrationstester: <strong>Ted Raffle</strong> | Kundenbranche: <strong>Utilities &amp; Energy</strong></p>
+<p style="color: #fff;">Penetrationstests stellen f&uuml;r Kunden ein &auml;u&szlig;erst hilfreiches Mittel dar, um Schwachstellen und Fehlkonfigurationen zu entdecken und zu beheben. Das gilt insbesondere dann, wenn starke Sicherheitsund Abwehrma&szlig;nahmen ihr Ziel verfehlen k&ouml;nnen, blo&szlig; weil ein oder zwei Systeme die Maschen des Sicherheitsnetzes weiten.</p>
+<p style="color: #fff;">Wie viele interne Netzwerk-Penetrationstests begann dieser mit der Suche nach Anfragen im NetBIOS Name Service (NBT-NS) und der Link Local Multicast Name Resolution (LLMNR). Diese unterst&uuml;tzenden Namensaufl&ouml;sungsservices k&ouml;nnen verwendet werden, um Hostnamen aufzul&ouml;sen, die in DNS nicht gefunden werden. Ihre Anfragen werden von verwundbaren Hosts bei Broadcast- und Multicast-Anfragen ins lokale Netzwerk gesendet. Indem auf diese Anfragen &bdquo;vergiftete&ldquo; Antworten geschickt werden, die den Namen des gew&uuml;nschten Hosts vorgeben, kann ein Angreifer &uuml;ber SMB-Verbindungen NetNTLMvs-Passwort-Hashes erhalten.</p>
+<p style="color: #fff;">Ich &uuml;berpr&uuml;fte zwei unterschiedliche lokale Netzwerke und konnte sechs Hosts identifizieren, die NBT-NS-Anfragen stellten. Die gegen diese Hosts gerichteten Poisoning-Attacken ergaben jedoch nur bei einem Domain-Benutzer SMB-Verbindungen und Passwort-Hashes. Eines der unmittelbarsten Risiken, die die Erbeutung solcher Passwort- Hashes mit sich bringt, ist, dass sie geknackt werden k&ouml;nnen. Ich war allerdings nicht in der Lage, den einsamen NetNTLMv2-Passwort-Hash, den ich erhalten hatte, zu knacken. Es muss sich also um ein starkes, nicht g&auml;ngiges Passwort gehandelt haben. Gut f&uuml;r den Kunden!</p>
+<p style="color: #fff;">Gleichwohl ist ein anderes Risiko, das mit der M&ouml;glichkeit einhergeht, solche SMB-Verbindungen herzustellen, SMB-Relay. In diesem Fall wird der Challenge-Response-Traffic auf anderen Hosts reproduziert, ohne dass das Passwort geknackt werden muss<a id="f17"></a>. Mit RunFinger.py entdeckte ich nur drei SMB-Hosts, die keine Nachrichtensignatur erforderten. Von diesen war nur einer tats&auml;chlich mit der Domain verbunden.</p>
+<p style="color: #fff;">Indem ich die SMB-Verbindungen des einzelnen Benutzerkontos ausnutzte, das durch NBT-NS-Poisoning betroffen war, und Smbrelayx<sup><a href="#f18">[</a><span class="s1"><a href="#f17">17]</a></span></sup> verwendete, um diese Verbindung zu dem Domain-Host umzuleiten, der keine SMB-Nachrichtensignatur verlangte, konnte ich von diesem Host schnell Passwort-Hashes f&uuml;r lokale Benutzerkonten abrufen.</p>
+<p style="color: #fff;">Bei diesen NTLM-Passwort-Hashes handelt es sich nicht um Challenge-Response Paare. Sie k&ouml;nnen zur &bdquo;Pass-the-Hash&ldquo;-Authentifizierung verwendet werden; das bedeutet, dass der nicht geknackte Passwort-Hash stellvertretend f&uuml;r das tats&auml;chliche Passwort zur netzwerkbasierten Authentifizierung verwendet wird. Ich konnte die gleichen lokalen Administrator-Zugangsdaten bei fast der H&auml;lfte aller SMB-Hosts verwenden, die in den Testrahmen des Auftrags fielen. Anschlie&szlig;end war es ein Leichtes, mit Mimikatz, einer Sammlung gebr&auml;uchlicher Tools zum Abrufen lokaler Passw&ouml;rter, Klartext-Passw&ouml;rter und Passwort-Hashes aus dem Cache zu holen. Darunter befand sich auch ein zwischenge-speicherter NTLMPasswort-Hash f&uuml;r einen der Domain-Administratoren. Jackpot.</p>
+<p style="color: #fff;">Da ich nun im Besitz der NTLM-Passwort-Hashes aller Domain- Benutzer war, widmete ich mich wieder dem Cracking &ndash; mit eher durchwachsenem Erfolg. Es gelang mir, nur f&uuml;r drei funktionierende Benutzerkonten g&uuml;ltige Anmeldedaten herauszufinden. Obwohl diese Konten schon ausreichten, um vertrauliche Dokumente in Fileshares und SharePoint zu finden, verdeutlichten die Ergebnisse des Passwort-Crackings, dass der Kunde fast seiner gesamten Anwenderbasis erfolgreich die Nutzung starker Passw&ouml;rter vermittelt hatte. Als wir mit dem Kunden die Nachbesprechung am Standort durchf&uuml;hrten, erkl&auml;rte er, dass die meisten ihrer Benutzer Smart-Cards und lange, zufallsgenerierte Passw&ouml;rter verwendeten. Doch trotz dieser starken Passw&ouml;rter und mageren Ergebnisse auf den meisten Hosts verdeutlichte dieser Auftrag, dass auch nur eine Handvoll &uuml;bersehener Systeme ausreicht, um einen mit gebr&auml;uchlichen Methoden vorgehenden Angreifer im Netzwerk Fu&szlig; fassen zu lassen.</p>
+</div>
+<p>&nbsp;</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[17]&nbsp;<em><a href="https://github.com/SecureAuthCorp/impacket/blob/master/examples/smbrelayx.py" target="_blank" rel="noopener">https://github.com/SecureAuthCorp/impacket/blob/master/examples/smbrelayx.py</a></em></p>
+<h2 class="p1">Privilegierte Konten</h2>
+<p class="p1">Unabh&auml;ngig davon, welcher Mechanismus zur Festlegung diskreter Privilegienstufen verwendet wird: Konten lassen sich in aller Regel in Benutzerkonten und &bdquo;privilegierte&ldquo; Konten unterteilen. Erstere werden von Personen (und selten Services) verwendet, die an ihrem jeweiligen Computer keine erweiterten Privilegien brauchen oder wollen. Sie k&ouml;nnen eigenst&auml;ndig keine systemver&auml;ndernde Software installieren, Logs l&ouml;schen oder die allgemeine Sicherheit des Host-Betriebssystems anderweitig beeinflussen. Letztere hingegen werden von Personen (und h&auml;ufig Services) verwendet, die diese Rechte ben&ouml;tigen. Typischerweise sind sie Administratorkonten oder haben auf andere Weise Kontrolle &uuml;ber das authentifizierende System.</p>
+<p class="p1">In Abbildung 23 wird aufgeschl&uuml;sselt, wie h&auml;ufig Zugriff auf privilegierte Konten erlangt wurde. Fast 80 % davon waren Domain-Administratoren oder &Auml;hnliches.</p>
+<p class="p1"><img src="../../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/imagexmx6y.png" alt="Abbildung 23: Konnten Sie Zugangsdaten f&uuml;r privilegierte Konten erbeuten? (Datensatz ist beschr&auml;nkt auf Auftr&auml;ge, f&uuml;r die Antworten gegeben wurden.)" width="1000" height="266" /></p>
+<h2 class="p1">Kontosperrungen</h2>
+<p class="p1">Eine h&auml;ufig zur Anwendung kommende Verteidigungsmethode gegen Online-Passwort-Spraying ist die Kontosperrung. Mehrere gescheiterte Anmeldeversuche innerhalb eines gewissen (und in der Regel kurzen) Zeitraums resultieren in einer Sperrung des Kontos. Im Unternehmenskontext w&auml;hrt diese in der Regel unbegrenzt, bis man sich ans IT-Helpdesk gewendet hat.<sup><a href="#f18">[</a><span class="s1"><a href="#f18">18]</a>&nbsp;</span></sup> Nat&uuml;rlich kennen sowohl kriminelle Angreifer als auch Penetrationstester diese Verteidigung und achten genau darauf, das Sperrungslimit knapp zu unterschreiten, wie in Abbildung 24 n&auml;her beschrieben wird.</p>
+<p class="p1"><img src="../../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/images1oon.png" alt="Abbildung 24: Status der Kontensperrungen
+(Datensatz enth&auml;lt nur in Bezug auf Kontosperrungen eingegangene Antworten.)" width="1000" height="308" /></p>
+<p class="p1"><a id="f18"></a>___________________________________________</p>
+<p class="p1">[18]&nbsp;<em>Zeit f&uuml;r eine kleine Predigt: Selbst eine Kontosperrung von nur f&uuml;nf Minuten wird in der Regel selbst die gl&uuml;cklichsten Online-Guessing-Angriffe unterbinden &ndash; vorausgesetzt, dass das Passwort, das erraten werden soll, nicht zu den bereits erw&auml;hnten &uuml;blichen Passw&ouml;rtern geh&ouml;rt, die typischerweise beim Spraying zum Einsatz kommen. Ein Authentifizierungsplan, der diese Spraying-Passw&ouml;rter explizit verbietet, verbessert in Verbindung mit einer kurzen Sperrungsfrist nicht nur die Sicherheit, sondern macht es f&uuml;r Benutzer auch weniger frustrierend, wenn sie gelegentlich ihr Passwort verlieren oder vergessen.</em></p>
+<h2 class="p1">Multifaktor-Authentifizierung</h2>
+<p class="p1">Ein neuerer Mechanismus zur Zugangsdatenkontrolle ist die Zwei-Faktor-Authentifizierung (2FA), die gelegentlich auch als &bdquo;Multifaktor-Authentifizierung&ldquo; (MFA) bezeichnet wird. Nachdem ein Passwort richtig eingegeben wurde, wird der Benutzer dazu aufgefordert, einen zus&auml;tzlichen Wert anzugeben. Dabei handelt es sich in der Regel um eine kurze Folge algorithmisch generierter Zahlen, die auf einem gemeinsamen Geheimnis beruhen, das vom 2FA-Ger&auml;t und dem authentifizierenden Com-puter genutzt wird. Einige Organisationen verwenden diese L&ouml;sung entweder, indem sie ihre Mitarbeiterinnen und Mitarbeiter mit einem speziell angefertigten 2FA-Ger&auml;t ausstatten oder die privaten oder dienstlichen Smartphones nutzen.</p>
+<p class="p1">Obwohl 2FA auf Verbraucherwebsites weiter an Popularit&auml;t gewinnt, sieht man sie im Feld nur selten, wie Abbildung 25 zeigt. Nichtsdestotrotz war die Antwort in etwa 22 % aller F&auml;lle ein definitives &bdquo;Ja&ldquo; &ndash; ein bedeutender Anstieg gegen&uuml;ber den 15 % vorgefundener 2FA-L&ouml;sungen im vergangenen Jahr. F&uuml;r Verteidiger ist das ein sehr positiver Trend.</p>
+<p class="p1"><img src="../../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/imageuxuya.png" alt="Abbildung 25: Wurde bei den getesteten Services Zwei-Faktor-Authentifizierung verwendet? (Datensatz ist beschr&auml;nkt auf Auftr&auml;ge, f&uuml;r die Antworten gegeben wurden.)" width="1000" height="188" /></p>
+<p class="p1">Doch war 2FA an den wenigen Kundenstandorten, wo sie genutzt wurde, auch effektiv? Die Rede ist hier nur von 26 F&auml;llen; anhand der geringen Gr&ouml;&szlig;e dieses Datensatzes ist es also schwer, eine sichere Aussage zu treffen. Trotz dieses Vorbehalts ist die Antwort ein zaghaftes &bdquo;Ja&ldquo;. In rund 65 % der F&auml;lle konnten die Penetrationstester selbst, wenn sie ein Passwort hatten, an der Anmeldung gehindert werden. Dennoch ist dieses Ergebnis ziemlich schwach. In einigen F&auml;llen wurden vor Ort SMS und E-Mails abgefangen, um die 2FA zu umgehen, doch haupts&auml;chlich fanden Penetrationstester eine alternative Authenti-fizierungsm&ouml;glichkeit, die &uuml;berhaupt keine 2FA erforderte. Bei vielen Anwendungen, unter anderem E-Mail-Systemen mit Fernzugriff, muss Zwei-Faktor-Authentifizierung erst eingef&uuml;hrt werden. Dazu geh&ouml;ren unter anderem E-Mail-Systeme mit Fernzugriff. 2FA auf dem Hauptanmeldungsbildschirm ist besser als nichts. Wirklich sicher ist sie allerdings nur dann, wenn alle Wege zur Authenti-fizierung eines bestimmten Kontos zwingend 2FA ben&ouml;tigen.</p>
+<div style="background-image: url('../../../../globalassets/_images/backgrounds/hoodie-walker-2.jpg'); background-repeat: no-repeat; width: auto; height: auto; padding: 1.5rem; border-radius: 15px;"><br />
+<p style="font-family: Muli ExtraBold; color: #ffd349; size: 1.5rem;">EINMAL BEIM PENETRATIONSTEST:</p>
+<h2 style="color: #fff; margin-top: 1rem !important;">Nerds in der NERC</h2>
+<p style="color: #fff; font-size: .85rem;">Penetrationstester: <strong>Jonathan Stines</strong> | Kundenbranche: <strong>Utilities &amp; Energy</strong></p>
+<p style="color: #fff;">Wir wurden damit beauftragt, in einem Gro&szlig;kraftwerk einen kombinierten physischen Sicherheits- und Social-Engineering-Test durchzuf&uuml;hren. Dabei wurden wir konkret darum gebeten, das Sicherheitsbewusstsein der Mitarbeiter zu testen. Wir f&uuml;hrten einige Nachforschungen durch und fanden einen IT-Manager, der im Kraftwerk arbeitete, sowie dessen Telefonnummer.</p>
+<p style="color: #fff;">Ich ging durch den Vordereingang, wo eine Sicherheitsmitarbeiterin an der Rezeption sa&szlig;. Ich sagte ihr, ich sei ein Netzwerktechniker und sollte das WLAN pr&uuml;fen, wobei ich den IT-Manager als die Person angab, mit der ich arbeiten sollte. Sie erwiderte, dass sie nichts von einem WLAN-Test geh&ouml;rt hatte. Darauf antwortete ich, dass wir bereits an verschiedenen anderen Standorten Tests durchgef&uuml;hrt hatten, deren Namen ich aufz&auml;hlte, um glaubw&uuml;rdiger zu wirken. Dann erkl&auml;rte ich ihr, dass ich ihn einfach nur bitten m&uuml;sste, den diensthabenden Mitarbeiter an der Rezeption anzurufen, sobald ich eintreffe. Sie war einverstanden und stimmte zu, sich von ihm anrufen zu lassen. Dann gab sie mir ihre Telefonnummer.</p>
+<p style="color: #fff;">Ich ging auf den Parkplatz und rief sie an, wobei ich meine Nummer mit der des IT-Managers maskierte, damit sie wie die korrekte Anrufer-kennung aussah. Ich sagte ihr, dass er (also ich) Zugang zu den IDF-Schr&auml;nken, dem Rechenzentrum und den NERC-CIPKontrollr&auml;umen der Einrichtung brauchen w&uuml;rde. Das nahm sie mir ohne Probleme ab. Sie stimmte zu, ihm (also mir) Zugang zu gew&auml;hren.</p>
+<p style="color: #fff;">Ich kam wieder hinein und sie stellte mir jemanden vom Informationssicherheitsteam zur Seite, der &uuml;ber unsere physischen Tests nicht Bescheid wusste, um mich bei meinem &bdquo;WLAN-Test&ldquo; durch die Einrich-tung zu begleiten. Mit unserem Zugang kamen wir in alle Bereiche des Geb&auml;udes, auch in den Kontrollraum und das Datenzentrum. Ein voller Erfolg.</p>
+</div></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Verteidigung-gegen-diese-dunklen-Knste" id="Verteidigung-gegen-diese-dunklen-Knste"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Verteidigung gegen diese dunklen K&#252;nste</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p>Penetrationstester &bdquo;gewinnen&ldquo; in der Regel, mit anderen Worten: Sie erreichen das im Rahmen des Auftrags gesetzte Ziel, sei es Eindringen ins Netzwerk von au&szlig;erhalb, das Entwenden vertraulicher Daten oder ein Domain-Admin-Zugang. In konkreten Zahlen ausgedr&uuml;ckt f&uuml;hren 80,6 % aller externen Penetrationstests zu einem internen Zugang, und dieser m&uuml;ndet in der Regel entweder in der Kompromittierung eines Domain-Admin-Zugangs (75,9 % aller F&auml;lle) oder der Entwendung vertraulicher Daten (87 % aller F&auml;lle). Angesichts dieser Zahlen geben manche vielleicht die Hoffnung auf, sich gegen einen raffinierten und zielstrebigen Angreifer verteidigen zu k&ouml;nnen; worin besteht dann der Sinn, &uuml;berhaupt etwas zu sichern?</p>
+<p class="p1">Um solcher Verzweiflung entgegenzuwirken, sollten wir allerdings zun&auml;chst einen Blick auf die optimistische Interpretation dieser Ergebnisse werfen. In rund 15 bis 20 % aller F&auml;lle wird der Penetrationstester von den vorhandenen Sicherheitsma&szlig;nahmen ziemlich effektiv aufgehalten. Das zeigt, dass der getestete Kunde ziemlich gute Arbeit bei der Sicherung der ihm wichtigen Daten leistet.</p>
+<p class="p1">Zweitens besteht der Job des Penetrationstesters darin, akribisch jene dunklen, vergessenen Ecken der Infrastruktur aufzu- st&ouml;bern, in denen eine verborgene (oder weniger verborgene) L&uuml;cke im vorhandenen Sicherheitskonzept klafft. Wenn eine Organisation ernsthafte Probleme mit ihrem Patch-Management und der Sicherung ihrer Webanwendungen hat, ist sie vermutlich noch nicht bereit f&uuml;r einen Penetrationstest. Was solche Organisationen brauchen, ist eine gr&uuml;ndliche Schwachstellen-analyse, die &bdquo;leichte&ldquo; Ziele identifiziert. Anschlie&szlig;end k&ouml;nnen sie dann einen Berater engagieren, der ihnen mitteilt, wo etwas danebengegangen ist.</p>
+<p class="p1">Das Erfolgsrezept f&uuml;r Verteidiger, mit dem man den n&auml;chsten Penetrationstest &bdquo;gewinnen&ldquo; kann, besteht also darin, sich den Bereichen zu widmen, auf die Angreifer es h&auml;ufig &ndash; und oft erfolgreich &ndash; abgesehen haben:</p>
+<ul>
+<li class="p2">An erster Stelle steht das Patch-Management als absolute Grundlage der Netzwerksicherheit. Sorgen Sie daf&uuml;r, dass Sie nicht zu den 30 % der Organisationen geh&ouml;ren, die immer noch anf&auml;llig f&uuml;r alte, wohlbekannte Sicherheitsl&uuml;cken wie MS17-010 (EternalBlue) sind. Fehlt Ihnen eine solide, umfassende Schwachstellen-Management-Strategie, wird Ihnen fast jeder Penetrationstest verraten, dass Sie sich zun&auml;chst darauf konzentrieren m&uuml;ssen.</li>
+<li class="p2">Wenn Sie Ihren Penetrationstest-Berater wirklich beeindrucken (und in den Wahnsinn treiben) wollen, dann etablieren Sie in Ihrer Organisation ein starkes Passwort-Management. Hierf&uuml;r gibt es verschiedene L&ouml;sungen, doch wenn es Ihnen gelingt, alle Benutzer- und Servicekonten mit zufallsgenerierten, langen Passw&ouml;rtern auszustatten, wird letztendlich jeder Passwort-Spraying-Versuch ins Leere laufen.</li>
+<li class="p2">Um mit diesen beiden &bdquo;Anfangsstrategien&ldquo; Erfolg zu haben, m&uuml;ssen Sie Ihr Netzwerk unbedingt laufend auf neue Assets und Services &uuml;berwachen, die darin zu finden sind. Das beste Schwachstellen- und Passwort-Management ist umsonst, wenn irgendein vergessenes Ger&auml;t mit den Standardzugangsdaten &bdquo;admin/admin&ldquo; ein weit offenes Einfalltor in Ihr Netzwerk bietet &ndash; besonders, wenn dieses Ger&auml;t auch noch Schreibberechtigung f&uuml;r ansonsten sichere Systeme hat. &bdquo;Erscanne dich selbst&ldquo; ist das erste Gebot der Netzwerksicherheit. Haben Sie keine Scheu davor, in den restlichen 50 Wochen des Jahres, in denen der Penetrationstester nicht im Hause ist, kontinuierlich nach dem schw&auml;chsten Glied in Ihrer Sicherheitskette zu scannen.</li>
+<li class="p2">Schulungen gegen Social Engineering k&ouml;nnen an einem Freitagnachmittag abwechslungsreiche Unterhaltung bieten und dienen nicht nur der Vertrauensbildung und der F&ouml;rderung des Teamgeistes, sondern vermitteln gleichzeitig auch, wie man angesichts eines Social-Engineering-Versuchs h&ouml;flich, aber bestimmt bleibt. Selbst wenn technische Sicherheitsma&szlig;nahmen aller Art bereits eingerichtet wurden, kann die Schwachstelle einer Organisation n&auml;mlich an einer Tastatur sitzen oder vor einem verschlossenen Fahrstuhl stehen. Im Zuge der zunehmenden Verschiebung allt&auml;glicher IT-Services in die Cloud nutzen kriminelle Angreifer und Penetrationstester zunehmend E-Mail-basierte Phishing-Kampagnen und sowohl pers&ouml;nliche als auch telefonische &Uuml;berredungsmethoden.</li>
+</ul></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Anhang" id="Anhang"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Anhang</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<h2 class="p1">Anhang A: Kundendemografie</h2>
+<p class="p1">Im Hinblick auf die Kundendemografie erfassen wir die Gr&ouml;&szlig;e und die Branche des Kunden. Ein Unternehmen gilt als &bdquo;gro&szlig;&ldquo;, sobald es mehr als 1.000 Assets Teil des Testrahmens sind. Unser Datensatz f&uuml;r diese Studie enthielt neben der Kategorie &bdquo;Sonstige und unbekannt&ldquo; neun Branchen: Kommunikation und Medien, Bildung, Finanzen, Gesundheitswesen, Produktion, Einzelhandel, Dienstleistungen, Technologie sowie Energie und Versorgungsbetriebe.</p>
+<p class="p1">Von den 160 Kunden (einige davon wurden im Untersuchungszeitraum mehr als einmal getestet) tendierte unsere Kunden-demografie st&auml;rker in Richtung Finanzen (39 Firmen) und Dienstleistungen (33 Firmen). Hinsichtlich der Gr&ouml;&szlig;e war die Verteilung mit 53,75 % kleinen und 40 % gro&szlig;en Unternehmen (ausgenommen zehn Unternehmen, deren Gr&ouml;&szlig;e nicht erfasst wurde) relativ ausgeglichen. Die folgende Tabelle fasst die Demografie kurz zusammen.</p>
+<p class="p1"><img src="../../../../contentassets/18bb314637b14323a7d4f2e29977dc0f/figure-26.jpg" alt="Abbildung 26: Kundendemografie (Prozentwerte geben den Prozentsatz innerhalb der Spalte an.)" width="900" height="827" /></p>
+<h2 class="p1">Anhang B: Fragestellungen der Umfrage und Beantwortungsquote</h2>
+<p><a href="../../../../globalassets/_pdfs/research/uth_appendix_b.pdf">Klicken Sie hier</a>, um die Fragen und Beantwortungsquoten einzusehen.</p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="ber-Rapid7-Global-Consulting" id="ber-Rapid7-Global-Consulting"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">&#220;ber Rapid7 Global Consulting</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">Der Bereich <a href="../../../../services/index.html">Global Consulting</a> von Rapid7 erbringt branchenweit renommierte Beratungs- und Analysedienstleistungen, die Zuversicht, Klarheit und Orientierungspunkte f&uuml;r Ihr Sicherheitsprogramm schaffen. Unsere Managed Services und Beratungsleistungen vergr&ouml;&szlig;ern die Reichweite Ihrer Teams, w&auml;hrend unsere Industrieanalysen, Berichte und Open-Source-Tools die Insight-Cloud &ndash; und Sie &ndash; stets mit neuen Erkenntnissen versorgen.</p>
+<p class="p1">Die Berater von Rapid7 haben umfangreiche praktische Kenntnisse in der Entwicklung und Verwaltung von Sicherheits-programmen und verf&uuml;gen unter anderem &uuml;ber Expertenwissen in den Bereichen Schwachstellenmanagement, Betrugserkennung, Penetrationstests, Threat Intelligence, Incident Response, Red-Team-Programme und vielen weiteren Feldern.</p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="ber-Rapid7" id="ber-Rapid7"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">&#220;ber Rapid7</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">Rapid7 arbeitet an fortschrittlichen Sicherheitsl&ouml;sungen durch unsere Insight-Cloud, die auf Transparenz, Analytik und Automatisierung setzt. Unsere L&ouml;sungen vereinfachen komplizierte Sachverhalte und erm&ouml;glichen es Sicherheitsteams, effektiver mit IT und Entwicklung zusammenzuarbeiten, um Sicherheitsl&uuml;cken zu schlie&szlig;en, sch&auml;dliche Aktivit&auml;ten zu&nbsp;erkennen, Angriffe zu untersuchen und abzuwehren sowie Abl&auml;ufe zu automatisieren. Mehr als 7.900 Kunden bauen auf die Technologien, die Dienstleistungen und die Forschung von Rapid7, um ihre Sicherheit zu verbessern und ihre Unternehmen sicher voranzubringen. Weitere Informationen finden Sie auf <a href="../../../../index.html"><span class="s1">unserer Website</span></a>. Besuchen Sie au&szlig;erdem unseren <a href="https://blog.rapid7.com/"><span class="s1">Blog</span></a> oder folgen Sie uns auf <a href="https://twitter.com/rapid7"><span class="s1">Twitter</span></a>.</p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+
+
+            </section>
+        </div>
+
+    </div>
+    <!-- / Main Section -->
+
+</div>
+<!-- Page Content -->
+
+
+<footer >
+    <section class="search-scroll">
+        <div class="row">
+            <div class="footer__search">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="Suche" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                </form>
+            </div>
+            <div class="footer__scroll">
+                <a href="#__" class="smooth">
+                    <span>ZUR&#220;CK ZUM ANFANG</span>
+                    <img class="lazy" data-src="/includes/img/up-arrow-lightgray.png" src="../../../../includes/img/placeholder.png" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+        <section class="footer__links row">
+            <div class="footer__links-wrapper">
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__contact">
+                        <a href="../../../../index.html">
+                            <img alt="Rapid7 logo" class="logo lazy" data-src="/includes/img/Rapid7_logo.svg" src="../../../../includes/img/placeholder.png" />
+                        </a>
+                                        <div class="footer__links-title">KUNDEN SUPPORT</div>
+                <a class="link" href="tel:1-866-390-8113">+1-866-390-8113</a>
+                <div class="footer__links-title">VERTRIEB</div>
+                <a class="link" href="tel:+498997007007">+49 89 97 007 007</a>
+
+                            <div class="footer__breach">
+                                <div class="footer__breach-title">Brauchen Sie dringend Hilfe bei einem Vorfall?</div>
+                                <div class="footer__breach-contact">
+                                    <div class="footer__breach-icon"></div>
+                                    <div class="footer__breach-phone"><a href="tel:18447274347">+1-844-RAPID-IR</a></div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="footer__links-section footer__solutions">
+                                        <div class="footer__links-title">LÖSUNGEN</div>
+                <a class="link" href="../../../solutions/index.html">Alle Lösungen</a>
+                <a class="link" href="../../../solutions/industry/index.html">Lösungen nach Branchen</a>
+                <a class="link" href="../../../solutions/compliance/index.html">Compliance-Lösungen</a>
+
+                    </div>
+                </div>
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__support">
+                                        <div class="footer__links-title">SUPPORT & RESSOURCEN</div>
+                <a class="link" href="../../../for-customers/index.html">Produkt-Support</a>
+                <a class="link" href="../../../resources/index.html">Ressourcen</a>
+                <a class="link" href="../../../about/customers/index.html">Kunden-Erfahrungsberichte</a>
+                <a class="link" href="../../../about/events-webcasts/index.html">Events & Webcasts</a>
+                <a class="link" href="../../../services/training-certification/index.html">Training & Zertifizierung</a>
+                <a class="link" href="../../../fundamentals/index.html">IT & Security Fundamentals</a>
+                <a class="link" href="../../../db/index.html">Vulnerability- & Exploit-Datenbank</a>
+
+                    </div>
+                    <div class="footer__links-section footer__about">
+                                        <div class="footer__links-title">ÜBER UNS</div>
+                <a class="link" href="../../../about/company/index.html">Unternehmen</a>
+                <a class="link" href="../../../about/leadership/index.html">Geschäftsführung</a>
+                <a class="link" href="../../../about/press-releases/index.html">News & Pressemitteilungen</a>
+                <a class="link" href="../../../about/customers/index.html">Kunden</a>
+                <a class="link" href="../../../about/public-policy/index.html">Gesellschaftliches Engagement</a>
+                <a class="link" href="https://investors.rapid7.com/">Investoren</a>
+
+                    </div>
+                </div>
+
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__connect">
+                                        <div class="footer__links-title">INS GESPRÄCH KOMMEN</div>
+                <a class="link" href="../../../contact/index.html">Kontakt</a>
+                <a class="link" href="https://blog.rapid7.com/">Blog</a>
+                <a class="link" href="https://rapid7support.force.com/customers/">Support Login</a>
+                <a class="link" href="../../../careers/index.html">Stellenangebote</a>
+
+                        <div class="footer__links-social">
+                            <a class="linkedin" href="https://www.linkedin.com/company/39624" target="_blank"></a>
+                            <a class="twitter" href="https://twitter.com/Rapid7" target="_blank"></a>
+                            <a class="facebook" href="https://www.facebook.com/rapid7" target="_blank"></a>
+                            <a class="instagram" href="https://www.instagram.com/rapid7/" target="_blank"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <section class="footer__legal">
+        <div class="row">
+            <div class="footer__legal-copyright">&copy; Rapid7</div>
+
+                    <div class="footer__legal-link"><a href="../../../legal/index.html">Nutzungsbedingungen</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../../privacy-policy/index.html">Datenschutz</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../../export-notice/index.html">Export-Bedingungen</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../../trust/index.html">Trust</a></div>
+        </div>
+    </section>
+
+        <!-- *************************** sticky contact us modal *************************** -->
+        <section class="contact-sticky">
+            <div class="row expanded">
+                <div id="stickyButtons" class="driftInit">
+                    <div class="chatBtn show-if-chat-online" id="stickyChat">
+                        <a class="gray button">Chat</a>
+                    </div>
+                    <div class="contactBtn" data-open="stickyContact">
+                        <a id="sticky_contact_btn" class="gray button">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="reveal light hasSidebar" id="stickyContact" data-reveal>
+            <section class="contactForm">
+                <div class="row">
+                    <div class="large-9 columns">
+                        <form id="contactModal" class="formBlock freemail">
+                            <div id="intro" class="row">
+                                <div id="thankyouText" style="display:none;" class="messageBox green">
+                                    <div class="medium-12">
+                                        <h4><span class="success">Success!</span> Thank you for submission. We will be in touch shortly.</h4>
+                                    </div>
+                                </div>
+                                <div id="errorText" style="display:none;" class="messageBox red">
+                                    <div class="medium-12">
+                                        <h4><span class="error">Oops!</span> There was a problem in submission. Please <a href="../../../../contact/index.html" title="Visit our Contact Us Page">contact us</a>.</h4>
+                                    </div>
+                                </div>
+                                <div class="columns medium-12">
+                                    <h2>Contact Us</h2>
+                                    <p id="fieldInstruction" class="">We're happy to answer any questions you may have about Rapid7</p>
+                                </div>
+                            </div>
+                            <fieldset>
+                                <dl class="clearfix expand">
+                                    <dd>
+                                        <select name="contactType" id="contactType" tabindex="21" class="normalSelect dropdownSelect">
+                                            <option value="0">Grund f&#252;r die Kontaktaufnahme</option>
+                                                <option value="3557252">Generelles Interesse</option>
+                                                <option value="3557253">Demo-Anfrage</option>
+                                                <option value="3557256">Preise</option>
+                                                <option value="3557257">Dienstleistungen</option>
+                                                <option value="3557359">Angebot-Anfrage</option>
+                                        </select>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix expand" id="productNameParent" style="display:none;">
+                                    <dd>
+                                        <select name="productName" id="productName" tabindex="22" class="normalSelect dropdownSelect">
+                                            <option value="0">Select Product</option>
+                                            <option value="3558027">Metasploit</option>
+                                            <option value="8209765">InsightIDR</option>
+                                            <option value="11407979">InsightVM</option>
+                                            <option value="10417511">InsightOps</option>
+                                            <option value="18912840">InsightAppSec</option>
+                                            <option value="6184447">AppSpider</option>
+                                            <option value="1550853">Nexpose</option>
+                                        </select>
+                                    </dd>
+                                </dl>
+                                <dl class="">
+                                    <dd>
+                                        <label for="firstName">Vorname</label>
+                                        <input id="firstName" type="text" name="firstName" tabindex="23" />
+                                    </dd>
+                                </dl>
+                                <dl class="">
+                                    <dd>
+                                        <label for="lastName">Name</label>
+                                        <input id="lastName" type="text" name="lastName" tabindex="24" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="jobTitle">Berufsbezeichnung</label>
+                                        <input id="jobTitle" type="text" name="jobTitle" tabindex="25" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="companyName">Firma</label>
+                                        <input id="companyName" type="text" name="companyName" tabindex="26" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="email">E-Mail (gesch&#228;ftlich)</label>
+                                        <input id="email" type="text" tabindex="27" name="email" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <div class="intl-phone">
+                                            <label for="phone">Telefon (gesch&#228;ftlich)</label>
+                                            <div class="flag-container">
+                                                <div class="selected-flag">
+                                                    <div class="iti-flag"></div>
+                                                </div>
+                                                <ul class="country-list"></ul>
+                                            </div>
+                                            <input id="phone" type="text" name="phone" tabindex="28" />
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="country">Land</label>
+                                        <select name="country" id="country" tabindex="29" class="form_SelectInstruction normalSelect country_select" onchange='updateCountryData("#contactModal")'></select>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="state">Staat</label>
+                                        <select name="state" id="state" tabindex="30" class="form_SelectInstruction normalSelect dropdownSelect"></select>
+                                    </dd>
+                                </dl>
+                                <dl class="expand checkboxContainer" id="optout" style="display:none;">
+                                    <dd>
+                                        <input id="explicitOptOutAlt" type="checkbox" class="r7-check">
+                                        <label for="explicitOptOut">Ich möchte keine E-Mails über Rapid7-Produkte und -Dienstleistungen erhalten</label>
+                                    </dd>
+                                    <p class="disc">
+                                        <p>Sie haben Probleme mit dieser Seite? Bitte senden Sie eine E-Mail an <a href="mailto:info@rapid7.com">info@rapid7.com</a>. Bitte lesen Sie die aktualisierten <a href="../../../../privacy-policy/index.html">Datenschutzrichtlinien</a></p>
+                                    </p>
+                                </dl>
+                                <dl class="expand" id="consultant" style="display: none;">
+                                    <input id="consultantFieldAlt" type="checkbox" class="r7-check">
+                                    <label for="consultantFieldAlt">Ich bin Consultant, Partner oder Reseller.</label>
+                                </dl>
+                                <dl class="expand">
+                                    <button id="submit" class="submit button blue mdBtn" tabindex="31">Absenden</button>
+                                </dl>
+                                <input type="hidden" id="formName" value="ContactModal" />
+                            </fieldset>
+
+                        </form>
+                    </div>
+                    <div class="large-3 columns sidebar">
+                        <img alt="Rapid7 logo" class="logo lazy" data-src="/includes/img/logo-black.png" src="../../../../includes/img/placeholder.png" />
+                        <h3>General:</h3>
+                        <p><a href="mailto:info@rapid7.com">info@rapid7.com</a></p>
+                        <h3>Sales: </h3>
+                        <p>
+                            <a href="tel:1-866-772-7497">+1&ndash;866&ndash;7&ndash;Rapid7</a><br />
+                            <a href="mailto:sales@rapid7.com">sales@rapid7.com</a>
+                        </p>
+                        <h3>Support:</h3>
+                        <p>
+                            <a href="tel:1-866-390-8113">+1&ndash;866&ndash;390&ndash;8113(toll free)</a><br />
+                            <a href="mailto:support@rapid7.com">support@rapid7.com</a>
+                        </p>
+                        <h3>Incident Response:</h3>
+                        <p><a href="tel:1-844-787-4947">1-844-RAPID-IR</a></p>
+                        <p><a href="../../../../contact/index.html" class="view_more">More Contact Info</a></p>
+                    </div>
+                </div>
+            </section>
+            <button class="close-button" data-close="" aria-label="Close reveal" type="button"></button>
+        </div>
+        <!-- *************************** end sticky contact us modal *************************** -->
+</footer>
+
+
+
+
+
+
+
+            <!-- *************************** navigation close module *************************** -->
+        </div><!-- off-canvas-content -->
+    </div><!-- off-canvas-wrapper-inner -->
+</div><!-- off-canvas-wrapper -->
+
+
+    <!-- scripts -->
+    <!--[if lte IE 11]>
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+    <![endif]-->
+    <script src="../../../../includes/js/all.mined79.js?cb=1576099002710"></script>
+    
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert"></script>
+
+
+    
+    <!-- end scripts -->
+
+</body>
+
+<!-- Mirrored from www.rapid7.com/de/research/reports/under-the-hoodie-2019/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:18:52 GMT -->
+</html>

@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+
+<!-- Mirrored from www.rapid7.com/research/report/under-the-hoodie-2019/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:09:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Under the Hoodie 2019: Security Lessons Learned from 180 Pen Tests</title>
+
+
+            <meta property="og:url" content="index.html" />
+        <link rel="canonical" href="index.html"  />
+        <link rel="alternate" href="../../../de/research/reports/under-the-hoodie-2019/index.html" hreflang="de" />
+        <link rel="alternate" href="index.html" hreflang="en" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="title" content="Under the Hoodie 2019: Security Lessons Learned from 180 Pen Tests" />
+    <meta name="description" />
+    <meta property="og:title" content="Under the Hoodie 2019: Security Lessons Learned from 180 Pen Tests" />
+        <meta property="og:image" content="../../../globalassets/_images/_og-images/r7-long-form-og-uth.jpg" />
+        <meta name="twitter:image" content="../../../globalassets/_images/_og-images/r7-long-form-og-uth.jpg" />
+    <meta name="twitter:title" content="Under the Hoodie 2019: Security Lessons Learned from 180 Pen Tests">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="Rapid7" />
+    <meta property="og:description" />
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+'conversionType': 'secondary',            
+        });
+    </script>
+
+    
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WBTPTVC');</script>
+    
+
+    <link rel="icon" type="image/x-icon" href="../../../includes/img/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:800,900|Roboto:300,400,700|Noto+Sans+JP">
+    <link rel="stylesheet" href="../../../includes/css/all.mined79.css?cb=1576099002710">
+    <script src="../../../includes/js/jquery.min.js"></script>
+    <script src="http://js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>
+    <script src="../../../includes/js/populateCountryState.js"></script>
+    <script src="http://information.rapid7.com/js/forms2/js/forms2.min.js"></script>
+    
+    
+
+</head>
+<body id="longFormContent" class="pg-id-15800 internal">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBTPTVC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+        <div id="gdprAlert" class="overlay" style="display:none;">
+            <div class="gdpr-modal">
+                <div>
+                    <h2>Quick Cookie Notification</h2>
+                    <p>This site uses cookies, including for analytics, personalization, and advertising purposes.  For more information or to change your cookie settings, <a href="../../../privacy-policy/tracking-technologies/index.html" target="_blank">click here</a>.  <br /><br />If you continue to browse this site without changing your cookie settings, you agree to this use.</p>
+                    <button class="button mdBtn blue" id="gdprClose">I AGREE, LET&rsquo;S GO!</button>
+                    <hr>
+                    <p class="fineprint">View <a href="../../../privacy-policy/tracking-technologies/index.html" target="_blank">Cookie Policy</a> for full details</p>
+                </div>
+
+            </div>
+        </div>
+
+    <div id="__"></div>
+    <!--[if lte IE 9]>
+    <div id="ie-conditional"><spa>Your IE browser is out of date - Upgrade to the latest version of IE or Chrome for an optimal website experience.</span> <a href="https://support.microsoft.com/en-us/help/17621/internet-explorer-downloads" title="Upgrade IE Now" class="button smBtn darkClear" target="_blank">Upgrade IE Now</a>
+    <button class="close-button" type="button" id="closeIEBar">
+        <img src="../includes/img/close_white.svg">
+    </button>
+    </div>
+    <![endif]-->
+
+    
+
+
+<div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <div class="off-canvas__overlay"></div>
+<div class="off-canvas position-left" id="offCanvas" data-off-canvas data-transition="overlap">
+    <!-- Menu -->
+    <div class="off-canvas__content">
+        <!-- Mobile Menu -->
+        <div class="off-canvas__menu">
+            <div class="off-canvas__top">
+                <div class="off-canvas-close" data-toggle="offCanvas" aria-expanded="false" aria-controls="offCanvas"></div>
+                <div class="menuLabel">Main Menu</div>
+                <div id="btnMobileSearch" class="off-canvas-search"></div>
+            </div>
+                <ul class="vertical menu" data-accordion-menu data-multi-open="false">
+
+                    <li>
+                        <a href="../../../products/index.html">
+                            <div class="menu__title">Products<span></span></div>
+                        </a>
+                        <ul class="menu vertical nested">
+                                            <li>
+                    <a href="../../../products/insightidr/index.html">
+                        <p class="navTitle">InsightIDR</p>
+                        User Behavior Analytics &amp; SIEM
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../products/insightvm/index.html">
+                        <p class="navTitle">InsightVM</p>
+                        Vulnerability Management
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../products/insightappsec/index.html">
+                        <p class="navTitle">InsightAppSec</p>
+                        Dynamic Application Security Testing
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../products/insightconnect/index.html">
+                        <p class="navTitle">InsightConnect</p>
+                        Orchestration &amp; Automation
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../products/insightops/index.html">
+                        <p class="navTitle">InsightOps</p>
+                        Log Management
+                    </a>
+                </li>
+
+                                            <li class="menu section-title"> </li>
+                <li>
+                    <a href="../../../products/metasploit/index.html">
+                        <p class="navTitle">Metasploit</p>
+                        Penetration Testing
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../products/nexpose/index.html">
+                        <p class="navTitle">Nexpose</p>
+                        Vulnerability Management On-Premise
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../products/appspider/index.html">
+                        <p class="navTitle">AppSpider</p>
+                        Application Security On-Premise
+                    </a>
+                </li>
+                <li>
+                    <a href="https://earlyaccess.rapid7.com/tcell">
+                        <p class="navTitle">tCell by Rapid7</p>
+                        Application Monitoring &amp; Protection
+                    </a>
+                </li>
+
+                        </ul>
+                    </li>
+                                        <li>
+
+                            <a href="#">
+                                <div class="menu__title">Services<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../../services/security-consulting/index.html">
+                                            <p class="navTitle">Security Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/product-consulting/index.html">
+                                            <p class="navTitle">Product Consulting</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/managed-services/index.html">
+                                            <p class="navTitle">Managed Services</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/training-certification/index.html">
+                                            <p class="navTitle">Training &amp; Certification</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../services/support-and-customer-success/index.html">
+                                            <p class="navTitle">Support &amp; CSM</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="#">
+                                <div class="menu__title">Partners<span></span></div>
+                            </a>
+                            <ul class="menu vertical nested">
+                                    <li>
+                                        <a href="../../../partners/sales-partners/index.html">
+                                            <p class="navTitle">Sales Partners</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../partners/technology-partners/index.html">
+                                            <p class="navTitle">Technology Partners</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../../../partners/index.html">
+                                            <p class="navTitle">Find a Partner</p>
+                                        </a>
+                                    </li>
+                            </ul>
+
+
+                    </li>
+                    <li>
+
+                            <a href="../../index.html">
+                                <div class="menu__title">Research</div>
+                            </a>
+
+
+                    </li>
+
+                </ul>
+
+                <ul class="vertical menu sideUtilityLinks">
+                        <li><a href="https://blog.rapid7.com/">Blog</a></li>
+                        <li><a href="../../../for-customers/index.html">Support</a></li>
+                        <li><a href="../../../contact/index.html">Contact</a></li>
+                </ul>
+
+            <div class="menu__cta">
+                <a href="../../../try/insight/index.html" class="button smBtn blue">Free Trial</a>
+            </div>
+        </div>
+
+        <!-- Mobile Search -->
+        <div class="off-canvas__search">
+            <div id="btnCloseMobileSearch" class="off-canvas-close"></div>
+            <div class="searchContainer">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                    <span class="sb-icon-search"></span>
+                </form>
+                <div class="search-links">
+                    <header>Helpful Links</header>
+                            <a href="../../../for-customers/index.html">Product Support</a>
+                            <a href="../../../pricing/index.html">Product Pricing</a>
+                            <a href="../../../resources/index.html">Resource Library</a>
+                            <a href="../../../about/events-webcasts/index.html">Events &amp; Webcasts</a>
+                            <a href="../../../services/training-certification/index.html">Training &amp; Certification</a>
+                            <a href="../../../about/news/index.html">News &amp; Press Releases</a>
+                            <a href="../../../about/index.html">About Rapid7</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- end .off-canvas -->
+
+
+        <div class="off-canvas-content" data-off-canvas-content>
+            <div id="menuOverlay" class="reveal-overlay"></div>
+
+                <section class="longHero" style=background-image:url(../../../globalassets/_images/hero-images/background-herosm-uth.jpg)>
+
+                    
+
+    <!-- nav -->
+    <div class="utility row">
+
+        <!-- nav toggle (mobile only) -->
+        <button type="button" class="button hamburger hamClosed" data-toggle="offCanvas" aria-expanded="false" aria-controls="offCanvas">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- main nav links -->
+        <div class="nav__main">
+
+            <div class="nav__main-top">
+                <a href="../../../index.html" class="nav__main-logo">
+                    <img src="../../../includes/img/Rapid7_logo.svg" alt="Rapid7 logo">
+                </a>
+                    <div class="top-bar">
+                        <ul class="dropdown menu nav__main-links" data-dropdown-menu data-disable-hover="true" data-click-open="true">
+                                    <li class="megamenu">
+                                        <a data-toggle="megamenu-Products" href="#">Products</a>
+
+                                        <div class="dropdown-pane megamenu__wrapper" id="megamenu-Products" data-dropdown data-disable-hover="true" data-click-open="true" data-options="closeOnClick:true;">
+                                            <div class="row collapse megamenu__content">
+                                                <div class="megamenu__info">
+                                                    <div class="megamenu__header">The Rapid7 Insight Cloud</div>
+<p>Rapid7 Insight is your home for SecOps, equipping you with the visibility, analytics, and automation you need to unite your teams and amplify efficiency.</p>
+<p><a href="../../../products/insight-platform/index.html">Insight Cloud Overview</a><br /><a href="../../../pricing/index.html">Insight Cloud Pricing</a> <a class="button xsmBtn blue" href="../../../try/insight/index.html">Try Now</a></p>
+                                                </div>
+                                                <div class="megamenu__items">
+                                                    <div class="megamenu__items-main">
+                                                        <div class="megamenu__items-left megamenu__items-cols-two">
+                                                                <div class="megamenu__subheader">Insight Products</div>
+                                                            <div class="megamenu__items-col">
+                                                                                <div class="megamenu__item">
+                    <a href="../../../products/insightidr/index.html" target="">
+                        <div class="megamenu__item-title">InsightIDR</div>
+                        <p>User Behavior Analytics &amp; SIEM</p>
+                    </a>
+                    <a href="../../../trial/insightidr/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../../products/insightvm/index.html" target="">
+                        <div class="megamenu__item-title">InsightVM</div>
+                        <p>Vulnerability Management</p>
+                    </a>
+                    <a href="../../../trial/insightvm/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../../products/insightappsec/index.html" target="">
+                        <div class="megamenu__item-title">InsightAppSec</div>
+                        <p>Dynamic Application Security Testing</p>
+                    </a>
+                    <a href="../../../trial/insightappsec/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../../products/insightconnect/index.html" target="">
+                        <div class="megamenu__item-title">InsightConnect</div>
+                        <p>Orchestration &amp; Automation</p>
+                    </a>
+                    <a href="../../../info/insightconnect-contact/index.html" target=" ">Request Demo</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../../products/insightops/index.html" target="">
+                        <div class="megamenu__item-title">InsightOps</div>
+                        <p>Log Management</p>
+                    </a>
+                    <a href="../../../trial/insightops/index.html" target=" ">Free Trial</a>
+                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="megamenu__items-right">
+                                                                            <div class="megamenu__subheader"> &nbsp;</div>
+                <div class="megamenu__item">
+                    <a href="../../../products/metasploit/index.html" target="">
+                        <div class="megamenu__item-title">Metasploit</div>
+                        <p>Penetration Testing</p>
+                    </a>
+                    <a href="../../../try/metasploit-pro/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../../products/nexpose/index.html" target="">
+                        <div class="megamenu__item-title">Nexpose</div>
+                        <p>Vulnerability Management On-Premise</p>
+                    </a>
+                    <a href="../../../products/nexpose/download/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="../../../products/appspider/index.html" target="">
+                        <div class="megamenu__item-title">AppSpider</div>
+                        <p>Application Security On-Premise</p>
+                    </a>
+                    <a href="../../../try/appspider/index.html" target=" ">Free Trial</a>
+                </div>
+                <div class="megamenu__item">
+                    <a href="https://earlyaccess.rapid7.com/tcell" target="_blank">
+                        <div class="megamenu__item-title">tCell by Rapid7</div>
+                        <p>Application Monitoring &amp; Protection</p>
+                    </a>
+                    <a href="https://information.rapid7.com/WC-TEM-2018-12-20-Cloud-WAF-Beta-Program_Registration.html" target="_blank ">Request Demo</a>
+                </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="megamenu__items-links">
+                                                        <a href="../../../products/index.html">View All Products</a> &nbsp;
+                                                            <span> &vert; &nbsp; <a href="../../../solutions/index.html">Search by Solution</a></span>
+                                                    </div>
+                                                </div>
+                                                <div class=" megamenu__search searchContainer">
+                                                    <form action="https://www.rapid7.com/search/">
+                                                        <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                                                        <input class="sb-search-submit" type="submit" value="">
+                                                        <span class="sb-icon-search"></span>
+                                                    </form>
+                                                    <div class="search-links">
+                                                        <div class="megamenu__subheader">Helpful Links</div>
+                                                                <a href="../../../for-customers/index.html">Product Support</a>
+                                                                <a href="../../../pricing/index.html">Product Pricing</a>
+                                                                <a href="../../../resources/index.html">Resource Library</a>
+                                                                <a href="../../../about/events-webcasts/index.html">Events &amp; Webcasts</a>
+                                                                <a href="../../../services/training-certification/index.html">Training &amp; Certification</a>
+                                                                <a href="../../../about/news/index.html">News &amp; Press Releases</a>
+                                                                <a href="../../../about/index.html">About Rapid7</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="#">Services</a>
+                                            <ul class="menu vertical">
+                                                    <li><a href="../../../services/security-consulting/index.html">Security Consulting</a></li>
+                                                    <li><a href="../../../services/product-consulting/index.html">Product Consulting</a></li>
+                                                    <li><a href="../../../services/managed-services/index.html">Managed Services</a></li>
+                                                    <li><a href="../../../services/training-certification/index.html">Training &amp; Certification</a></li>
+                                                    <li><a href="../../../services/support-and-customer-success/index.html">Support &amp; CSM</a></li>
+                                            </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">Partners</a>
+                                            <ul class="menu vertical">
+                                                    <li><a href="../../../partners/sales-partners/index.html">Sales Partners</a></li>
+                                                    <li><a href="../../../partners/technology-partners/index.html">Technology Partners</a></li>
+                                                    <li><a href="../../../partners/index.html">Find a Partner</a></li>
+                                            </ul>
+                                    </li>
+                                    <li>
+                                        <a href="../../index.html">Research</a>
+                                    </li>
+                        </ul>
+                    </div>
+
+            </div>
+
+            <!-- breadcrumbs -->
+    <div class="row expanded">
+        <div class="medium-12 columns">
+            <ul class="breadcrumbs">
+                <li><a href="../../../index.html">Home</a></li>
+                            <li><a href="../../index.html">Research</a></li>
+
+            </ul>
+        </div>
+    </div>
+
+
+
+        </div>
+
+        <div class="nav__utility">
+            <!-- utility links -->
+            <div id="utilityLinks" class="nav__utility-links hide-for-small-only" data-auth="false">
+
+                <ul class="dropdown menu" data-dropdown-menu data-disable-hover="true" data-click-open="true">
+                    <li class="language-toggle has-menu">
+                        <a href="#" class="text-uppercase">en</a>
+                        <ul class="menu">
+                                <li class=selected>
+                                    <a href="#">English</a>
+                                </li>
+                                <li >
+                                    <a href="../../../de/research/reports/under-the-hoodie-2019/index.html">Deutsch</a>
+                                </li>
+                                <li >
+                                    <a href="../../../ja/research/report/under-the-hoodie-2019/index.html">日本語</a>
+                                </li>
+                        </ul>
+                    </li>
+                            <li >
+                                <a href="https://blog.rapid7.com/">Blog</a>
+                            </li>
+                            <li >
+                                <a href="../../../for-customers/index.html">Support</a>
+                            </li>
+                            <li >
+                                <a href="../../../contact/index.html">Contact</a>
+                            </li>
+                                            <li>
+                            <a id="utilitySignin" href="https://insight.rapid7.com/saml/SSO?fromURI=https%3a%2f%2fwww.rapid7.com%2fresearch%2freport%2funder-the-hoodie-2019%2f" class="notlogged">Sign In</a>
+                        </li>
+                </ul>
+            </div>
+            <!-- utility user -->
+            <div class="nav__utility-trial" data-auth="false">
+                    <a href="../../../try/insight/index.html" target="_blank">
+                        <span id="trialCta" class="button blue mdBtn cta"><span>Free</span> Trial</span>
+                    </a>
+            </div>
+        </div>
+
+    </div><!-- utility -->
+
+
+                    <div class="overlayText">
+                        <div class="row">
+                            <div class="longHero__content medium-10 medium-offset-1 large-8 large-offset-2 columns">
+
+                                <h1>
+                                    Under the Hoodie 2019
+                                </h1>
+                                    <h2 class="subtitle">
+                                        By Rapid7 Global Consulting
+                                    </h2>
+                                
+                                
+                            </div>
+                            
+
+                        </div>
+                    </div>
+
+                    
+                </section>
+            
+
+
+
+<!-- Page Content -->
+<div class="pageContent">
+    
+
+<div data-sticky-container>
+    <div class="sticky-nav" id="stickyNav" data-sticky data-options="marginTop:0;" style="width:100%" data-top-anchor="stickyTrigger:top" data-sticky-on="small">
+        <div class="sticky-nav__main">
+            <a href="../../../index.html" class="sticky-nav__logo">
+                <img alt="Rapid7 logo" class="lazy" data-src="/includes/img/Rapid7_logo.svg" src="../../../includes/img/placeholder.png" />
+            </a>
+            <div class="sticky-nav__title show-for-medium">
+                    <a href="#__" class="smooth">Under the Hoodie 2019</a>
+            </div>
+                    <div class="sticky-nav__share hide-for-medium">
+                        <a href="#" class="sticky-nav__share-title">
+                            <img alt="Share" class="lazy" data-src="/includes/img/icon-share.svg" src="../../../includes/img/placeholder.png" />
+                        </a>
+                    </div>
+                <div class="sticky-nav__share sticky-nav__share--options">
+                        <span class="sticky-nav__share-title">
+                            Share:
+                        </span>
+                    <ul>
+                            <li>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.rapid7.com%2fresearch%2freport%2funder-the-hoodie-2019%2f&amp;title=Under+the+Hoodie+2019" onclick="window.open(this.href, 'linkedin-share', 'width=520,height=570');return false;">
+                                    <img class="lazy" data-src="/includes/img/linkedin-white.svg" src="../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/intent/tweet?text=Under+the+Hoodie+2019&amp;url=https%3a%2f%2fwww.rapid7.com%2fresearch%2freport%2funder-the-hoodie-2019%2f" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                                    <img class="lazy" data-src="/includes/img/twitter-white.svg" src="../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.rapid7.com%2fresearch%2freport%2funder-the-hoodie-2019%2f" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                                    <img class="lazy" data-src="/includes/img/facebook-white.svg" src="../../../includes/img/placeholder.png" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../../../globalassets/_pdfs/research/rapid7-under-the-hoodie-2019-research-report.pdf" target="_blank">
+                                    <img class="lazy" data-src="/includes/img/download-white.svg" src="../../../includes/img/placeholder.png" />
+                                </a>
+                             </li>
+                        
+                    </ul>
+                </div>
+ 
+            <div class="sticky-nav__cta">
+                <a href="../../../globalassets/_pdfs/research/rapid7-under-the-hoodie-2019-research-report.pdf">
+                    <button class="blue button">
+                        Download Report
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="stickyTrigger"></div>
+    <!-- Main Section -->
+    <div class="row expanded">
+
+        <!-- Sticky SideNav Menu -->
+        <div class="medium-3 columns hide-for-small-only longFormToc" data-sticky-container id="stickySideNav">
+            <nav class="sticky" data-sticky data-sticky-on="medium" data-top-anchor="longFormContentMenu:top" data-margin-bottom="10" data-btm-anchor="longFormContentMenu:bottom">
+                <div class="title">Contents</div>
+                <ul class="vertical menu" data-magellan>
+                    <li><a href="#introduction">Introduction</a></li>
+                                    <li>
+                    <a href="#Pentesting-Scope">Pentesting Scope</a>
+                </li>
+                <li>
+                    <a href="#Vulnerabilities-Encountered">Vulnerabilities Encountered</a>
+                </li>
+                <li>
+                    <a href="#Social-Engineering">Social Engineering</a>
+                </li>
+                <li>
+                    <a href="#Incident-Detection-and-Response">Incident Detection and Response</a>
+                </li>
+                <li>
+                    <a href="#Credential-Capture">Credential Capture</a>
+                </li>
+                <li>
+                    <a href="#Conclusion-Defense-Against-These-Dark-Arts">Conclusion: Defense Against These Dark Arts</a>
+                </li>
+                <li>
+                    <a href="#Appendix">Appendix</a>
+                </li>
+                <li>
+                    <a href="#About-Rapid7-Global-Consulting">About Rapid7 Global Consulting</a>
+                </li>
+                <li>
+                    <a href="#About-Rapid7">About Rapid7</a>
+                </li>
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Content Section -->
+        <div class="medium-9 columns no-gutter" id="longFormContentMenu">
+            <section class="longFormBackground" id="introduction" data-magellan-target="introduction">
+                <div class="row">
+                    <div class="small-10 small-offset-1 columns introStandard sectionContainerOuter">
+                        <div class="sectionContent">
+
+                                <div class="sectionContainerInner">
+
+                                                <div class="callToActionLight ctaBlock right">
+                <div class="flag">More Resources</div>
+                <h3>Pen Testers Tell All</h3>
+                <p>Want more Under the Hoodie? Explore confessional videos, an interactive quiz, and more to shed light on the “dark art” of penetration testing.<br />&nbsp;</p>
+                    <a class="clear button smBtn" href="../../under-the-hoodie/index.html" id="darkSideCtaPrimaryBtn">
+                        View Now
+                    </a>
+            </div>
+
+
+                                    <div class="headerOffset"></div>
+                                    <h3 class="introTitle">Introduction</h3>
+                                    <p>It&rsquo;s Summer 2019! <a href="#f1" name="f1"><sup>[1]</sup></a> That means it&rsquo;s time for our annual installment of Rapid7&rsquo;s &ldquo;Under the Hoodie,&rdquo; a statistical study into the art and craft of penetration testing. Penetration testing remains a fairly occult niche of information security. Its busiest practitioners rarely complete more than 20 or so engagements in a given year, and the findings from those engagements are nearly always held privately under strict non-disclosure agreements. As a result, it&rsquo;s often difficult for any one person to get a sense of the contours of the overall pentesting landscape. Now in its third year, this report is part of Rapid7&rsquo;s efforts to demystify what exactly goes on in a typical pen test and offer a view into what both clients and practitioners should expect to see during the course of an engagement.</p>
+<p>We have collected data from 180 penetration testing engagements over the nine-month period between mid-September 2018 through the end of May 2019. Since our last report, we&rsquo;ve produced a brand-new survey of 94 questions, designed to make the collection of high-quality data quick and painless for the pen tester. This survey, which is described more completely in Appendix B, explores not only the usual internal and external network assessments, but also physical intrusions, in-person and electronic social-engineering techniques, and non-production code reviews. Key findings include:</p>
+<ul>
+<li>Most (96%) engagements that involved either a network or application assessment saw at least one vulnerability exposed to attackers, which reaffirms our belief that penetration testing is an essential component of a holistic vulnerability management strategy.</li>
+<li>Password management continues to challenge even the most sophisticated IT security organizations. Nearly three-quarters (72%) of engagements resulted in at least one compromised password (when credential capture was in scope). Of those, 60% were easily guessed passwords, where the pen tester used generic password spraying, known defaults, and easily guessed organization-specific passwords.</li>
+<li>It&rsquo;s not all doom-and-gloom, though. Basic network segmentation controls between &ldquo;internal&rdquo; and &ldquo;external&rdquo; networks appear to be generally effective, especially given the ongoing move to the cloud for externally accessible resources. Respondents that started an externally based engagement only gained internal LAN access 21% of the time. Web application-specific engagements rarely-to-never (under 3%) resulted in a total site-wide compromise. Most (over 70%) web applications were hosted somewhere other than the client&rsquo;s data center, which significantly complicates an attacker&rsquo;s path from a compromised web application.</li>
+</ul>
+<p>With these key takeaways in mind, the rest of this report will examine the data gathered from our most recent season of penetration testing, as well as provide anecdotes drawn from real-world experiences in the field. We expect <a id="f1"></a>readers to come away from these pages with a baseline understanding of how penetration testers help organizations identify their own unique (and not-so-unique) IT risks. <span id="_ftn1">&nbsp;</span></p>
+<p>___________________________________________</p>
+<p>[1] <em>If you find it unsettling to see your &ldquo;Summer2019!&rdquo; password mentioned casually in this introduction, it&rsquo;s time to change your password selection algorithms.</em></p>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="headerOffset" data-magellan-target="Pentesting-Scope" id="Pentesting-Scope"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Pentesting Scope</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">Long-time readers may recall that, in the past, we tended to break up our engagement scopes into two large buckets:</p>
+<ol class="ol1">
+<li class="li2">External assessments, where the pen tester starts off on the internet and targets the client&rsquo;s web applications, VPN concentrators, file transfer systems, and other internet-facing assets</li>
+<li class="li3">Internal assessments, where the tester is mostly focused on things like Windows Active Directory domains, printers and IoT integrations, and other IT infrastructure not (normally) exposed to the internet</li>
+</ol>
+<p class="p1">While these two broad distinctions are important, we&rsquo;ve structured our survey for 2019 to account for investigative scenarios that cross the (mostly imaginary) boundaries between &ldquo;inside&rdquo; and &ldquo;outside,&rdquo; such as electronic and physical social engineering, red team assessments that involve an active defender, web applications that are hosted in third-party cloud environments, and code reviews for mobile applications that are ultimately installed on customer or employee-owned mobile devices. Figure 1 is a breakdown of these top-level considerations of scope performed and recorded for this report.</p>
+<p class="p1"><img src="../../../contentassets/ac7ec77df7434eeebec8da36d6a76426/figure-1.jpg" alt="Figure 1: Penetration Testing Assessments Performed" width="925" height="630" /></p>
+<p class="p1">As we can see here, the traditional &ldquo;external compromise&rdquo; test, where the client wants to ferret out their weaknesses and exposures that are exposed to the general internet, is the most popular scoping choice, accounting for just about 40% of the engagements surveyed. This makes sense, since most clients are concerned about external bad actors&mdash;the criminal hackers that don&rsquo;t already have some reach into the internal network and are seeking some kind of leverage over the target to execute whatever criminal enterprise they&rsquo;re involved in.</p>
+<p class="p1">However, for the third year running, we also see the gap is closing between external and internal assessments. Among Rapid7&rsquo;s customer base, 36% of our engagements have a primarily internal network compromise component, only six points behind external. In fact, considering social engineering and code review engagements, that brings the not-just-internet-facing-flavored share up to about 45% of all engagements this survey covers. This warms our hearts as a security advocates, since it speaks to a real commitment to defense in depth. Customers are increasingly aware that the line between internal and external truly is pretty porous, and these customers are very interested in measuring the effectiveness of their internal network security technologies like incident detection and response (IDR) and user behavior analytics (UBA), as well as core network security controls like privilege separation and network segmentation.</p>
+<h2 class="p1">Timing Considerations</h2>
+<p class="p1">Along with the scope of what&rsquo;s to be tested, the other factor penetration testers need to consider is the amount of time contracted to the customer. Over the course of the year, we&rsquo;ve seen a trend that edges up the average contracted hours for both internal and external to just about two weeks, or 80 contracted hours, with some significant outliers clocking in several hundred hours.</p>
+<p class="p1"><img src="../../../contentassets/ac7ec77df7434eeebec8da36d6a76426/figure-2.jpg" alt="Figure 2: Hours Contracted by Assessment Type" width="1200" height="538" /></p>
+<p class="p1">Now, one might argue that the automated attacks that we see routinely across the internet do not really have any time limits&mdash;they&rsquo;re both ongoing and opportunistic, and this doesn&rsquo;t mesh particularly well with the contracted penetration testing model. However, these sorts of attacks, practically by definition, don&rsquo;t have a focused reconnaissance and planning phase. They either work or they don&rsquo;t, and the attacker doesn&rsquo;t particularly care which targets are vulnerable.</p>
+<p class="p1">That said, these automated attacks aren&rsquo;t really what penetration testing is designed to explore; indeed, automated attacks tend to be thwarted pretty well by automated defenses, such as routine vulnerability management (VM) and asset management scanning. Instead, penetration testing is designed to uncover what information technology components aren&rsquo;t already adequately covered by automated solutions. To that end, a significant portion of the pen tester&rsquo;s time tends to be dedicated to advance reconnaissance and planning, so they end up looking more like the more significant threats faced by organizations and companies today. Figure 3 shows the percentage of contracted time that is dedicated to this pre-attack planning, per scope.</p>
+<p class="p1"><img src="../../../contentassets/ac7ec77df7434eeebec8da36d6a76426/figure-3.jpg" alt="Figure 3: Engagement Time Spent on Planning and Reconnaissance (Displayed set includes only engagements where details on time spent provided (n = 42).)" width="1200" height="369" /></p>
+<p class="p1">Not surprisingly, red team exercises, which seek to most accurately simulate an active adversary with an active defender, tend to spend the most time in recon, followed closely by purely social engineering engagements. It takes time to build a profile of the target and come up with solid pretexts supported by believable identities. Even traditional internal and external network assessments require some research work in order to find and understand the domains, network address ranges, and technology stacks in use by the client.</p>
+<p class="p1">In the end, penetration testing is not merely a point-and-shoot exercise; that job is much better handled by automated VM. Organizations looking for a penetration testing assessment would do well to have their VM house in order before engaging the sophisticated and specialized expertise of a pentesting outfit.</p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Vulnerabilities-Encountered" id="Vulnerabilities-Encountered"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Vulnerabilities Encountered</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">In the world of vulnerability management, vulnerabilities tend to be categorized on three axes on what an exploit of that vulnerability might impact: confidentiality, integrity, and availability. Together, these form the &ldquo;CIA Triad."<a href="#f2"><sup>[2]</sup></a></p>
+<h2 class="p1"><strong>The CIA Triad</strong></h2>
+<p class="p1">Penetration testers are most interested in integrity-centric vulnerabilities, where a successful exploit means that the attacker gets some level of control over the vulnerable application or component. Armed with such an exploit, the attacker gains all sorts of options, such as using the compromised system for ongoing access, impersonating legitimate users and their associated access permissions, or stealing private data stored, received, or transmitted by the affected system. When pen testers talk about &ldquo;remote root,&rdquo; they&rsquo;re talking about an attack that completely compromises the integrity of the targeted service&rsquo;s underlying operating system.</p>
+<p class="p1">Confidentiality-specific vulnerabilities, on the other hand, tend to give the attacker access to otherwise private information, but do not give absolute, direct control over the system itself. Such vulnerabilities are certainly valuable to an adversary, since confidential data may include things like passwords, password hashes, or session tokens, which can in turn be used to gain direct access to systems or applications. Confidentiality vulnerabilities can also include more subtle issues, such as the ability to intercept and modify data in transit, but in most cases, upgrading a confidentiality issue into an integrity issue takes some amount of work, and isn&rsquo;t a straight shot to remote root. Other issues in this category require the attacker to already be in a privileged position on the network to make use of it, as is the case with most cryptography vulnerabilities that affect confidentiality.</p>
+<p class="p1">The third element of the CIA Triad, availability, tends to be specifically out-of-bounds for pen testers. Few organizations rarely want to invite production outages on purpose, even as part of a testing scenario. Denial-of-service (DoS) attacks, distributed or otherwise, are certainly part of the criminal attacker&rsquo;s arsenal, but most ransomware attacks today leverage integrity issues to cause DoS. They use integrity vulnerabilities to first gain access to a system, then use that access to encrypt the system&rsquo;s storage and leave the ransom note. Notable exceptions to this are the so-called &ldquo;booter and stressor&rdquo; criminal services, which flood the target&rsquo;s network with junk traffic periodically, with an offer to stop for a price. Penetration testers tend not to simulate this type of attack, however, since the risk to adjacent and upstream networks is so high.</p>
+<p class="p1">With this vulnerability taxonomy understood, Figure 4 describes the types of vulnerabilities encountered across all engagement types:</p>
+<p class="p1"><img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/figure-4.png" alt="Figure 4: Vulnerabilities by Engagement Type (Length of vertical bars are proportionally scaled based on frequency.)" width="950" height="752" /></p>
+<p class="p1"><a id="f2"></a>___________________________________________</p>
+<p class="p1">[2]&nbsp;<em>The exact origins of the CIA Triad are unclear, but they appear in information security texts dating back to at least the 1990s. Any help on tracking down the etymology and first use of this term would be greatly appreciated!</em></p>
+<h2 class="p1">Network Vulnerabilities</h2>
+<p class="p1">Across all internal and external network and code audit engagements surveyed, 96% saw at least one vulnerability reported by the penetration tester. Not all vulnerabilities are created equal, however. With the CIA Triad model in mind, we have seen that for external network findings, penetration testers tend to uncover confidentiality vulnerabilities, such as weak encryption standards or user enumeration issues, while the bulk of integrity vulnerabilities are found and exploited only in internal network assessments.</p>
+<h3 class="p1">External Network Vulnerabilities</h3>
+<p class="p1">Figure 5 details the types of vulnerabilities encountered during external assessments over the survey period.</p>
+<p class="p1"><img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imagehxq6f.png" alt="Figure 5: External Engagement: Vulnerabilities Found (Count represents absolute number of vulnerabilities found. Percent represents proportion of total vulnerabilities.)" width="1000" height="490" /></p>
+<p class="p1">By far, the most common vulnerability finding reported is &ldquo;Weak Transport Layer Security,&rdquo; which is the quintessential confidentiality issue. These vulnerabilities point to old or absent encryption standards employed in externally facing resources. For example, a website might not offer any encryption at all (HTTP-only resources or an authentication mechanism that reveals credentials in the clear), or offer weaker cipher suites than those commonly recommended today (40-bit key lengths versus 128-bit key lengths, for example). These vulnerabilities can expose data in transit, such as passwords or other confidential information, to anyone with the ability to eavesdrop on the network connection. Such attacks are quite practical today, especially since the advent of Eric Butler&rsquo;s Firesheep<span class="s1"><a href="#f3"><sup>[3]</sup></a>&nbsp;</span>in 2010.</p>
+<p class="p1">We also see &ldquo;Weak password policy&rdquo; topping the list; this issue allows users to select relatively weak passwords for account access, and is usually discovered through the practice of &ldquo;password spraying&rdquo;&mdash;more on this later in &ldquo;Credential Capture,&rdquo; below. Combined with issues like &ldquo;OWA Timing Attack,&rdquo; and &ldquo;SMTP email address enumeration,&rdquo; such findings, while information disclosure only, can quickly lead to user account compromises.</p>
+<p class="p1">Also of note are the &ldquo;Outdated software&rdquo; and &ldquo;Missing patches&rdquo; issues. When these issues are identified externally, they tend to implicate a failure in VM and asset management.</p>
+<p class="p1">Taken together, these information exposure issues do tend to be serious enough to report out to the client, but penetration testers are rarely able to exercise these vulnerabilities to traverse the boundary between &ldquo;external&rdquo; and &ldquo;internal&rdquo; networks, as seen in Figure 6.<img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imagekjr5n.png" alt="Figure 6: External Engagement: Gained Internal Access" width="1000" height="162" />As it turns out, only about 20% of external engagements ended up with an internal network compromise. This is due largely to two factors. First, client organizations are increasingly embracing external hosting solutions, such as those offered by Amazon AWS, Microsoft Azure, Google Cloud Platform, and other cloud computing providers. Second, as such, there is often no clear path from an external compromise of a networked software component to the client&rsquo;s internal network.</p>
+<p class="p1">Such findings tend to be confidentiality only; an attacker can access otherwise private data but cannot leverage that data to establish a presence internally. However, this may be good enough for the penetration tester (or criminal attacker). Imagine a breach that exposes all customer username and passwords but did not expose employee credentials; the fact that the attacker could not access internal network assets isn&rsquo;t much comfort.</p>
+<p class="p1">One interesting view of the survey data takes a look at that 20% minority of engagements where the penetration tester was, in fact, able to leverage external vulnerabilities to gain access to internal resources. Figure 7 offers just such a view:</p>
+<p class="p1"><img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imageqk588.png" alt="Figure 7: External Engagement: Vulnerabilities Identified Where Internal Access Attained (Count reflects only available responses, not total set of external engagements.)" width="1000" height="424" /></p>
+<p class="p1">Here, we see that the &ldquo;Weak password policy&rdquo; finding jumps to the top of the list. Occasionally (about 4% of the time), the usernames and passwords exposed internally are, in fact, also used for internal network authentication. This leads to a rather quick compromise of the internal network. This is followed by &ldquo;Outdated software,&rdquo; and its close cousin further down, &ldquo;Missing security patches,&rdquo; which allow for integrity exploitation at a similar rate.</p>
+<div style="background-image: url('../../../globalassets/_images/backgrounds/hoodie-walker-2.jpg'); background-repeat: no-repeat; width: auto; height: auto; padding: 1.5rem; border-radius: 15px;"><br />
+<p style="font-family: Muli ExtraBold; color: #ffd349; size: 1.5rem;">THIS ONE TIME ON A PEN TEST</p>
+<h2 style="color: #fff; margin-top: 1rem !important;">Your Mouse Is My Keyboard</h2>
+<p style="color: #fff; font-size: .85rem;">Investigator: <strong>Jesse Gardner</strong> | Client Vertical: <strong>Healthcare</strong></p>
+<p style="color: #fff;">In one engagement, we were tasked with compromising the internal network of a facility that was used for medical trials and had a laboratory where they worked on the pharmaceuticals used for their testing. The first leg of the engagement was a physical and social engineering test, and while the lab site was intended to be a highly secure physical location, we were able to sneak in by tailgating, quickly diving into open doors, etc. We made short work of the internal network once we had physical access to the datacenter, so, after consulting with our point of contact, we decided to try our hand at getting in remotely without physical access.</p>
+<p style="color: #fff;">There is this tool we like to use called the Crazyradio PA, which is a small software-defined radio (SDR).<a href="#f4"><sup>[4]</sup></a>&nbsp;Combining that with an open source implementation<a href="#f5"><sup>[5]</sup></a> of the MouseJack vulnerability described by Bastille Security,<a href="#f6"><sup>[6]</sup></a>&nbsp;we could perform some pretty cool attacks against wireless keyboards and mice. First disclosed in 2016, the MouseJack vulnerability is still a fairly common issue affecting a wide range of non-Bluetooth wireless keyboards and mice.</p>
+<p style="color: #fff;">Armed with this technique, software, and hardware, we figured if we could get within range of a vulnerable device, we could inject keystrokes, or sometimes even record what a user is typing. After circling the building a few times in a rental car, we indeed found a few vulnerable devices in use on the client's site.</p>
+<p style="color: #fff;">We were able to successfully launch attacks and execute malicious payloads on several systems, which gave us remote access to that organization's computers over the internet&mdash;from our rental car in the parking lot. There was no physical entry required; all we needed was to be reasonably close in an unsecured parking lot.</p>
+<p style="color: #fff;">We presented this finding to the client, who used our report to replace their wireless keyboards and mice with cheaper and more secure wired <a id="f4"></a>alternatives. It was a great object lesson that even if you have implemented strong physical security and trained your staff to keep an <a id="f5"></a>eye out for secure door tailgaters, if your peripherals aren't secure, you <a id="f6"></a>might still be vulnerable to targeted, over-the-air radio attacks.</p>
+</div>
+<p>&nbsp;</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[3]&nbsp;<a href="https://codebutler.com/2010/10/24/firesheep/" target="_blank" rel="noopener"><em><span class="s2">https://codebutler.com/2010/10/24/firesheep/</span></em></a></p>
+<p class="p1"><span class="s2">[4]&nbsp;</span><em><a href="https://www.bitcraze.io/crazyradio-pa/"><span class="s1">https://www.bitcraze.io/crazyradio-pa/&nbsp;</span></a></em></p>
+<p class="p1"><span class="s1">[5]<em>&nbsp;</em></span><em><a href="https://github.com/insecurityofthings/jackit"><span class="s1">https://github.com/insecurityofthings/jackit </span></a></em></p>
+<p class="p1"><span class="s1">[6]&nbsp;</span><a href="https://www.bastille.net/research/vulnerabilities/mousejack/technical-details"><em><span class="s1">https://www.bastille.net/research/vulnerabilities/mousejack/technical-details</span></em></a></p>
+<p class="p1">&nbsp;</p>
+<h3 class="p1">Internal Network Access</h3>
+<p class="p1">Normally (about 88% of the time in our survey results), an internal network compromise starts off with the penetration tester being granted some limited access to the internal network in the form of an ingress point, usually in the form of a standard laptop connected to the internal network, either wired or wireless. This is usually done in order to simulate the scenario where an untrusted party has already somehow associated to the infrastructure in order to speed along the investigatory job of uncovering internal network vulnerabilities.</p>
+<p class="p1">Occasionally, though, the penetration tester (at the request of the client) will need to first break into the internal network in order to demonstrate any weaknesses in the internal network access controls. In these cases, there are a variety of techniques available and reported by penetration testers. These include:</p>
+<ul>
+<li class="p1">
+<p class="p2">Electronic social engineering (tricking a user into running malware on the pen tester&rsquo;s behalf on their connected workstation)</p>
+</li>
+<li class="p1">
+<p class="p2">Physical social engineering (tailgating into the building and finding a live, wired network drop or unlocked desktop)</p>
+</li>
+<li class="p1">
+<p class="p2">Exploiting an external internet vulnerability to traverse into the internal network</p>
+</li>
+<li class="p1">
+<p class="p2">Compromising the layer 2 access controls by MAC address cloning</p>
+</li>
+</ul>
+<p class="p1">Note that in either case, &ldquo;access&rdquo; is defined as merely &ldquo;associated to the local area network,&rdquo; and the penetration tester is rarely provided with domain credentials or anything like that; after all, where would the fun be in that?</p>
+<h3 class="p1">From Access to Compromise</h3>
+<p class="p1">Once access is obtained, the penetration tester then needs to get some kind of logical access. Nearly all clients are running some version of Microsoft Active Domain, as Microsoft continues to dominate the internal landscape for most organizations.<a href="#f7"><sup>[7]</sup></a><span class="s1">&nbsp;</span>As a result, the types of vulnerabilities and misconfigurations exploited by penetration testers who find themselves on the LAN all tend to be Microsoft-flavored. A breakdown of these vulnerabilities is shown in Figure 8.</p>
+<p class="p1"><img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imageco6jm.png" alt="Figure 8: Internal Engagement: Vulnerabilities Found (Count represents absolute number of vulnerabilities found. Percent represents proportion of total vulnerabilities.)" width="1000" height="424" /></p>
+<p class="p1">As with prior reporting years, SMB relaying remains the No. 1 technique for gaining an initial user foothold in the domain, thanks to the presence of LLMNR, NetBIOS poisoning, and unsigned SMB. Unlike prior years, however, the prevalence of SMB relaying as a viable attack vector is down; only about 15% of engagements were able to take advantage of this once terribly common technique. For contrast, 2018&rsquo;s report saw SMB relaying being leveraged about 26% of the time. This drop is significant, thanks to increased awareness of the need for SMB signing and the gradual disappearance of older SMB clients that do not support signing. However, it&rsquo;s important to note that current versions of Windows 10 still do not enable signing by default,<a href="#f7_10"><sup>[8]</sup></a><span class="s1">&nbsp;</span>so it&rsquo;s up to domain administrators to follow Microsoft&rsquo;s advice and manually enable this important integrity feature.</p>
+<p class="p1">Next on the vulnerabilities reported list is &ldquo;critical security patches missing&rdquo; at about 11% of sampled client sites. Exploiting vulnerabilities that do have patches available is pretty bread-and-butter penetration testing, and Conficker (MS08-067) and EternalBlue (MS17-010) are two of the most notorious Windows vulnerabilities as of the time of this writing.<a href="#f7_10"><sup>[9]</sup></a><span class="s1">&nbsp;</span>Both vulnerabilities are exploited by reliable Metasploit modules, and checking Windows hosts for these vulnerabilities is pretty standard practice onsite, as illustrated by Figure 9.</p>
+<p class="p1"><img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/image8s2f2.png" alt="Figure 9: Were any hosts vulnerable to EternalBlue and/or Conficker? (Count reflects only available responses.)" width="1000" height="878" /></p>
+<p class="p1">While it&rsquo;s nice to see that MS08-067 is slowly fading from the internal network, it&rsquo;s sobering to note that it&rsquo;s also nearly 11 years old. EternalBlue is probably the most written-about vulnerability in mainstream media, and yet, if Conficker&rsquo;s history is any guide, this issue will be readily available in a strong minority of penetration testing engagements for several years to come.</p>
+<p class="p1">Rounding out the top issues reported is &ldquo;cleartext credentials found in memory.&rdquo; Unfortunately, this is a rather intractable problem in modern domain-based computing. Given privileged access to a workstation, the art of recovering locally stored passwords and replayable password hashes is indispensable to penetration testers and criminal attackers alike. While a number of creative defensive techniques are described (nearly all of which are <a id="f7_10"></a>helpfully collected by the Blue Team blog<a href="#f7_10"><sup>[<span class="s1">10]</span></sup></a>), these solutions are non-default, not well-publicized, and tend to impact the common use case of using cached credentials when a domain controller is unavailable to validate local logins <a id="f7"></a>using domain credentials. That said, organizations would do well to ensure through periodic GPO pushes that domain administrator credentials, at least, are not cached in local memory on most client workstations.</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[7] <em>Perhaps next year will be the Year of Linux-based LDAP+Kerberos, but this configuration is exceedingly rare to non-existent in the sampled client base.</em></p>
+<p class="p1">[8] <em><a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/microsoft-network-client-digitally-sign-communications-always" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/microsoft-network-client-digitally-sign-communications-always</a></em></p>
+<p class="p1">[9]&nbsp;<em>We&rsquo;re still waiting to see where &ldquo;BlueKeep,&rdquo; the RDP vulnerability tracked as CVE-2019-0708, ends up on the notoriety scale.</em></p>
+<p class="p1">[10]&nbsp;<em><a href="https://medium.com/blue-team/preventing-mimikatz-attacks-ed283e7ebdd5" target="_blank" rel="noopener">https://medium.com/blue-team/preventing-mimikatz-attacks-ed283e7ebdd5</a></em></p>
+<h3 class="p1">Lateral Movement</h3>
+<p class="p1">One system compromise is a good start for any penetration test, but of course, that&rsquo;s usually just the beginning. Once a foothold is gained, the next task is to leverage that access to get to more and better systems across the internal network. Figure 10 details the methods typically used by pen testers to extend their reach across the enterprise in search of confidential data and better domain-wide access.</p>
+<p class="p1"><img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imagerdzx.png" alt="Figure 10: Internal Network Compromise: What lateral movement technique did you leverage the most? (Count reflects only available responses.)" width="1000" height="284" /></p>
+<p class="p1">Interestingly, it seems that PowerShell is definitely falling out of favor, at least among the surveyed pen testers. PowerShell restrictions are becoming increasingly common in enterprise Windows networks, and while attackers got a lot of mileage in years past with PowerShell, those techniques seem to be falling by the wayside in 2019.</p>
+<p class="p1">That said, Windows Management Instrumentation (WMI) and PsExec, two far older Windows remote administration technologies, continue to remain at the forefront in lateral movement techniques. Some of the most successful Windows worms in recent memory also leverage these interfaces, so it&rsquo;s no wonder our simulated attacks do the same.</p>
+<h4 class="p1">Watch Out for Remote Desk Protocol (RDP)</h4>
+<p class="p1">Of special note is the presence of RDP. In June 2019, the U.S. Department of Homeland Security&rsquo;s Cybersecurity Infrastructure Security Agency (CISA) issued a bulletin warning of imminent threat from the &ldquo;BlueKeep&rdquo; Windows RDP vulnerability,<sup><a href="#f11">[<span class="s1">11]</span></a></sup>&nbsp;aka CVE-2019-0708. This is a serious vulnerability that stretches all the way back to Windows 2000, and older Windows machines that offer RDP in a modern network are often integrated in hard-to-patch devices, such as specialty IoT equipment, point-of-sale systems, and medical gear.</p>
+<p class="p1">At the time of this writing, there is not a widely available remote code execution (RCE) exploit for this vulnerability, but we do know that at least a <a id="f11"></a>handful of both government and private organizations do have one. So, another widespread attack seems almost inevitable. We&rsquo;re hopeful that this will force better patching among RDP endpoints, but, as we saw above with the presence of EternalBlue and Conficker vulnerabilities, we expect RDP to become a favored target for both lateral movement and RCE for many pen testers for many years to come.</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[11]&nbsp;<a href="https://www.us-cert.gov/ncas/alerts/AA19-168A" target="_blank" rel="noopener">https://www.us-cert.gov/ncas/alerts/AA19-168A</a></p>
+<h3 class="p1">Goals and Objectives in the Local Network</h3>
+<p class="p1">While not every engagement has a stated goal of achieving domain or enterprise administrative access, all internal engagements typically have a goal involving proving access to sensitive data. In engagements where an internal network compromise was pursued, Rapid7 penetration testers were able to achieve domain administrator access (or equivalent) just about 76% of the time, and otherwise &ldquo;sensitive information&rdquo; was collected 87% of the time. These appear to be pretty typical &ldquo;win rates&rdquo; for penetration testers&mdash;they are in range of the survey results reported in prior years and considering the types of vulnerabilities pen testers run into as described above.</p>
+<p class="p1"><img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imageudji.png" alt="Figure 11: Internal Network Compromise: Did you obtain domain or enterprise administrator access?" width="1000" height="138" />In fact, the intersection between the questions, &ldquo;Did you obtain Domain or Enterprise Admin access?&rdquo; and, &ldquo;Did you find some sensitive data?&rdquo; pretty clearly shows that one tends to lead to the other. As one might expect, when Domain Admin or Enterprise Admin access is achieved, it&rsquo;s rather difficult to keep sensitive data secret for long. Figure 12 illustrates the relationship between these two objectives.</p>
+<p class="p1">While it&rsquo;s technically possible to keep sensitive data out of the hands of a legitimate domain admin, network and data segregation practices in use today rarely bother with such intricate and complex internal security solutions. This is not a value judgement&mdash;architecting such a computing environment is nearly impossible, and it&rsquo;s much, much easier to simply trust domain admins to not be malicious insiders. In the end, protecting those domain admin credentials from misuse is paramount for any IT security organization.</p>
+<p class="p1"><img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imagea5sd.png" alt="Figure 12: The Path of Least Resistance to Sensitive Data (Privileged accounts provide the keys to unlock the credential vaults. Value in cell represents engagement count.)" width="1000" height="876" /></p>
+<h4 class="p1">Watch Out for Null Sessions</h4>
+<p class="p1">Finally, penetration testers are always on the lookout for domain-available null sessions and tend to find them available about half the time, as Figure 13 shows.</p>
+<p class="p1"><img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/figure-13.jpg" alt="Figure 13: Did any domain controllers have null sessions enabled?" width="1000" height="162" />Null sessions, in and of themselves, tend to get classified into low-priority &ldquo;information-only&rdquo; vulnerability assessments, but penetration testers leverage them primarily to test for mapped drives and use them to exercise credential stuffing and guessing attacks on the internal network. In years past, null sessions were almost universally available, so the fact that they&rsquo;re only found about half the time says that more and more enterprise IT administrators are taking them seriously, or segmenting their networks in ways that end up neutering SMB-based traffic entirely.</p>
+<h3 class="p1">Web Application Vulnerabilities</h3>
+<p class="p1">Penetration testers are jacks-of-all-trades when it comes to technology stacks, relying on at least a working expertise for all sorts of operating systems and programming languages. But some technologies, such as Microsoft Active Directory and Microsoft Windows, are fairly fundamental when it comes to effectively demonstrating common vulnerabilities and misconfigurations. Another broad bucket of skills pretty much required for this kind of work are web application frameworks. Most medium to large organizations have a fairly rich web application environment today, often deploying two or more distinct frameworks for getting business done. Figure 14 describes this situation rather succinctly.</p>
+<p class="p1"><img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/imageiiwfo.png" alt="Figure 14: Web App Engagement: What technology was the application built on?" width="1000" height="341" /></p>
+<p class="p1">As we can see here, ASP.NET is still going strong in the enterprise web application space, along with JQuery as a JavaScript framework. The &ldquo;something else&rdquo; categories for each, though, speak again to the pen testers&rsquo; requirement to apply their general security skillset to sometimes unfamiliar implementations between 15% and 20% of the time.</p>
+<div style="background-image: url('../../../globalassets/_images/backgrounds/hoodie-walker-2.jpg'); background-repeat: no-repeat; width: auto; height: auto; padding: 1.5rem; border-radius: 15px;"><br />
+<p style="font-family: Muli ExtraBold; color: #ffd349; size: 1.5rem;">THIS ONE TIME ON A PEN TEST</p>
+<h2 style="color: #fff; margin-top: 1rem !important;">Paging Doctor Hackerman</h2>
+<p style="color: #fff; font-size: .85rem;">Investigator: <strong>Nick Powers</strong> | Client Vertical: <strong>Healthcare</strong></p>
+<p style="color: #fff;">I was testing wireless and internal network vulnerabilities at a system of eight hospitals, and the wireless network specifically seemed to be fairly locked down. They had employed EAP-TLS, which allows devices to connect to the corporate wireless network using strictly certificate-based authentication in common deployments. This high-security configuration is still fairly unusual to see implemented consistently, since not every wireless device is technically capable of complying with it. In other words, it&rsquo;s common to see exceptions made to this authentication policy for certain devices.</p>
+<p style="color: #fff;">However, a full day or two of testing went by before we determined the standard methods of exploitation were just not going to work, at least against the employee workstations that were nearby at the time. It looked like EAP-TLS really was pretty bulletproof on these sites. I went for a walk around the hospital halls to see what other types of wireless devices I could find. While walking past the entrance to the Intensive Care Unit (ICU) in a particular hospital, I saw MAC addresses matching that of pagers (presumably used by the nurses and doctors) connecting and interacting with the corporate WiFi. I put my laptop and antenna in my backpack after deploying an evil twin of the corporate wireless, and headed back to the entrance of the ICU. After loitering a discreet and unobtrusive distance from the ICU for 15 minutes or so, I returned to a desk to discover the domain user and password hash leveraged by the pagers for authentication. This captured hash turned out to be pretty quick to crack, so with the cleartext password and username in hand, I was on the corporate network.</p>
+<p style="color: #fff;">The internal network had a large amount of non-standard devices&mdash;namely, networked medical equipment. One of these medical devices, an unused X-ray machine, was running an outdated version of Windows. The old and forgotten X-ray machine had been previously accessed by a privileged Active Directory user with Domain Administrator privileges, which allowed for the cleartext credentials of that user to be recovered from memory. That X-ray machine gave us the keys to the entire network.</p>
+</div>
+<p>&nbsp;</p>
+<p class="p1">This is all due to the fact that web application vulnerabilities are a common and distinct source of vulnerabilities and tend to be featured prominently in findings during both internal and external engagements. Figure 15 shows what kinds of web app vulnerabilities were uncovered where web apps were in scope.</p>
+<p class="p1"><img src="../../../contentassets/0cf984b5ca9c48f28fc746ddc0a50215/image0mny.png" alt="Figure 15: Web App Engagement: What vulnerabilities did you find?" width="1000" height="764" /></p>
+<p class="p1">The good news is, web app findings tend to be information disclosures, falling in the familiar &ldquo;confidentiality&rdquo; category of the CIA triad. Topping the list are username enumeration issues, generic &ldquo;information leakage,&rdquo; missing HTTP Strict Transportation Security (HSTS) headers (which can lead to encryption failures in transit), and insecure cookies. All of these have the potential to be abused by attackers to learn more about the target organization, its users, and potentially, session tokens that can be turned around and used to impersonate authenticated users.</p>
+<p class="p1">Other familiar issues involve clickjacking, cross-site scripting (XSS) and SQL injection (SQLi). These are the issues that tend to lead to enhanced privileges on web applications, either as regular user account access or privileged application administrator accounts. However, the silver lining here is that SQLi seems to be getting more rare as a finding. Common web application frameworks make it difficult for SQLi bugs to make it into production, since common tasks tend to be automated through framework-based &ldquo;syntactic sugar&rdquo; that makes database operations easy to write and read while also protecting the developer from accidentally SQL injecting themselves in the foot. &ldquo;Rare&rdquo; is not synonymous with &ldquo;extinct,&rdquo; of course. SQLi has the potential to creep back into applications whenever developers need more complex functionality not offered by a framework or when a web application is being built from scratch, so DevOps teams are advised to closely examine any custom SQL-based code for potential abuse.</p>
+<p class="p1">In the end, as enterprises continue to move to cloud hosting providers such as Amazon AWS, Microsoft Azure, and Google Cloud (the three most popular hosting providers seen in our sample), the job of the penetration tester will be increasingly focused on web apps and will require some recon expertise in order to find and evaluate these applications (since they won&rsquo;t be easily scanned for in the client&rsquo;s normal IP ranges).</p>
+<div style="background-image: url('../../../globalassets/_images/backgrounds/hoodie-walker-2.jpg'); background-repeat: no-repeat; width: auto; height: auto; padding: 1.5rem; border-radius: 15px;"><br />
+<p style="font-family: Muli ExtraBold; color: #ffd349; size: 1.5rem;">THIS ONE TIME ON A PEN TEST</p>
+<h2 style="color: #fff; margin-top: 1rem !important;">Your Data Is in the Wind</h2>
+<p style="color: #fff; font-size: .85rem;">Investigator: <strong>Trevor O'Donnal</strong> | Client Vertical: <strong>Healthcare</strong></p>
+<p style="color: #fff;">It was an early Monday morning in the dead of winter. I had just finished my breakfast, showered, made a cup of hot cocoa, and sat down at my computer to start a new week of hacking. This week, I was assigned to test the website of a company that handled medical records. Healthcare providers and patients could access records through the web portal. It was super important that the site be secure, since medical records provide a wealth of information that makes identity theft easy and are highly prized in the internet underground.</p>
+<p style="color: #fff;">I started out as I always do, poking around the site, checking out its functionality, and making notes of areas that are likely to be vulnerable to various website weaknesses. I spent about 15 minutes checking things out. Then, I decided to manually test a few areas that looked promising for SQLi. The first thing I tested was the login form. I placed a single apostrophe in the username field and a bogus password in the password field and hit the &ldquo;Enter&rdquo; button.</p>
+<p style="color: #fff;">SQLi has been harder to find lately, so I didn&rsquo;t expect much to happen. Developers have been trained against it for years, and web application frameworks make it hard to implement by accident. So, I was very shocked to see a SQL error pop up onto my screen. It was very detailed, pointing out the specific area of the underlying database query that contained the error. The error message also helpfully exposed the majority of the query, making it trivial to devise a more targeted attack.</p>
+<p style="color: #fff;">It took a second to register what I was seeing. When I finally got a hold of myself, I tried a simple authentication bypass, which worked. I was now authenticated as the site administrator without even knowing the password. I owned the site, practically by accident, and I hadn&rsquo;t even finished my morning cocoa. Rather than play around with my new privileges, I decided to try some more exotic queries. Five minutes later, I was in the process of dumping the entire back-end database, including all the personal information it contained.</p>
+<p style="color: #fff;">I contacted the client to verify whether this site was live if the data it contained was live production data, as mentioned on our kickoff call the week before. He confirmed once again that it was, so rather than continue with this avenue of investigation, I scheduled a conference call with him immediately. After all, this was people&rsquo;s personal health information we were talking about.</p>
+<p style="color: #fff;">On the call, I demonstrated what I had found and how easy it was for anyone on the internet to do the same. I stressed the importance that this be dealt with right away and offered my help. The client ended up shutting down the website completely for emergency maintenance, and we spent the next couple days working with the site developers to get the problems fixed before putting it back into production.</p>
+</div></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Social-Engineering" id="Social-Engineering"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Social Engineering</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">Rounding out the usual engagement activities penetration testers perform are social engineering techniques, the most popular of which is email-based electronic social engineering (ESE). Figure 16 details the types of techniques employed.</p>
+<p class="p1"><img src="../../../contentassets/db68131f67ad4b1089ba1bf253c963bc/imagex8wq.png" alt="Figure 16: Email-Based Electronic Social Engineering: What happened? (Percentages calculated based on aggregated total count of attempts.)" width="1000" height="397" /></p>
+<p class="p1">The top technique in play is the usage of spoofed domains, which are nearly always the domain of the client themselves. Unfortunately, most corporate organizations today are behind on their implementation of Domain-based Message Authentication, Reporting &amp; Conformance (DMARC). This jargony mouthful is a DNS-based technical specification that seeks to make it difficult for external attackers to send mail claiming to be from a protected domain. While it was originally deployed in order to assure customers that a given organization&rsquo;s email is, in fact, sourced from the domain claimed, it turns out that DMARC is also a wildly effective countermeasure against internal phishing as well. After all, if attackers can&rsquo;t believably source email from &ldquo;rapid7.com,&rdquo; they are forced to instead claim to be from a distinctly different domain, like &ldquo;rapiid7.com.&rdquo; Of course, human eyeballs have a tendency to skip over slight misspellings (including this paper, we&rsquo;re sure), but DMARC does raise the bar for attackers and can go a long way toward preventing phishing campaigns before they start.</p>
+<p class="p1">Modern email clients&mdash;which, these days, tend to be webmail applications&mdash;are pretty good at basic anti-spam and anti-malware on the server side, which is why the No. 1 payload for phishing emails is a call to action to click on a link leading to a malicious URL. Usually, penetration testers like to use mock-ups of otherwise familiar login screens, such as a Google Apps or Outlook 365 login page, in an effort to extract usernames and passwords.</p>
+<p class="p1">Crafty penetration testers can be more subtle, however, and mock up familiar web applications that a little reconnaissance will show that are already in use at the client site. For example, a TXT DNS record for rapid7.com may show an entry for &ldquo;atlassian-domain-verification,&rdquo; which indicates that Atlassian products like Jira and Confluence are in use. After a cursory LinkedIn search, an attacker could send a well-crafted, targeted phishing email pretending to be from a lead application developer to more junior developers, urging them to &ldquo;check out this P0 Jira ticket&rdquo; and land them on a malicious site.</p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Incident-Detection-and-Response" id="Incident-Detection-and-Response"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Incident Detection and Response</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">Of special note is the role IDR plays in a typical engagement. While detection, response, and (ultimately) isolation is a core component for any red team or social engineering engagement, it&rsquo;s only a factor in about half (52%) of engagements that involve a network compromise. This is a matter of client expectations&mdash;after all, if the client knows they don&rsquo;t have mature detection and response capability, it&rsquo;s kind of pointless to exercise it, so the penetration tester should concentrate on finding and exploiting vulnerabilities without having to worry about IDR. On the other hand, once deployed, it would be kind of silly to not rely on automated and manual IDR whenever the client can. IDR software and training is an investment not taken on lightly, so in order to more accurately model attacker behavior, penetration testers should be subject to the same rules as real criminal attackers.</p>
+<p class="p1">Figure 17 demonstrates how effective penetration testers in our study are in avoiding detection, either before an objective is achieved or after.</p>
+<p class="p1"><img src="../../../contentassets/773f2fc2b3f844ab9d9b08c18f8e12ab/imageyf0ah.png" alt="Figure 17: Were you detected, caught, or blocked by the blue team, SOC, or physical security before or after internal access? (Only includes engagements where infiltration was in scope and responses provided.)" width="1000" height="644" /></p>
+<p class="p1">Respondents were detected only about 20% of the time in environments where IDR was in play before gaining internal access to the local network, and about 53% of the time sometime after internal access was achieved. These detection rates are pretty good, considering prior years&rsquo; studies,<sup><a href="#f12">[</a><span class="s1"><a href="#f12">12]</a>&nbsp;</span></sup>and anecdotal stories of penetration testing super-ninjas. Of course, pen testers aren&rsquo;t usually in the business of deleting logs and covering their tracks after an objective is <a id="f12"></a>achieved; after all, that would make the after-action reporting more difficult, so consider these right-hand results with a grain of salt when comparing to likely real-world criminal attackers.</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[12] <em>In fact, this is the first year we made the before/after distinction, and the first year we explicitly surveyed whether detection capabilities were in scope. Without this data, prior years&rsquo; &ldquo;evasiveness&rdquo; figures were somewhat inflated; considering out-of-scope detection, this year&rsquo;s detection rate is around 65%, which is in line with 2018&rsquo;s report.</em></p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Credential-Capture" id="Credential-Capture"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Credential Capture</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">Regardless of the scoped engagement type&mdash;internal or external network compromise, social engineering, red team, or even code review&mdash;credentials tend to be in scope for penetration testers to nab and reuse. After, why bother with all this complicated vulnerability exploitation when you can just pretend to be a legitimate user to get inside information? As it happens, about 73% of the time, at least one credential is scooped up by pent esters on an engagement, with varying levels of success depending on the specific assessment type.</p>
+<p class="p1"><img src="../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/image3fbib.png" alt="Figure 18: Did you capture any credentials? (Set limited to engagements where credential capture was in scope.)" width="1000" height="286" /></p>
+<p class="p1"><img src="../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/figure-18.5.jpg/index.html" alt="" width="1000" height="470" /></p>
+<h2 class="p1">Gathering Usernames</h2>
+<p class="p1">The first order of business in any credential capturing exercise is figuring out which usernames are valid for a given site. Usernames are rarely secret and tend to follow familiar patterns, such as firstname_lastname@domain.com, FLastname@domain.com, or FLast@domain.com. Filling in these patterns is commonly the job of open source intelligence (OSINT) work, as shown in Figure 19.</p>
+<p class="p1"><img src="../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/figure-19.jpg" alt="Figure 19: How did you gather usernames? (Set includes only engagements where credentials were successfully captured. Infrequent method excluded.)" width="1000" height="291" /></p>
+<p class="p1">Two other techniques mentioned in Figure 19 involve username enumeration, either through local network access or externally available applications. Username enumeration techniques are tried-and-true methods for beginning to build a target list for a given organization, but even though these weaknesses are literally the textbook example of CWE-203, &ldquo;Information Exposure Through Discrepancy,&rdquo;<sup><a href="#f13_14">[</a><span class="s1"><a href="#f13_14">13]</a>&nbsp;</span></sup>there is still some disagreement among technology providers that username enumeration is a weakness at all. The Microsoft Exchange development team, for example, doesn&rsquo;t consider timing attacks against usernames to be a serious security issue<sup><a href="#f13_14">[</a><span class="s1"><a href="#f13_14">14]</a>&nbsp;</span></sup>since usernames aren&rsquo;t secret, <a id="f13_14"></a>while other major providers like Google take steps to limit the number of usernames that can be enumerated quickly.</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[13]&nbsp;<em><a href="https://cwe.mitre.org/data/definitions/203.html" target="_blank" rel="noopener">https://cwe.mitre.org/data/definitions/203.html</a></em></p>
+<p class="p1">[14]&nbsp;<em><a href="https://grimhacker.com/2017/07/24/office365-activesync-username-enumeration/" target="_blank" rel="noopener">https://grimhacker.com/2017/07/24/office365-activesync-username-enumeration/</a></em></p>
+<h2 class="p1">Password Guessing</h2>
+<p class="p1">Once a suitable list of usernames is created, passwords are next up. Now, there is no disagreement that passwords are intended to be both unique and secret, but unfortunately, human users are still pretty terrible at inventing passwords, while penetration testers<sup><a href="#f15_16">[</a><span class="s1"><a href="#f15_16">15]</a>&nbsp;</span></sup>are pretty good at guessing those terrible passwords. Figure 20 details the sources of valid passwords, as collected on surveyed engagements where credential theft was in scope.</p>
+<p class="p1"><img src="../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/imageumzi2.png" alt="Figure 20: How did you obtain passwords? (Set includes only engagements where credentials were successfully captured.)" width="1000" height="576" /></p>
+<p class="p1">Taken together, password spraying (trying passwords and password patterns common across all organizations), guessable organization-specific passwords, and common default passwords together account for the most common source of valid passwords, which all indicate that IT organizations would do well to consider either assigning random passwords to their users or strongly encouraging users to use a password manager for password generation and usage.</p>
+<p class="p1">Notably, assigning random passwords through a password management application would be worlds better than merely enforcing password complexity and rotation rules. It is common today to operate in an environment where passwords must include an uppercase letter, lowercase letter, a number, and special character, and change every 90 days, but such password restrictions tend to reduce password complexity, since humans will game this system and independently invent schemes like &ldquo;Summer2019!&rdquo; followed by &ldquo;Autumn2019!&rdquo; over and over again.</p>
+<h2 class="p1">Password Cracking</h2>
+<p class="p1">Password cracking&mdash;the act of taking a list of password hashes and figuring out what passwords generate those hashes&mdash;made a surprisingly strong showing in this year&rsquo;s survey. Obtaining a hash file is the No. 1 reported source of password material this year, with more specific sources of hashes such as challenge-response traffic and /etc/shadow also being reported. Here too, though, we find that if given the chance, many of these cracked passwords could just as easily been guessed with a little time and luck.</p>
+<p class="p1">&nbsp;</p>
+<p class="p1"><img src="../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/image7m3hl.png" alt="Figure 21: Guessable Cracked Passwords (Set limited to engagements where password cracking was in scope.)" width="1000" height="354" /></p>
+<p class="p1">We also surveyed where password hashes came from. Unsurprisingly, most were from Microsoft Windows sources, as seen in Figure 22.</p>
+<p class="p1"><img src="../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/image1qszl.png" alt="Figure 22: What kind of hashes did you collect? (Set includes only engagements where hashes were successfully collected.)" width="1000" height="308" /></p>
+<p class="p1">Of special note are the LM Hashes recovered. These hashes are deeply insecure, break some fundamental cryptography best practices, and have long since been deprecated by Microsoft in favor of stronger hashing mechanisms. But even though they serve basically no purpose in Microsoft environments that have been upgraded within the past 10 years, they doggedly persist, just waiting for attackers to get a hold of them. Domain administrators are strongly <a id="f15_16"></a>urged to kill these LM Hashes with fire, following the advice provided by Microsoft on how to disable LM Hash storage.<a href="#f15_16"><sup>[<span class="s1">16]</span></sup></a></p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[15]&nbsp;<em>Also, technically human. Usually.</em></p>
+<p class="p1">[16]&nbsp;<em><a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/network-security-do-not-store-lan-manager-hash-value-on-next-password-change" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/network-security-do-not-store-lan-manager-hash-value-on-next-password-change</a></em></p>
+<div style="background-image: url('../../../globalassets/_images/backgrounds/hoodie-walker-2.jpg'); background-repeat: no-repeat; width: auto; height: auto; padding: 1.5rem; border-radius: 15px;"><br />
+<p style="font-family: Muli ExtraBold; color: #ffd349; size: 1.5rem;">THIS ONE TIME ON A PEN TEST</p>
+<h2 style="color: #fff; margin-top: 1rem !important;">Missed a Spot</h2>
+<p style="color: #fff; font-size: .85rem;">Investigator: <strong>Ted Raffle</strong> | Client Vertical: <strong>Utilities &amp; Energy</strong></p>
+<p style="color: #fff;">Penetration testing is a valuable tool for clients to identify and remediate vulnerabilities and misconfigurations, especially when strong security controls and threat mitigation can miss the mark when only one or two systems fall through the cracks.</p>
+<p style="color: #fff;">Like many internal network penetration tests, this one started by looking for NetBIOS Name Service (NBT-NS) and Link Local Multicast Name Resolution (LLMNR) requests to exploit. These auxiliary name resolution services can be used to resolve hostnames that are not found in DNS, which vulnerable hosts transmit out to the local network in broadcast requests and multicast requests. By sending poisoned responses to these requests, which claim the desired host name, a malicious actor can receive NetNTLMv2 password hashes from SMB connections.</p>
+<p style="color: #fff;">Testing across two different local networks, I identified six hosts making NBT-NS requests. Among these hosts, though, poisoning attacks resulted in receiving SMB connections and password hashes for just one domain user. One of the most immediate risks of obtaining these password hashes is that they could be cracked. However, I was unable to crack the one NetNTLMv2 password hash that was obtained, so it must have been a pretty good, uncommon password. Good for them!</p>
+<p style="color: #fff;">That said, another risk of being able to solicit these SMB connections is SMB relay, where that challenge-response authentication traffic can be replayed against other hosts without the password needing to be <a id="f17"></a>cracked. Using RunFinger.py, I found just three SMB hosts that did not require message signing, and only one of which was actually joined to the domain.</p>
+<p style="color: #fff;">Leveraging SMB connections from the one user account that was affected by NBT-NS poisoning, and using Smbrelayx<sup><a href="#f18">[</a><span class="s1"><a href="#f17">17]</a></span></sup> to relay that connection to the one domain host that did not require SMB message signing, I was quickly able to retrieve password hashes for local user accounts from that host.</p>
+<p style="color: #fff;">These NTLM password hashes are not challenge-response pairs, and can be used for &lsquo;pass-the-hash&rsquo; authentication, where the uncracked password hash can be used as a stand-in for the actual password for network-based authentication. I was able to use these same local administrator credentials on nearly half of the SMB hosts in scope for the assessment. From there, it was quick work to retrieve cached plaintext passwords and password hashes with Mimikatz, a set of common local password recovery tools, which resulted in the discovery of a cached NTLM password hash for one of the domain administrators. Win.</p>
+<p style="color: #fff;">Returning to cracking, now armed with the NTLM password hashes for all of the domain users, I still had very limited success. Valid credentials were only discovered for three working user accounts. While these accounts were enough to then find sensitive documents in file shares and SharePoint, the password cracking results showed that the client had a healthy culture of strong password generation among nearly the entire user base. When discussing these results during an onsite debrief, the client explained that most of their users have smart cards and long, randomly generated passwords. But, despite these strong passwords and very limited findings on most hosts, this engagement showed that just a handful of missed systems can still allow a malicious actor to gain a foothold using common attack techniques.</p>
+</div>
+<p>&nbsp;</p>
+<p class="p1">___________________________________________</p>
+<p class="p1">[17]&nbsp;<em><a href="https://github.com/SecureAuthCorp/impacket/blob/master/examples/smbrelayx.py" target="_blank" rel="noopener">https://github.com/SecureAuthCorp/impacket/blob/master/examples/smbrelayx.py</a></em></p>
+<h2 class="p1">Privileged Accounts</h2>
+<p class="p1">Regardless of the mechanisms of defining discrete levels of privilege, accounts typically fall into the category of &ldquo;user-level&rdquo; accounts and &ldquo;privileged&rdquo; accounts. The former are used by people (and rarely, services) who don&rsquo;t need or want enhanced privileges on a given computer; they can&rsquo;t install system-altering software by themselves, delete logs, or otherwise affect the overall security of the host operating system. The latter, in contrast, are used by people (and often, services) who do need these rights; they&rsquo;re typically administrator accounts or otherwise have unusual levels of control over the authenticating system.</p>
+<p class="p1">Figure 23 describes how often privileged accounts were obtained, with nearly 80% of those privileged accounts being, in fact, domain administrator or an equivalent.</p>
+<p class="p1"><img src="../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/imagexmx6y.png" alt="Figure 23: Did you obtain credentials for privileged accounts? (Set limited to engagements where responses provided.)" width="1000" height="266" /></p>
+<h2 class="p1">Account Lockouts</h2>
+<p class="p1">One of the most common defenses against online password spraying are account lockouts&mdash;after a (usually short) period of time, multiple guesses against an account result in an account lockout (usually forever, in most corporate environments, until a call is made to the IT helpdesk).<sup><a href="#f18">[</a><span class="s1"><a href="#f18">18]</a>&nbsp;</span></sup>Of course, criminal attackers and pen testers alike are well aware of this technique and tend to carefully stay just below the lockout threshold, as described in Figure 24.</p>
+<p class="p1"><img src="../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/images1oon.png" alt="Figure 24: State of account lockouts (Set includes only responses provided relating to account lockouts.)" width="1000" height="308" /></p>
+<p class="p1"><a id="f18"></a>___________________________________________</p>
+<p class="p1">[18]&nbsp;<em>Soapbox time: Even implementing an account lockout of only five minutes will stymie virtually all but the luckiest online guessing, presuming the passwords being guessed at don&rsquo;t include the commonly sprayed passwords mentioned above. An authentication scheme that specifically forbids these sprayed passwords, combined with a short lockout time, will not only improve security, but improve the user experience for the occasional lost or forgotten password.</em></p>
+<h2 class="p1">Multi-Factor Authentication</h2>
+<p class="p1">A more recent credential control is two-factor authentication (2FA), also sometimes known as multi-factor authentication (MFA). After a password is correctly entered, the user is challenged for an additional value. This is usually a short series of algorithmically generated numbers based on a shared secret between the 2FA device and the authenticating computer. Some organizations deploy this solution by either issuing employees with a purpose-built 2FA device, or by leveraging the smartphones employees use, which may be personally owned devices.</p>
+<p class="p1">While 2FA continues to grow in popularity in consumer websites, it is still rare to find it in the field, as seen in Figure 25. That said, the definitive &ldquo;yes&rdquo; answer was reported about 22% of the time, a significant increase over last year&rsquo;s 15% finding of 2FA. This is a great trend to see for defenders.</p>
+<p class="p1"><img src="../../../contentassets/93f47ebd4a6a4397b42d65f2b3221851/imageuxuya.png" alt="Figure 25: Was two-factor authentication enabled on tested services? (Set limited to engagements where responses provided.)" width="1000" height="188" /></p>
+<p class="p1">In this minority of client sites where 2FA was enabled, was it effective? Alas, we&rsquo;re only talking about 26 cases, so it&rsquo;s hard to say with certainty given this small sample size. With that caveat in mind, it&rsquo;s a tentative &ldquo;yes.&rdquo; About 65% of the time, it was effective in preventing the pen tester from logging in, even when a password was available. This finding is still pretty weak, though. SMS and email interceptions were used onsite in a few cases to bypass 2FA, but most often, the penetration tester was able to find an alternative authentication mechanism that did not require 2FA at all. Many applications are still trying to figure out how to live in a world with 2FA, and among them are remotely accessible email systems. 2FA on a primary login screen is better than nothing, but it really is only effective when all avenues to authenticating a particular account enforce 2FA.</p>
+<div style="background-image: url('../../../globalassets/_images/backgrounds/hoodie-walker-2.jpg'); background-repeat: no-repeat; width: auto; height: auto; padding: 1.5rem; border-radius: 15px;"><br />
+<p style="font-family: Muli ExtraBold; color: #ffd349; size: 1.5rem;">THIS ONE TIME ON A PEN TEST</p>
+<h2 style="color: #fff; margin-top: 1rem !important;">Nerds in the NERC</h2>
+<p style="color: #fff; font-size: .85rem;">Investigator: <strong>Jonathan Stines</strong> | Client Vertical: <strong>Utilities &amp; Energy</strong></p>
+<p style="color: #fff;">We were performing a physical and social engineering test on a major power plant and were specifically tasked with testing their employees' security awareness. We performed reconnaissance and found an IT manager who worked at the plant as well as his phone number.</p>
+<p style="color: #fff;">I walked in to their front entrance, where a security guard was waiting at the front desk. I told her I was a network technician and was there to perform wireless testing, explaining the IT manager was the person I had been working with. She said she had not heard anything about wireless testing. I told her we had been performing testing at several other locations, and rattled off the addresses for believability, explaining to her that he would just have me tell him to call whoever was working the front desk when I arrived. She said okay, and agreed to have him call her, giving me her phone number.</p>
+<p style="color: #fff;">I stepped out into the parking lot and called her, spoofing the IT manager&rsquo;s phone number so it would look legit on the caller ID. I said he (meaning me) needed access to the IDF closets, data center, as well as the NERC CIP control rooms at the facility. This turned out to be an easy sell&mdash;she agreed to get him (me) all squared away.</p>
+<p style="color: #fff;">I walked back in, and she paired me up with someone from the information security team who was unaware of our physical testing to escort me around the facility to do &ldquo;wireless testing.&rdquo; With our access, we got into all areas of the building, including the control room and data center. Win.</p>
+</div></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Conclusion-Defense-Against-These-Dark-Arts" id="Conclusion-Defense-Against-These-Dark-Arts"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Conclusion: Defense Against These Dark Arts</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p>Pen testers do usually "win" in that they usually reach the assessment's named objective, be it internal access from the outside, a loss of confidential data, or domain admin access. Specifically, external penetration tests result in some kind of internal access about one-fifth of the time, and internal penetration tests usually result in either domain admin access (75.9% of the time) or a sensitive data breach (87% of the time). Realizing this, some may feel like all hope is lost when defending against a sophisticated and determined attacker, so what's the point in securing anything?</p>
+<p class="p1">In the face of such despair, though, we should take a look first at the optimistic interpretation of these results. Somewhere around 15% to 20% of the time, the penetration tester is pretty well-thwarted by the existing controls, which demonstrates that the client under test is doing a pretty great job at securing the things they care to secure.</p>
+<p class="p1">Secondly, the ultimate job of the penetration tester is to ferret out those dark, cobwebby corners of the infrastructure where existing controls have suffered a silent (or not-so-silent) failure. After all, if an organization is having serious trouble with patch management and web application hardening, they are probably not ready for a penetration test; what they need is a thorough vulnerability assessment to identify the &ldquo;easy&rdquo; targets before they think about hiring a consultant to tell them where things went sideways.</p>
+<p class="p1">With that said, the way to &ldquo;win&rdquo; your next penetration test, as a defender, would be to hit those areas most commonly and successfully exploited by attackers:</p>
+<ul>
+<li class="p2">First and foremost, patch management is the price of admission to network security. Don&rsquo;t be in the 30% bucket of organizations still vulnerable to old, well-known vulnerabilities like MS17-010 (Eternal Blue). Without a robust and comprehensive VM strategy, nearly all penetration tests are going to tell you that this is where you need to focus first.</li>
+<li class="p2">If you want to really impress (and infuriate) your penetration testing consultant, have a strong culture of password management in play at your organization. There are several solutions out there, but in the end, if you can get your user and service accounts on a set of random and long passwords, all the usual credential spraying will come to naught.</li>
+<li class="p2">Both of these &ldquo;first&rdquo; strategies rely on continuous monitoring for new assets and new services popping up on your network. All the vulnerability and password management in the world won&rsquo;t help you if you have some forgotten piece of gear hanging out on your network with default &ldquo;admin/admin&rdquo; credentials, especially if it has some kind of write access to otherwise secure systems. &ldquo;Scan thyself,&rdquo; is the first commandment of network security. Don&rsquo;t be afraid to scan around for your weakest link during the other 50 weeks when the pen tester isn&rsquo;t onsite.</li>
+<li class="p2">Counter-social engineering training can be a fun way to spend a Friday afternoon, filled with both trust exercises and building workplace camaraderie while figuring how to be polite but firm in the face of social engineering attempts. With all these technical controls in place, the weak spot in any organization ends up sitting behind a keyboard or in front of a locked elevator. As organizations increasingly turn to The Cloud for day-to-day IT services, criminal attackers and penetration testers alike tend to rely on email-based phishing campaigns and in-person and over-the-phone smooth-talking.</li>
+</ul></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="Appendix" id="Appendix"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">Appendix</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<h2 class="p1">Appendix A: Client Demographics</h2>
+<p class="p1">For client demographics, we record each client&rsquo;s size and industry vertical. A company is considered &ldquo;large&rdquo; if it has over 1,000 assets in scope; otherwise, it&rsquo;s &ldquo;small.&rdquo; Our sample set for this research consisted of nine identified industries: Communications &amp; Media, Education, Finance, Healthcare, Manufacturing, Retail, Services, Technology, and Utilities &amp; Energy, along with &ldquo;Other and N/A.&rdquo;</p>
+<p class="p1">Of the 160 clients (some clients were tested more than once during the survey period), our client demographics slant toward Financial (with 39 represented) and Services (at 33), with a pretty even 53.75% to 40% split favoring smaller organizations (not counting the 10 organizations where sizes were not recorded). Figure 26 lays out these demographics succinctly.</p>
+<p class="p1"><img src="../../../contentassets/18bb314637b14323a7d4f2e29977dc0f/figure-26.jpg" alt="Figure 26: Client Demographics (Percent values represent in-column percentage.) " width="900" height="827" /></p>
+<h2 class="p1">Appendix B: Survey Questions and Response Rate</h2>
+<p><a href="../../../globalassets/_pdfs/research/uth_appendix_b.pdf">Click here</a> for a full list of survey questions and response rates.</p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="About-Rapid7-Global-Consulting" id="About-Rapid7-Global-Consulting"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">About Rapid7 Global Consulting</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1"><a href="../../../services/index.html">Rapid7&rsquo;s Global Consulting</a> practice provides industry-recognized consulting and assessment engagements that provide peace of mind, clarity, and guidance for your security program. Our managed and consulting services extend the reach of your team, while our industry research, reports, and open source tools constantly feed the Insight cloud&mdash;and you&mdash;with new insights.</p>
+<p class="p1">Rapid7 consultants have extensive experience building and managing security programs, with expertise in vulnerability management, fraud detection, penetration testing, threat intelligence, incident response, red team programs, and more.</p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+<div class="headerOffset" data-magellan-target="About-Rapid7" id="About-Rapid7"></div>
+<div class="bannerGradientHeader">
+    <h1 class="sectionTitle small-11 small-offset-1 columns">About Rapid7</h1>
+</div><div class="row">
+    <div class="small-10 small-offset-1 columns sectionContainerOuter">
+        <div class="sectionContent">
+            <div class="richTextBlockWrap">
+<p class="p1">Rapid7 is advancing security with visibility, analytics, and automation delivered through our Insight cloud. Our solutions simplify the complex, allowing security teams to work more effectively with IT and development to reduce vulnerabilities, monitor for malicious behavior, investigate and shut down attacks, and automate routine tasks. Over 7,900 customers rely on Rapid7 technology, services, and research to improve security outcomes and securely advance their organizations. For more information, visit our <a href="../../../index.html"><span class="s1">website</span></a>, check out <a href="https://blog.rapid7.com/">our <span class="s1">blog</span></a>, or follow us on <a href="https://twitter.com/rapid7"><span class="s1">Twitter</span></a>.</p></div>
+        </div>
+    </div>
+</div>
+
+           
+
+
+
+            </section>
+        </div>
+
+    </div>
+    <!-- / Main Section -->
+
+</div>
+<!-- Page Content -->
+
+
+<footer >
+    <section class="search-scroll">
+        <div class="row">
+            <div class="footer__search">
+                <form action="https://www.rapid7.com/search/">
+                    <input class="sb-search-input" placeholder="Search all the things" type="search" value="" name="q" id="search">
+                    <input class="sb-search-submit" type="submit" value="">
+                </form>
+            </div>
+            <div class="footer__scroll">
+                <a href="#__" class="smooth">
+                    <span>BACK TO TOP</span>
+                    <img class="lazy" data-src="/includes/img/up-arrow-lightgray.png" src="../../../includes/img/placeholder.png" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+        <section class="footer__links row">
+            <div class="footer__links-wrapper">
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__contact">
+                        <a href="../../../index.html">
+                            <img alt="Rapid7 logo" class="logo lazy" data-src="/includes/img/Rapid7_logo.svg" src="../../../includes/img/placeholder.png" />
+                        </a>
+                                        <div class="footer__links-title">CUSTOMER SUPPORT</div>
+                <a class="link" href="tel:1-866-390-8113">+1-866-390-8113 (Toll Free)</a>
+                <div class="footer__links-title">SALES SUPPORT</div>
+                <a class="link" href="tel:866-772-7437">+1-866-7RAPID7 (Toll Free)</a>
+
+                            <div class="footer__breach">
+                                <div class="footer__breach-title">Need immediate help with a breach?</div>
+                                <div class="footer__breach-contact">
+                                    <div class="footer__breach-icon"></div>
+                                    <div class="footer__breach-phone"><a href="tel:18447274347">+1-844-RAPID-IR</a></div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="footer__links-section footer__solutions">
+                                        <div class="footer__links-title">SOLUTIONS</div>
+                <a class="link" href="../../../solutions/index.html">All Solutions</a>
+                <a class="link" href="../../../solutions/industry/index.html">Industry Solutions</a>
+                <a class="link" href="../../../solutions/compliance/index.html">Compliance Solutions</a>
+
+                    </div>
+                </div>
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__support">
+                                        <div class="footer__links-title">SUPPORT & RESOURCES</div>
+                <a class="link" href="../../../for-customers/index.html">Product Support</a>
+                <a class="link" href="../../../resources/index.html">Resource Library</a>
+                <a class="link" href="../../../about/customers/index.html">Customer Stories</a>
+                <a class="link" href="../../../about/events-webcasts/index.html">Events & Webcasts</a>
+                <a class="link" href="../../../services/training-certification/index.html">Training & Certification</a>
+                <a class="link" href="../../../fundamentals/index.html">IT & Security Fundamentals</a>
+                <a class="link" href="../../../db/index.html">Vulnerability & Exploit Database</a>
+
+                    </div>
+                    <div class="footer__links-section footer__about">
+                                        <div class="footer__links-title">ABOUT US</div>
+                <a class="link" href="../../../about/company/index.html">Company</a>
+                <a class="link" href="../../../about/leadership/index.html">Leadership</a>
+                <a class="link" href="../../../about/news/index.html">News & Press Releases</a>
+                <a class="link" href="../../../about/customers/index.html">Customers</a>
+                <a class="link" href="../../../about/public-policy/index.html">Public Policy</a>
+                <a class="link" href="https://investors.rapid7.com/">Investors</a>
+
+                    </div>
+                </div>
+
+                <div class="footer__links-col">
+                    <div class="footer__links-section footer__connect">
+                                        <div class="footer__links-title">CONNECT WITH US</div>
+                <a class="link" href="../../../contact/index.html">Contact</a>
+                <a class="link" href="https://blog.rapid7.com/">Blog</a>
+                <a class="link" href="https://rapid7support.force.com/customers/">Support Login</a>
+                <a class="link" href="../../../careers/index.html">Careers</a>
+
+                        <div class="footer__links-social">
+                            <a class="linkedin" href="https://www.linkedin.com/company/39624" target="_blank"></a>
+                            <a class="twitter" href="https://twitter.com/Rapid7" target="_blank"></a>
+                            <a class="facebook" href="https://www.facebook.com/rapid7" target="_blank"></a>
+                            <a class="instagram" href="https://www.instagram.com/rapid7/" target="_blank"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <section class="footer__legal">
+        <div class="row">
+            <div class="footer__legal-copyright">&copy; Rapid7</div>
+
+                    <div class="footer__legal-link"><a href="../../../legal/index.html">Legal Terms</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../../privacy-policy/index.html">Privacy Policy</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../../export-notice/index.html">Export Notice</a></div>
+&nbsp; | &nbsp;                    <div class="footer__legal-link"><a href="../../../trust/index.html">Trust</a></div>
+        </div>
+    </section>
+
+        <!-- *************************** sticky contact us modal *************************** -->
+        <section class="contact-sticky">
+            <div class="row expanded">
+                <div id="stickyButtons" class="driftInit">
+                    <div class="chatBtn show-if-chat-online" id="stickyChat">
+                        <a class="gray button">Chat</a>
+                    </div>
+                    <div class="contactBtn" data-open="stickyContact">
+                        <a id="sticky_contact_btn" class="gray button">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="reveal light hasSidebar" id="stickyContact" data-reveal>
+            <section class="contactForm">
+                <div class="row">
+                    <div class="large-9 columns">
+                        <form id="contactModal" class="formBlock freemail">
+                            <div id="intro" class="row">
+                                <div id="thankyouText" style="display:none;" class="messageBox green">
+                                    <div class="medium-12">
+                                        <h4><span class="success">Success!</span> Thank you for submission. We will be in touch shortly.</h4>
+                                    </div>
+                                </div>
+                                <div id="errorText" style="display:none;" class="messageBox red">
+                                    <div class="medium-12">
+                                        <h4><span class="error">Oops!</span> There was a problem in submission. Please <a href="../../../contact/index.html" title="Visit our Contact Us Page">contact us</a>.</h4>
+                                    </div>
+                                </div>
+                                <div class="columns medium-12">
+                                    <h2>Contact Us</h2>
+                                    <p id="fieldInstruction" class="">We're happy to answer any questions you may have about Rapid7</p>
+                                </div>
+                            </div>
+                            <fieldset>
+                                <dl class="clearfix expand">
+                                    <dd>
+                                        <select name="contactType" id="contactType" tabindex="21" class="normalSelect dropdownSelect">
+                                            <option value="0">Reason for Contact</option>
+                                                <option value="3557252">General</option>
+                                                <option value="3557253">Demo Request</option>
+                                                <option value="3557256">Pricing</option>
+                                                <option value="3557257">Professional Services</option>
+                                                <option value="3557359">Request for Proposal</option>
+                                        </select>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix expand" id="productNameParent" style="display:none;">
+                                    <dd>
+                                        <select name="productName" id="productName" tabindex="22" class="normalSelect dropdownSelect">
+                                            <option value="0">Select Product</option>
+                                            <option value="3558027">Metasploit</option>
+                                            <option value="8209765">InsightIDR</option>
+                                            <option value="11407979">InsightVM</option>
+                                            <option value="10417511">InsightOps</option>
+                                            <option value="18912840">InsightAppSec</option>
+                                            <option value="6184447">AppSpider</option>
+                                            <option value="1550853">Nexpose</option>
+                                        </select>
+                                    </dd>
+                                </dl>
+                                <dl class="">
+                                    <dd>
+                                        <label for="firstName">First Name</label>
+                                        <input id="firstName" type="text" name="firstName" tabindex="23" />
+                                    </dd>
+                                </dl>
+                                <dl class="">
+                                    <dd>
+                                        <label for="lastName">Last Name</label>
+                                        <input id="lastName" type="text" name="lastName" tabindex="24" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="jobTitle">Job Title</label>
+                                        <input id="jobTitle" type="text" name="jobTitle" tabindex="25" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="companyName">Company</label>
+                                        <input id="companyName" type="text" name="companyName" tabindex="26" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="email">Email</label>
+                                        <input id="email" type="text" tabindex="27" name="email" />
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <div class="intl-phone">
+                                            <label for="phone">Phone</label>
+                                            <div class="flag-container">
+                                                <div class="selected-flag">
+                                                    <div class="iti-flag"></div>
+                                                </div>
+                                                <ul class="country-list"></ul>
+                                            </div>
+                                            <input id="phone" type="text" name="phone" tabindex="28" />
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="country">Country</label>
+                                        <select name="country" id="country" tabindex="29" class="form_SelectInstruction normalSelect country_select" onchange='updateCountryData("#contactModal")'></select>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dd>
+                                        <label for="state">State</label>
+                                        <select name="state" id="state" tabindex="30" class="form_SelectInstruction normalSelect dropdownSelect"></select>
+                                    </dd>
+                                </dl>
+                                <dl class="expand checkboxContainer" id="optout" style="display:none;">
+                                    <dd>
+                                        <input id="explicitOptOutAlt" type="checkbox" class="r7-check">
+                                        <label for="explicitOptOut">I do not want to receive emails regarding Rapid7's products and services.</label>
+                                    </dd>
+                                    <p class="disc">
+                                        <p>Issues with this page? Please email <a href="mailto:info@rapid7.com">info@rapid7.com</a>. Please see updated <a href="../../../privacy-policy/index.html">Privacy Policy</a></p>
+                                    </p>
+                                </dl>
+                                <dl class="expand" id="consultant" style="display: none;">
+                                    <input id="consultantFieldAlt" type="checkbox" class="r7-check">
+                                    <label for="consultantFieldAlt">I am a consultant, partner, or reseller.</label>
+                                </dl>
+                                <dl class="expand">
+                                    <button id="submit" class="submit button blue mdBtn" tabindex="31">Submit</button>
+                                </dl>
+                                <input type="hidden" id="formName" value="ContactModal" />
+                            </fieldset>
+
+                        </form>
+                    </div>
+                    <div class="large-3 columns sidebar">
+                        <img alt="Rapid7 logo" class="logo lazy" data-src="/includes/img/logo-black.png" src="../../../includes/img/placeholder.png" />
+                        <h3>General:</h3>
+                        <p><a href="mailto:info@rapid7.com">info@rapid7.com</a></p>
+                        <h3>Sales: </h3>
+                        <p>
+                            <a href="tel:1-866-772-7497">+1&ndash;866&ndash;7&ndash;Rapid7</a><br />
+                            <a href="mailto:sales@rapid7.com">sales@rapid7.com</a>
+                        </p>
+                        <h3>Support:</h3>
+                        <p>
+                            <a href="tel:1-866-390-8113">+1&ndash;866&ndash;390&ndash;8113(toll free)</a><br />
+                            <a href="mailto:support@rapid7.com">support@rapid7.com</a>
+                        </p>
+                        <h3>Incident Response:</h3>
+                        <p><a href="tel:1-844-787-4947">1-844-RAPID-IR</a></p>
+                        <p><a href="../../../contact/index.html" class="view_more">More Contact Info</a></p>
+                    </div>
+                </div>
+            </section>
+            <button class="close-button" data-close="" aria-label="Close reveal" type="button"></button>
+        </div>
+        <!-- *************************** end sticky contact us modal *************************** -->
+</footer>
+
+
+
+
+
+
+
+            <!-- *************************** navigation close module *************************** -->
+        </div><!-- off-canvas-content -->
+    </div><!-- off-canvas-wrapper-inner -->
+</div><!-- off-canvas-wrapper -->
+
+
+    <!-- scripts -->
+    <!--[if lte IE 11]>
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+    <![endif]-->
+    <script src="../../../includes/js/all.mined79.js?cb=1576099002710"></script>
+    
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert"></script>
+
+
+    
+    <!-- end scripts -->
+
+</body>
+
+<!-- Mirrored from www.rapid7.com/research/report/under-the-hoodie-2019/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 05:10:27 GMT -->
+</html>
